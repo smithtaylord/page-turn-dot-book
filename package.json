@@ -1,0 +1,16 @@
+
+  {
+    "name": "page-turn-dot-book",
+    "version": "1.0.0",
+    "scripts": {
+      "build": "npm run setup:server",
+      "setup:app": "npm run setup:server && npm run setup:client",
+      "setup:client": "cd page-turn-dot-book.client && npm i",
+      "setup:server": "cd page-turn-dot-book && npm i",
+      "start": "node page-turn-dot-book/index.js"
+    },
+    "engines": {
+      "node": "^18.12.1"
+    }
+  }
+  
