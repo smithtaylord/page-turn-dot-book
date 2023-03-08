@@ -15,7 +15,7 @@ export class ClubsController extends BaseController {
         .get('/:clubId', this.getClubById)
         .use(Auth0Provider.getAuthorizedUserInfo)
         .post('', this.createClub)
-        // TODO adding the update club
+        .put('/:clubId', this.editClub)
         .delete('/:clubId', this.archiveClub)
     }
 
@@ -45,6 +45,18 @@ export class ClubsController extends BaseController {
             body.creatorId = req.userInfo.id
             const club = await clubsService.createClub(body)
             res.send(club)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async editClub(req, res, next) {
+        try {
+            const clubId = req.params.clubId
+            const updateData = req.body
+            const userId = req.userInfo.id
+            const updatedClub = await clubsService.editClub(updateData, clubId, userId)
+            res.send(updatedClub)
         } catch (error) {
             next(error)
         }

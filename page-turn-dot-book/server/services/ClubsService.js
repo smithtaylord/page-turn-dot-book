@@ -14,6 +14,28 @@ class ClubsService {
         return club
     }
 
+    async editClub(updateData, clubId, userId) {
+        const club = await dbContext.Clubs.findById(clubId)
+        if (!club) {
+            throw new BadRequest('Club Not Found')
+        }
+        if (club.creatorId != userId) {
+            throw new Forbidden('You Are Not The Club Owner')
+        }
+        if (club.isArchived == true) {
+            throw new BadRequest('This Club Has Been Disbanded')
+        }
+
+        else {
+            club.name = updateData.name || club.name
+            club.coverImg = updateData.coverImg || club.coverImg
+            club.bio = updateData.bio || club.bio
+        }
+
+        await club.save()
+        return club
+    }
+
     async getClubById(clubId) {
         const club = await dbContext.Clubs.findById(clubId)
         if (!club) {
