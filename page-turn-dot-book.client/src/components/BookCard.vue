@@ -1,7 +1,6 @@
 <template>
-    <div class="BookCard">
-
-        <img class="selectable" :src="book.coverImg" :alt="book.title" :title="book.title">
+    <div class="BookCard">  
+        <img class="px-3 mt-2 selectable bookCover" :src="book.coverImg" :alt="book.title" :title="book.title">
 
     </div>
 </template>
@@ -19,4 +18,13 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+.bookCover{
+    height: 30vh;
+    // width: 100%;
+    object-fit: cover;
+
+}
+
+</style>

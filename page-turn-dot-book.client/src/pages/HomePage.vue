@@ -15,12 +15,14 @@
   </div>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 bg-primary">
-        <h1>
+      <div class="col-12  bg-primary">
+        <h1 class="text-center mt-2">
           New & Popular
         </h1>
-        <div v-for="b in NYTBooks">
-          <BookCard :book="b" />
+        <div class="d-flex scroll-x">
+          <div v-for="b in NYTBooks" class="">
+            <BookCard :book="b" />
+          </div>
         </div>
       </div>
     </div>
@@ -40,6 +42,7 @@ import { onMounted, computed } from 'vue';
 import { AppState } from '../AppState.js';
 import BookCard from '../components/BookCard.vue';
 import { booksService } from '../services/BooksService.js';
+import { clubsService } from '../services/ClubsService.js';
 import Pop from '../utils/Pop.js';
 
 
@@ -53,9 +56,21 @@ export default {
                 Pop.error(error, "get NYT books ");
             }
         }
+
+        async function getAllClubs() {
+          try {
+            await clubsService.getAllClubs()
+          } catch (error) {
+            Pop.error(error)
+          }
+        } 
+
+
         onMounted(() => {
             getNYTBooks();
+            getAllClubs();
         });
+
         return {
             NYTBooks: computed(() => AppState.NYTBooks),
         };
@@ -70,6 +85,10 @@ export default {
   background-size: cover;
 
 }
-
+.scroll-x{
+  overflow-x: scroll; 
+  width: 100%;
+  height: 35vh;
+}
 
 </style>
