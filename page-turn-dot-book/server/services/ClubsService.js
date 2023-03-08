@@ -1,9 +1,18 @@
 import { dbContext } from "../db/DbContext.js"
-import { BadRequest } from "../utils/Errors.js"
+import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 
 
 class ClubsService {
+    async archiveClub(clubId, userId){
+        const club = await this.getClubById(clubId)
+        if (club.creatorId.toString() != userId) {
+            throw new Forbidden('You Are Not A Club Owner!!')
+        }
+        club.isArchived = true
+        await club.save()
+        return club
+    }
 
     async getClubById(clubId) {
         const club = await dbContext.Clubs.findById(clubId)

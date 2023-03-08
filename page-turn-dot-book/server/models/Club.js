@@ -6,6 +6,7 @@ export const ClubSchema = new Schema(
         name: basicStringType,
         bio: basicStringType,
         coverImg: basicStringType,
+        isArchived: { type: Boolean, required: true, default: false},
         // type: {...basicStringType, enum: ['speed-readers', 'casual-readers', 'cat-moms', 'history-buffs', 'fiction-fans', 'other']}
         
         creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true},
