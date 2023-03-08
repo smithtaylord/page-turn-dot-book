@@ -1,5 +1,6 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
 import { clubsService } from "../services/ClubsService.js";
+import { commentsService } from "../services/CommentsService.js";
 import { membersService } from "../services/MembersService.js";
 import BaseController from "../utils/BaseController.js";
 
@@ -15,12 +16,22 @@ export class ClubsController extends BaseController {
         .get('', this.getAllClubs)
         .get('/:clubId', this.getClubById)
         .get('/:clubId/members', this.getClubMembers)
+        .get('/:parentId/comments', this.getClubComments)
         .use(Auth0Provider.getAuthorizedUserInfo)
         .post('', this.createClub)
         .put('/:clubId', this.editClub)
         .delete('/:clubId', this.archiveClub)
     }
 
+    async getClubComments(req, res, next){
+        try {
+            const parentId = req.params.parentId
+            const comments = await commentsService.getCommentbyParentId(parentId)
+            return res.send(comments)
+        } catch (error) {
+            next(error)
+        }
+    }
     async getClubMembers(req, res, next) {
         try {
             const clubId = req.params.clubId
