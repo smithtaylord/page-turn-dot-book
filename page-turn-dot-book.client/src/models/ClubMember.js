@@ -1,4 +1,4 @@
-export class BookClub {
+export class ClubMember {
     constructor(data) {
 
     }

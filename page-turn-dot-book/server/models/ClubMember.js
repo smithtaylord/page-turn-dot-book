@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-export const BookClubBookSchema = new Schema(
+export const ClubMemberSchema = new Schema(
     {
 
     }
