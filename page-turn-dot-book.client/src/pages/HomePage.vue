@@ -36,8 +36,31 @@
 </template>
 
 <script>
+import { onMounted } from 'vue';
+import { AppState } from '../AppState.js';
+import { booksService } from '../services/BooksService.js';
+import Pop from '../utils/Pop.js';
+
+
 export default {
+
+
+
+
   setup() {
+
+    async function getNYTBooks(){
+      try {
+        await booksService.getNYTBooks()
+      } catch (error) {
+        Pop.error(error, 'get NYT books ')
+      }
+    }
+
+
+    onMounted(() => {
+      getNYTBooks()
+    })
     return {}
   }
 }
