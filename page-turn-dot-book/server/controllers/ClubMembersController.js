@@ -11,6 +11,7 @@ export class ClubMembersController extends BaseController {
         this.router
         .use(Auth0Provider.getAuthorizedUserInfo)
         .post('', this.createMember)
+        .delete('/:memberId', this.deleteMember)
     }
 
 
@@ -19,6 +20,17 @@ export class ClubMembersController extends BaseController {
             const memberData = req.body
             memberData.accountId = req.userInfo.id
             const member = await membersService.createMember(memberData)
+            res.send(member)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async deleteMember(req, res, next) {
+        try {
+            const memberId = req.params.memberId
+            const userId = req.userInfo.id
+            const member = await membersService.deleteMember(memberId, userId)
             res.send(member)
         } catch (error) {
             next(error)
