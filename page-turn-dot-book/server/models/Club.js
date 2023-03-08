@@ -3,7 +3,7 @@ import { basicStringType, defaultSchemaOptions } from "../db/Constants.js";
 
 export const ClubSchema = new Schema(
     {
-        name: basicStringType,
+        name: {...basicStringType, maxLength: 20},
         bio: basicStringType,
         coverImg: basicStringType,
         isArchived: { type: Boolean, required: true, default: false},
