@@ -51,3 +51,7 @@ form:invalid button[type="submit"] {
   filter: grayscale(1);
   pointer-events: none;
 }
+
+.text-shadow{
+  text-shadow: 1px 1px 2px black;
+}

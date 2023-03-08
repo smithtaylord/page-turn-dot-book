@@ -1,14 +1,36 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img
-        src="https://bcw.blob.core.windows.net/public/img/8600856373152463"
-        alt="CodeWorks Logo"
-        class="rounded-circle"
-      >
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 homePagePic ">
+        <p class="text-light py-5 px-2 fs-3 text-shadow">
+          At PageTurn.Book, we offer tools for hosting
+          book clubs and tools for finding book club
+          members.
+        </p>
+        <button class="mb-3 btn bg-danger selectable">
+          Create a Club
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 bg-primary">
+        <h1>
+          New & Popular
+        </h1>
+        <h1>
+          book component goes here
+        </h1>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 bg-danger">
+        <h1>Let's get clubbin'!</h1>
+        <h1>Club Component Card goes here</h1>
+      </div>
     </div>
   </div>
 </template>
@@ -22,23 +44,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
+.homePagePic {
+  background-image: url(https://images.unsplash.com/photo-1460518451285-97b6aa326961?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80);
+  background-size: cover;
 
-  .home-card {
-    width: 50vw;
-
-    >img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
 }
+
+
 </style>
