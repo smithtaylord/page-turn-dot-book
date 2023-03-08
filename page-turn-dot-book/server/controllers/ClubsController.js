@@ -12,14 +12,26 @@ export class ClubsController extends BaseController {
         super('api/clubs')
         this.router
         .get('', this.getAllClubs)
+        .get('/:clubId', this.getClubById)
         .use(Auth0Provider.getAuthorizedUserInfo)
         .post('', this.createClub)
     }
 
+    
     async getAllClubs(req, res, next) {
         try {
             const clubs = await clubsService.getAllClubs()
             res.send(clubs)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async getClubById(req,res,next) {
+        try {
+            const clubId = req.params.clubId
+            const club = await clubsService.getClubById(clubId)
+            res.send(club)
         } catch (error) {
             next(error)
         }
