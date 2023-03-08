@@ -20,7 +20,7 @@
           New & Popular
         </h1>
         <div class="d-flex scroll-x">
-          <div v-for="b in NYTBooks" class="">
+          <div v-for="b in Books" class="">
             <BookCard :book="b" />
           </div>
         </div>
@@ -33,7 +33,7 @@
         <h1 class="text-center mt-2">Let's get clubbin'!</h1>
         <div class="d-flex scroll-x mb-3">
           <div v-for="c in clubs">
-            <ClubCard :club="c"/>
+            <ClubCard :club="c" />
           </div>
         </div>
       </div>
@@ -51,36 +51,36 @@ import Pop from '../utils/Pop.js';
 import ClubCard from '../components/ClubCard.vue';
 
 export default {
-    setup() {
-        async function getNYTBooks() {
-            try {
-                await booksService.getNYTBooks();
-            }
-            catch (error) {
-                Pop.error(error, "get NYT books ");
-            }
-        }
+  setup() {
+    async function getNYTBooks() {
+      try {
+        await booksService.getNYTBooks();
+      }
+      catch (error) {
+        Pop.error(error, "get NYT books ");
+      }
+    }
 
-        async function getAllClubs() {
-          try {
-            await clubsService.getAllClubs()
-          } catch (error) {
-            Pop.error(error)
-          }
-        } 
+    async function getAllClubs() {
+      try {
+        await clubsService.getAllClubs()
+      } catch (error) {
+        Pop.error(error)
+      }
+    }
 
 
-        onMounted(() => {
-            getNYTBooks();
-            getAllClubs();
-        });
+    onMounted(() => {
+      getNYTBooks();
+      getAllClubs();
+    });
 
-        return {
-            NYTBooks: computed(() => AppState.NYTBooks),
-            clubs: computed(() => AppState.clubs),
-        };
-    },
-    components: { BookCard, ClubCard }
+    return {
+      Books: computed(() => AppState.Books),
+      clubs: computed(() => AppState.clubs),
+    };
+  },
+  components: { BookCard, ClubCard }
 }
 
 </script>
@@ -91,10 +91,10 @@ export default {
   background-size: cover;
 
 }
-.scroll-x{
-  overflow-x: scroll; 
+
+.scroll-x {
+  overflow-x: scroll;
   width: 100%;
   height: 40vh;
 }
-
 </style>

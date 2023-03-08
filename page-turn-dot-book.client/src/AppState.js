@@ -7,9 +7,11 @@ export const AppState = reactive({
   account: {},
 
   
-  /** @type {import('./models/NYTBook').NYTBook[]} */
-  NYTBooks: [],
+  /** @type {import('./models/Book').Book[]} */
+  books: [],
 
+  /** @type {import('./models/GoogleBook').GoogleBook[]} */
+  googleBooks: [],
 
  /** @type {import('./models/Club').Club[]} */
   clubs: [],

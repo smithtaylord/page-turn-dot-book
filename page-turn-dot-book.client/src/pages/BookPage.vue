@@ -3,13 +3,18 @@
 
         <h1>youre on the book page yo!</h1>
 
+        <div>
+            {{ googleBooks.volumeInfo }}
+        </div>
+
     </div>
 </template>
 
 
 <script>
-import { watchEffect } from 'vue';
+import { watchEffect, computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { AppState } from '../AppState.js';
 import { booksService } from '../services/BooksService';
 import Pop from '../utils/Pop.js';
 
@@ -18,21 +23,23 @@ export default {
         const route = useRoute()
 
 
-        async function getBookByISBN(){
+        async function getBookByISBN() {
             try {
                 let isbn = route.params.isbn
                 await booksService.getBookByISBN(isbn)
             } catch (error) {
-                Pop.error(error,'GET BOOK BY ISBN PROBS YO')
+                Pop.error(error, 'GET BOOK BY ISBN PROBS YO')
             }
         }
 
         watchEffect(() => {
-            if(route.params.isbn){
+            if (route.params.isbn) {
                 getBookByISBN()
             }
         })
-        return {}
+        return {
+            googleBooks: computed(() => AppState.googleBooks)
+        }
     }
 }
 </script>
