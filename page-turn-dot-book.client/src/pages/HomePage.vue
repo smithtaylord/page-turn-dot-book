@@ -30,8 +30,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 bg-danger">
-        <h1>Let's get clubbin'!</h1>
-        <h1>Club Component Card goes here</h1>
+        <h1 class="text-center mt-2">Let's get clubbin'!</h1>
+        <div class="d-flex scroll-x mb-3">
+          <div v-for="c in clubs">
+            <ClubCard :club="c"/>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -44,7 +48,7 @@ import BookCard from '../components/BookCard.vue';
 import { booksService } from '../services/BooksService.js';
 import { clubsService } from '../services/ClubsService.js';
 import Pop from '../utils/Pop.js';
-
+import ClubCard from '../components/ClubCard.vue';
 
 export default {
     setup() {
@@ -73,10 +77,12 @@ export default {
 
         return {
             NYTBooks: computed(() => AppState.NYTBooks),
+            clubs: computed(() => AppState.clubs),
         };
     },
-    components: { BookCard }
+    components: { BookCard, ClubCard }
 }
+
 </script>
 
 <style scoped lang="scss">
@@ -88,7 +94,7 @@ export default {
 .scroll-x{
   overflow-x: scroll; 
   width: 100%;
-  height: 35vh;
+  height: 40vh;
 }
 
 </style>

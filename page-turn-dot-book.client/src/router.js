@@ -21,7 +21,14 @@ const routes = [
     name: 'Account',
     component: loadPage('AccountPage'),
     beforeEnter: authGuard
+  },{
+    path: '/book/:isbn',
+    name: 'Book',
+    component: loadPage('BookPage'),
+
   }
+
+
 ]
 
 export const router = createRouter({

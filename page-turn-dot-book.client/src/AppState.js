@@ -11,6 +11,9 @@ export const AppState = reactive({
   NYTBooks: [],
 
 
+ /** @type {import('./models/Club').Club[]} */
+  clubs: [],
+
 
 
 })

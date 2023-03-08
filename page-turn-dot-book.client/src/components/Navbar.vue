@@ -1,11 +1,24 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
-      </div>
+      <h1>
+        <i class="mdi mdi-book-open-variant fs-1 text-light"></i>
+        PageTurn.Book
+      </h1>
     </router-link>
-    <button
+
+  <button  class="btn bg-dark selectable" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+   <i class="fs-1 mdi mdi-menu"></i>
+  </button>
+   
+
+  </nav>
+
+</template>
+  
+
+    <!-- OLD NAV BAR STUFF -->
+    <!-- <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
@@ -24,11 +37,9 @@
           </router-link>
         </li>
       </ul>
-      <!-- LOGIN COMPONENT HERE -->
+      LOGIN COMPONENT HERE
       <Login />
-    </div>
-  </nav>
-</template>
+    </div> -->
 
 <script>
 import Login from './Login.vue'

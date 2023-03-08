@@ -8,12 +8,17 @@
    <footer class="bg-dark text-light">
     Made with 💖 by CodeWorks
   </footer>
+
+  <OffCanvas/>
+
+
 </template>
 
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
+import OffCanvas from './components/OffCanvas.vue'
 
 export default {
   setup() {
@@ -21,7 +26,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar }
+  components: { Navbar, OffCanvas }
 }
 </script>
 <style lang="scss">

@@ -10,3 +10,9 @@ export const apiNYT = Axios.create({
   timeout: '5000',
   params: { 'api-key': 'o4y8ftZIRFWxEWjmHGemUKANmCPnlngA' }
 })
+
+export const googleAPI = Axios.create({
+  baseURL: 'https://www.googleapis.com/books/',
+  timeout: '5000',
+  // params: {}
+})

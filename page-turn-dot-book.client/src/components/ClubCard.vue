@@ -1,13 +1,20 @@
 <template>
-    <div class="component">
+    <div class="ClubCard box-shadow m-3 bg-warning text-center d-flex flex-column p-3 align-items-center">
+<div>
 
-
-    </div>
+    <img class="rounded-circle club-picture mb-2" :src="club.coverImg" :alt="club.name">
+    <h4 class="text-limit" >{{ club.name }}</h4>
+    <button class="btn bg-danger selectable mt-2">Join</button>
+</div>
+</div>
 </template>
 
 
 <script>
+import { Club } from '../models/Club.js';
+
 export default {
+    props: {club: { type: Club, required: true, }},
     setup() {
         return {}
     }
@@ -15,4 +22,22 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.club-picture{
+    height: 15vh;
+    width: 15vh;
+    object-fit: cover;
+}
+
+.ClubCard{
+    width: 70vw;
+    // max-height: 50vh;
+    contain: content;
+}
+.text-limit{
+    overflow: hidden;
+    text-overflow: clip;
+    // max-width: 100%;
+    max-height: 25px;
+}
+</style>

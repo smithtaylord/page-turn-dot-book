@@ -1,6 +1,8 @@
 <template>
-    <div class="BookCard">  
-        <img class="px-3 mt-2 selectable bookCover" :src="book.coverImg" :alt="book.title" :title="book.title">
+    <div class="BookCard px-3">  
+        <router-link :to="{name: 'Book', params:{isbn: book.isbn}}">
+            <img class=" box-shadow mt-2 selectable bookCover" :src="book.coverImg" :alt="book.title" :title="book.title">
+        </router-link>
 
     </div>
 </template>
@@ -21,7 +23,7 @@ export default {
 <style lang="scss" scoped>
 
 .bookCover{
-    height: 30vh;
+    height: 35vh;
     // width: 100%;
     object-fit: cover;
 
