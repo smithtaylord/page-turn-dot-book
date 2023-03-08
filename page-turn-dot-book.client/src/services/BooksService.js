@@ -14,9 +14,9 @@ class BooksService {
     }
 
     async getBookByISBN(isbn) {
-        const res = await googleAPI.get(`/v1/volumes?q=${isbn}+isbn`)
+        const res = await googleAPI.get(`/v1/volumes?q=+isbn:${isbn}`)
         logger.log(res.data.items[0], 'RES . DATA FOR ISBN GET FROM GOOGLE API LOOKS LIKE>>>>>>>')
-        AppState.googleBooks = new GoogleBook( res.data.items[0] )
+        AppState.googleBook = new GoogleBook( res.data.items[0] )
     }
 
 

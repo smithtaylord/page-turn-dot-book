@@ -1,10 +1,13 @@
 <template>
-    <div class="component">
+    <div class="container-fluid" v-if="googleBook">
 
-        <h1>youre on the book page yo!</h1>
+        <!-- <h1>youre on the book page yo!</h1> -->
 
-        <div v-for="b in googleBooks">
-            <GoogleBook :Book="b" />
+
+        <div>
+            <!-- {{ googleBooks.volumeInfo }} -->
+            <!-- <GoogleBook :book="b" /> -->
+            <img :src="googleBook?.volumeInfo?.imageLinks?.thumbnail" alt="Hello There">
         </div>
 
     </div>
@@ -39,10 +42,10 @@ export default {
             }
         })
         return {
-            googleBooks: computed(() => AppState.googleBooks)
+            googleBook: computed(() => AppState.googleBook)
         }
-    }
-    // components: { GoogleBook }
+    },
+    components: { GoogleBook }
 }
 </script>
 
