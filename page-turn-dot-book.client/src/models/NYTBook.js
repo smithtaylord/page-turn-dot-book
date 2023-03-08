@@ -1,4 +1,4 @@
-export class NYTBooks {
+export class NYTBook {
     constructor(data) {
         this.isbn = data.isbns[0].isbn10
         this.title = data.title

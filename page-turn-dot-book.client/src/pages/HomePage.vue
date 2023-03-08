@@ -19,9 +19,9 @@
         <h1>
           New & Popular
         </h1>
-        <h1>
-          book component goes here
-        </h1>
+        <div v-for="b in NYTBooks">
+          <BookCard :book="b" />
+        </div>
       </div>
     </div>
   </div>
@@ -36,33 +36,31 @@
 </template>
 
 <script>
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 import { AppState } from '../AppState.js';
+import BookCard from '../components/BookCard.vue';
 import { booksService } from '../services/BooksService.js';
 import Pop from '../utils/Pop.js';
 
 
 export default {
-
-
-
-
-  setup() {
-
-    async function getNYTBooks(){
-      try {
-        await booksService.getNYTBooks()
-      } catch (error) {
-        Pop.error(error, 'get NYT books ')
-      }
-    }
-
-
-    onMounted(() => {
-      getNYTBooks()
-    })
-    return {}
-  }
+    setup() {
+        async function getNYTBooks() {
+            try {
+                await booksService.getNYTBooks();
+            }
+            catch (error) {
+                Pop.error(error, "get NYT books ");
+            }
+        }
+        onMounted(() => {
+            getNYTBooks();
+        });
+        return {
+            NYTBooks: computed(() => AppState.NYTBooks),
+        };
+    },
+    components: { BookCard }
 }
 </script>
 
