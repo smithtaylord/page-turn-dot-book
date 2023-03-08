@@ -3,8 +3,8 @@
 
         <h1>youre on the book page yo!</h1>
 
-        <div>
-            {{ googleBooks.volumeInfo }}
+        <div v-for="b in googleBooks">
+            <GoogleBook :Book="b" />
         </div>
 
     </div>
@@ -17,6 +17,7 @@ import { useRoute } from 'vue-router';
 import { AppState } from '../AppState.js';
 import { booksService } from '../services/BooksService';
 import Pop from '../utils/Pop.js';
+import GoogleBook from '../components/GoogleBook.vue';
 
 export default {
     setup() {
@@ -41,6 +42,7 @@ export default {
             googleBooks: computed(() => AppState.googleBooks)
         }
     }
+    // components: { GoogleBook }
 }
 </script>
 

@@ -7,7 +7,10 @@
 
 
 <script>
+import { GoogleBook } from '../models/GoogleBook.js';
+
 export default {
+    props: { googleBook: { type: GoogleBook, required: true, } },
     setup() {
         return {}
     }

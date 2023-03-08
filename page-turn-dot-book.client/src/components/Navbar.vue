@@ -7,26 +7,14 @@
       </h1>
     </router-link>
 
-  <button  class="btn bg-dark selectable" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-   <i class="fs-1 mdi mdi-menu"></i>
-  </button>
-   
+    <button class="btn bg-dark selectable" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+      aria-controls="offcanvasExample">
+      <i class="fs-1 mdi mdi-menu"></i>
+    </button>
 
-  </nav>
 
-</template>
-  
-
-    <!-- OLD NAV BAR STUFF -->
-    <!-- <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
@@ -37,9 +25,14 @@
           </router-link>
         </li>
       </ul>
-      LOGIN COMPONENT HERE
+      <!-- LOGIN COMPONENT HERE -->
       <Login />
-    </div> -->
+    </div>
+  </nav>
+</template>
+  
+
+    <!-- OLD NAV BAR STUFF -->
 
 <script>
 import Login from './Login.vue'
@@ -71,5 +64,4 @@ a:hover {
     height: 64px;
   }
 }
-
 </style>
