@@ -1,8 +1,8 @@
 <template>
     <div class="component">
-        <div class="d-flex flex-row">
-            <form @submit.prevent="handleSubmit()" class="input">
-                <div class="form-control">
+        <div class="d-flex mt-3 align-items-center">
+            <form @submit.prevent="handleSubmit()" class="">
+                <div class="align-items-center">
                     <input v-model="editable.body" placeholder="Leave a comment..." class="input" name="comment"
                         type="text">
                     <button aria-label="Type comment here" type="submit" class="fs-3">

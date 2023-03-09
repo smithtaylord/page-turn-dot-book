@@ -44,12 +44,14 @@
     <div class="container-fluid bg-dark">
         <div class="row">
             <div v-for="c in comments" class="col-12 my-3">
-                <div class="row d-flex">
+                <div class="row d-flex align-content-center">
                     <div class="col-2">
                         <img :src="c.creator?.picture" alt="" class="img-fluid profilePic">
                     </div>
-                    <div class="col-10">
-                        {{ c.body }}
+                    <div class="col-8 bg-warning">
+                        <p>
+                            {{ c.body }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -57,8 +59,11 @@
     </div>
     <div class="container-fluid bg-warning">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 text-center">
                 <h1>Vote On Next Book</h1>
+            </div>
+            <div>
+
             </div>
         </div>
     </div>
@@ -81,6 +86,14 @@ export default {
     setup() {
         const route = useRoute();
         const router = useRouter();
+        async function getClubBooks() {
+            try {
+
+            } catch (error) {
+                Pop.error("getting club books")
+            }
+        }
+
         async function getClubById() {
             try {
                 const clubId = route.params.clubId;

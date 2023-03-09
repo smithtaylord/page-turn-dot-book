@@ -97,6 +97,15 @@ export default {
                     AppState.expanded = true
                 }
                 logger.log(AppState.expanded)
+            },
+
+            async addBookToClub() {
+                try {
+
+                } catch (error) {
+                    logger.log(error)
+                    Pop.error(error.message)
+                }
             }
             // editable,
 
