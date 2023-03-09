@@ -23,7 +23,15 @@
             <div class="col-12">
                 <h1 class="text-center my-3">{{ googleBook?.title }}</h1>
                 <p class="mt-2 mb-4 fs-3 px-3 py-0 text-end">-{{ googleBook?.author }}</p>
-                <p class="mt-2 mb-5 fs-4 px-3 py-0">{{ googleBook?.description }}</p>
+                <p class="mt-2 mb-5 fs-4 px-3 py-0">
+                <div :class="expanded ? 'expandable' : 'expanded'">
+                    {{ googleBook?.description }}
+                </div>
+                </p>
+                <div class="d-flex flex-column align-items-center">
+                    <button v-if="expanded" @click="expand" class='btn-cool text-center'>read more</button>
+                    <button v-else @click="expand" class='btn-cool text-center'>read less</button>
+                </div>
                 <p class="my-3 fs-3 p-0">{{ googleBook?.genre }}</p>
                 <!-- TODO categories need mapped through -->
             </div>
@@ -52,6 +60,7 @@ import { watchEffect, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { AppState } from '../AppState.js';
 import { booksService } from '../services/BooksService';
+import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 
 export default {
@@ -76,8 +85,18 @@ export default {
         })
         return {
             googleBook: computed(() => AppState.googleBook),
+            expanded: computed(() => AppState.expanded),
             onImageError() {
                 event.target.src = this.googleBook.googleImg
+            },
+            expand() {
+                logger.log(AppState.expanded)
+                if (AppState.expanded) {
+                    AppState.expanded = false
+                } else {
+                    AppState.expanded = true
+                }
+                logger.log(AppState.expanded)
             }
             // editable,
 
@@ -102,5 +121,75 @@ export default {
     object-fit: cover;
 
 
+}
+
+.expandable {
+    max-height: 25vh;
+    overflow: hidden;
+}
+
+.expanded {
+    max-height: none;
+}
+
+.btn-cool {
+    width: 140px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    position: relative;
+    background-color: transparent;
+    transition: .2s cubic-bezier(0.19, 1, 0.22, 1);
+    opacity: 0.6;
+}
+
+.btn-cool::after {
+    content: '';
+    border-bottom: 3px double rgb(214, 207, 113);
+    width: 0;
+    height: 100%;
+    position: absolute;
+    margin-top: -5px;
+    top: 0;
+    left: 5px;
+    visibility: hidden;
+    opacity: 1;
+    transition: .2s linear;
+}
+
+.btn-cool .icon {
+    transform: translateX(0%);
+    transition: .2s linear;
+    animation: attention 1.2s linear infinite;
+}
+
+.btn-cool:hover::after {
+    visibility: visible;
+    opacity: 0.7;
+    width: 90%;
+}
+
+.btn-cool:hover {
+    letter-spacing: 2px;
+    opacity: 1;
+}
+
+.btn-cool:hover>.icon {
+    transform: translateX(30%);
+    animation: none;
+}
+
+@keyframes attention {
+    0% {
+        transform: translateX(0%);
+    }
+
+    50% {
+        transform: translateX(30%);
+    }
 }
 </style>
