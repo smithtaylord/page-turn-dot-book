@@ -5,15 +5,15 @@
                 <div class="card text-start">
                     <img class="clubImg" :src="club?.coverImg" :alt="club?.name">
                     <div class="card-body">
-                        <h4 class="card-title">{{ club.name }}</h4>
-                        <p class="card-text">{{ club.bio }}</p>
+                        <h4 class="card-title">{{ club?.name }}</h4>
+                        <p class="card-text">{{ club?.bio }}</p>
                     </div>
                     <div class="row justify-content-end">
                         <div class="col-6 text-end m-2">
                             <button class="btn bg-success" v-if="!foundMember" @click="createMember()"
-                                :disabled="club.isArchived">Join Club</button>
+                                :disabled="club?.isArchived">Join Club</button>
                             <button class="btn bg-danger" v-else @click="removeMember(foundMember.memberId)"
-                                :disabled="club.isArchived">Leave Club</button>
+                                :disabled="club?.isArchived">Leave Club</button>
                         </div>
                     </div>
                 </div>
@@ -41,6 +41,27 @@
             <CommentComponent />
         </div>
     </div>
+    <div class="container-fluid bg-dark">
+        <div class="row">
+            <div v-for="c in comments" class="col-12 my-3">
+                <div class="row d-flex">
+                    <div class="col-2">
+                        <img :src="c.creator?.picture" alt="" class="img-fluid profilePic">
+                    </div>
+                    <div class="col-10">
+                        {{ c.body }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-warning">
+        <div class="row">
+            <div class="col-12">
+                <h1>Vote On Next Book</h1>
+            </div>
+        </div>
+    </div>
 </template>
 
 
@@ -54,6 +75,7 @@ import ClubCard from '../components/ClubCard.vue';
 import { useRoute, useRouter } from 'vue-router';
 import { clubMembersService } from '../services/ClubMembersService';
 import CommentComponent from "../components/CommentComponent.vue";
+import { commentsService } from '../services/CommentsService.js';
 
 export default {
     setup() {
@@ -79,10 +101,21 @@ export default {
             }
         }
 
+        async function getCommentsByClubId() {
+            try {
+                const clubId = route.params.clubId
+                await commentsService.getCommentsByClubId(clubId)
+            } catch (error) {
+                logger.error(error)
+                Pop.error(error.message)
+            }
+        }
+
         watchEffect(() => {
             if (route.params.clubId) {
                 getClubById();
                 getMembersByClubId();
+                getCommentsByClubId();
             }
         })
 
@@ -93,6 +126,7 @@ export default {
             foundMember: computed(() => AppState.members.find(m => m.id == AppState.account.id)),
             myMembership: computed(() => AppState.members.find(m => m.clubId == AppState.activeClub.id)),
             account: computed(() => AppState.account),
+            comments: computed(() => AppState.comments),
             async createMember() {
                 try {
                     await clubMembersService.createMember({ clubId: route.params.clubId })
