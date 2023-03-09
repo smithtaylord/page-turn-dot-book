@@ -1,21 +1,26 @@
 <template>
-    <div class="OffCanvas">
+    <div class="OffCanvas bg-warning">
 
 
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">   <i class="mdi mdi-book-open-variant" ></i>  PageTurn.Book</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <div class="offcanvas-header bg-warning">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel"> <i class="mdi mdi-book-open-variant text-dark"></i>
+                    PageTurn.Book</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close-OffCanvas"></button>
             </div>
-            <div class="offcanvas-body">
-                <div>
-                  
-                    <p>Create Club</p>
-                    <p>Search Books</p>
-                    <p>My Account</p>
-                    <p>About Us</p>
-                    <p>Logout</p>
-                
+            <div class="offcanvas-body bg-warning">
+                <div class="d-flex flex-column">
+
+                    <button class="btn bg-primary mb-2" data-bs-dismiss="offcanvas" aria-label="Close-OffCanvas">Create
+                        Club</button>
+                    <button class="btn bg-success mb-2" data-bs-dismiss="offcanvas" aria-label="Close-OffCanvas">Search
+                        Books</button>
+                    <router-link :to="{ name: 'About' }" class="">
+                        <Button class="btn bg-danger w-100" data-bs-dismiss="offcanvas"
+                            aria-label="Close-OffCanvas">About</Button>
+                    </router-link>
+                    <Login />
+
                 </div>
 
             </div>
@@ -28,10 +33,13 @@
 
 
 <script>
+import Login from './Login.vue';
+
 export default {
     setup() {
-        return {}
-    }
+        return {};
+    },
+    components: { Login }
 }
 </script>
 

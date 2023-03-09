@@ -11,9 +11,9 @@
       aria-controls="offcanvasExample">
       <i class="fs-1 mdi mdi-menu"></i>
     </button>
+    <!-- OLD NAVBAR STUFF BELOW LEFT FOR REF -->
 
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -25,14 +25,10 @@
           </router-link>
         </li>
       </ul>
-      <!-- LOGIN COMPONENT HERE -->
       <Login />
-    </div>
+    </div> -->
   </nav>
 </template>
-  
-
-    <!-- OLD NAV BAR STUFF -->
 
 <script>
 import Login from './Login.vue'
