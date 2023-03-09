@@ -4,6 +4,18 @@ import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 
 class ClubsService {
+   async setActiveBook(clubId) {
+        const book = await dbContext.ClubBooks.findById(clubId)
+        if(!book){
+            throw new BadRequest("there is no book on set ACtive book")
+        }else{
+            book.isActive = true
+       
+        } 
+          await book.save()
+          return book
+    }
+
     async archiveClub(clubId, userId){
         const club = await this.getClubById(clubId)
         if (club.creatorId.toString() != userId) {

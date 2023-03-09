@@ -8,7 +8,7 @@ export const ClubSchema = new Schema(
         coverImg: basicStringType,
         isArchived: { type: Boolean, required: true, default: false},
         // type: {...basicStringType, enum: ['speed-readers', 'casual-readers', 'cat-moms', 'history-buffs', 'fiction-fans', 'other']}
-        
+        activeBook: { type: String,},
         creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true},
     }, defaultSchemaOptions
 )
