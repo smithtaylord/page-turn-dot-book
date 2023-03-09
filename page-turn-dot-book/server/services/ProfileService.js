@@ -29,5 +29,5 @@ class ProfileService {
       .exec()
   }
 }
-
+    
 export const profileService = new ProfileService()
