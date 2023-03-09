@@ -2,8 +2,8 @@
     <div class="container-fluid bg-primary" v-if="googleBook">
         <div class="row">
             <div class="col-12 my-4 px-4">
-                <div>
-                    <img class="book-img" :src="googleBook?.img" alt="Hello There">
+                <div class="d-flex justify-content-center">
+                    <img class="book-img" :src="googleBook?.img" :alt="googleBook.title" v-on:error="onImageError">
                 </div>
             </div>
         </div>
@@ -21,8 +21,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <p class="text-center my-3 fs-2 p-0">{{ googleBook?.title }}</p>
-                <p class="mt-2 mb-4 fs-3 px-3 py-0">{{ googleBook?.author }}</p>
+                <h1 class="text-center my-3">{{ googleBook?.title }}</h1>
+                <p class="mt-2 mb-4 fs-3 px-3 py-0 text-end">-{{ googleBook?.author }}</p>
                 <p class="mt-2 mb-5 fs-4 px-3 py-0">{{ googleBook?.description }}</p>
                 <p class="my-3 fs-3 p-0">{{ googleBook?.genre }}</p>
                 <!-- TODO categories need mapped through -->
@@ -76,6 +76,9 @@ export default {
         })
         return {
             googleBook: computed(() => AppState.googleBook),
+            onImageError() {
+                event.target.src = this.googleBook.googleImg
+            }
             // editable,
 
             // async createComment() {
@@ -94,8 +97,10 @@ export default {
 
 <style lang="scss" scoped>
 .book-img {
-    height: 60vh;
-    width: 100%;
+    height: 50vh;
+    width: auto;
+    object-fit: cover;
+
 
 }
 </style>
