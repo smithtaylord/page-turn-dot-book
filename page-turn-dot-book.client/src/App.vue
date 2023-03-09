@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="sticky-top">
     <Navbar />
   </header>
   <main>
@@ -15,13 +15,14 @@
       <img src="https://books.google.com/googlebooks/images/poweredby.png" alt="" class="px-2 bg-light logo rounded py-1">
     </span>
   </footer>
-
+  <Modal />
   <OffCanvas />
 </template>
 
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
+import Modal from './components/Modal.vue'
 import Navbar from './components/Navbar.vue'
 import OffCanvas from './components/OffCanvas.vue'
 
@@ -31,7 +32,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar, OffCanvas }
+  components: { Navbar, OffCanvas, Modal }
 }
 </script>
 <style lang="scss">
