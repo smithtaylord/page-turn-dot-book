@@ -10,6 +10,7 @@ class ClubsService {
         // NOTE go and make sure that this id we sent up can get a clubBook for this club
         
         club.clubBookId = bookData.clubBookId
+        club.populate('activeBook')
         // populate the clubBook here
         await club.save()
         return club
@@ -48,7 +49,7 @@ class ClubsService {
     }
 
     async getClubById(clubId) {
-        const club = await dbContext.Clubs.findById(clubId)
+        const club = await dbContext.Clubs.findById(clubId).populate('activeBook')
         if (!club) {
             throw new BadRequest('Invalid Club Id Loser')
         }

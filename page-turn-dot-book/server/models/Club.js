@@ -21,3 +21,9 @@ ClubSchema.virtual('creator', {
 })
 
 // NOTE set up a virtual for the club book
+ClubSchema.virtual('activeBook', {
+    ref: 'ClubBooks',
+    localField: 'clubBookId',
+    foreignField: '_id',
+    justOne: true,
+})
