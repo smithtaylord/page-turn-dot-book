@@ -3,7 +3,7 @@ import { basicStringType, defaultSchemaOptions } from "../db/Constants";
 
 export const ClubBookSchema = new Schema(
     {
-        bookClubId: {type: Schema.Types.ObjectId, required: true, ref: 'Club'},
+        clubId: {type: Schema.Types.ObjectId, required: true, ref: 'Club'},
         title: basicStringType,
         coverImg: basicStringType,
         ISBN: {type: Number, required: true},

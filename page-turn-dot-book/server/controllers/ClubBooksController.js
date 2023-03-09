@@ -7,8 +7,19 @@ export class ClubBooksController extends BaseController{
     super('api/clubBooks')
     this.router
     .use(Auth0Provider.getAuthorizedUserInfo)
+    .delete('/:id', this.deleteClubBookById)
     .post('', this.createClubBook)
   }
+  async deleteClubBookById(req, res, next) {
+    try {
+      const id = req.params.id
+      const removedBook = await clubBooksService.deleteClubBookById(id)
+      return res.send(removedBook)
+    } catch (error) {
+      next(error)
+    }
+  }
+
 
   async createClubBook(req, res, next){
     try {

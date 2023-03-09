@@ -1,6 +1,18 @@
+import { dbContext } from "../db/DbContext"
+
 class ClubBooksService{
-  createClubBook(clubBookData) {
-    throw new Error("Method not implemented.");
+ async deleteClubBookById(id) {
+    const book = await dbContext.ClubBooks.findById(id)
+    await book.remove()
+    return book
+  }
+  async getClubBooks(clubId) {
+    const clubBooks = await dbContext.ClubBooks.find({clubId})
+    return clubBooks
+ }
+ async createClubBook(clubBookData) {
+  const clubBook = await dbContext.ClubBooks.create(clubBookData)
+  return clubBook
   }
 
 }

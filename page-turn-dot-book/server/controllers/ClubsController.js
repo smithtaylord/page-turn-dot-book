@@ -1,4 +1,5 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
+import { clubBooksService } from "../services/ClubBooksService.js";
 import { clubsService } from "../services/ClubsService.js";
 import { commentsService } from "../services/CommentsService.js";
 import { membersService } from "../services/MembersService.js";
@@ -13,6 +14,7 @@ export class ClubsController extends BaseController {
     constructor() {
         super('api/clubs')
         this.router
+        .get('/:clubId/clubBooks', this.getClubBooks)
         .get('', this.getAllClubs)
         .get('/:clubId', this.getClubById)
         .get('/:clubId/members', this.getClubMembers)
@@ -22,6 +24,17 @@ export class ClubsController extends BaseController {
         .put('/:clubId', this.editClub)
         .delete('/:clubId', this.archiveClub)
     }
+
+    async getClubBooks(req, res, next) {
+    try {
+      const clubId = req.params.clubId
+      const clubBooks = await clubBooksService.getClubBooks(clubId)
+      return res.send(clubBooks)
+    } catch (error) {
+      next(error)
+    }
+  }
+
 
     async getClubComments(req, res, next){
         try {
