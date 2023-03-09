@@ -20,17 +20,17 @@ export class ClubsController extends BaseController {
         .get('/:clubId/members', this.getClubMembers)
         .get('/:parentId/comments', this.getClubComments)
         .use(Auth0Provider.getAuthorizedUserInfo)
-        .put('/:clubId', this.setActiveBook)
+        .put('/:clubId/book', this.setActiveBook)
         .post('', this.createClub)
         .put('/:clubId', this.editClub)
         .delete('/:clubId', this.archiveClub)
     }
     async setActiveBook(req, res, next)    {
         try {
-             const clubId = req.params.clubId
-            //  const isActive = req.body
-             const activeBook = await clubsService.setActiveBook(clubId)
-             return res.send(activeBook)
+            const clubId = req.params.clubId
+             const bookData = req.body
+            const activeBook = await clubsService.setActiveBook(clubId, bookData)
+            return res.send(activeBook)
         } catch (error) {
         next(error)    
         }
@@ -38,13 +38,13 @@ export class ClubsController extends BaseController {
 
     async getClubBooks(req, res, next) {
     try {
-      const clubId = req.params.clubId
-      const clubBooks = await clubBooksService.getClubBooks(clubId)
-      return res.send(clubBooks)
-    } catch (error) {
-      next(error)
+        const clubId = req.params.clubId
+        const clubBooks = await clubBooksService.getClubBooks(clubId)
+        return res.send(clubBooks)
+        } catch (error) {
+        next(error)
+        }
     }
-  }
 
 
     async getClubComments(req, res, next){

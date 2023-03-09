@@ -36,6 +36,7 @@ export default {
                 try {
                     const commentData = editable.value
                     commentData.parentId = route.params.clubId
+                    logger.log(commentData)
                     await commentsService.createComment(commentData)
                     editable.value = {}
                 } catch (error) {

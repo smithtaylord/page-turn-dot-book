@@ -8,7 +8,7 @@ export const ClubSchema = new Schema(
         coverImg: basicStringType,
         isArchived: { type: Boolean, required: true, default: false},
         // type: {...basicStringType, enum: ['speed-readers', 'casual-readers', 'cat-moms', 'history-buffs', 'fiction-fans', 'other']}
-        activeBook: { type: String,},
+        clubBookId: { type: Schema.Types.ObjectId, ref: 'ClubBooks'},
         creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true},
     }, defaultSchemaOptions
 )
@@ -19,3 +19,5 @@ ClubSchema.virtual('creator', {
     foreignField: '_id',
     justOne: true,
 })
+
+// NOTE set up a virtual for the club book
