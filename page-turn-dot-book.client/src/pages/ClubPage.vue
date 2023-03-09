@@ -16,10 +16,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 mt-3 bg-danger">
+            <div class="col-12 mt-3 bg-danger p-2 ">
                 <h4>Club Members</h4>
-                <div v-for="m in members">
-                    <img :src="m.picture" :alt="m-name" class="profilePic">
+                <div class="d-flex">
+                    <div v-for="m in members">
+                        <img :src="m.picture" :alt="m-name" class="profilePic m-1">
+                    </div>
                 </div>
             </div>
         </div>
@@ -106,5 +108,12 @@ export default {
     height: 50vh;
     width: auto;
 
+}
+
+.profilePic{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 2px black;
 }
 </style>
