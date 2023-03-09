@@ -21,14 +21,18 @@ const routes = [
     name: 'Account',
     component: loadPage('AccountPage'),
     beforeEnter: authGuard
-  },{
+  }, {
     path: '/book/:isbn',
     name: 'Book',
     component: loadPage('BookPage'),
-  },{
+  }, {
     path: '/clubs/:clubId',
     name: 'Club',
     component: loadPage('ClubPage')
+  }, {
+    path: '/search',
+    name: 'Search',
+    component: loadPage('SearchResultsPage')
   }
 
 

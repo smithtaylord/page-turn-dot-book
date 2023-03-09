@@ -1,7 +1,6 @@
 <template>
     <div class="component">
-
-
+        <h1>HELLO, This is the search results page</h1>
     </div>
 </template>
 
