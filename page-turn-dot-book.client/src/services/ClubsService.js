@@ -10,6 +10,12 @@ async getAllClubs() {
     AppState.clubs = res.data.map(c => new Club(c))
 }
 
+async getClubById(clubId){
+    const res = await api.get('api/clubs/' + clubId)
+    logger.log(res.data)
+    AppState.activeClub = new Club(res.data)
+}
+
 }
 
 export const clubsService = new ClubsService()

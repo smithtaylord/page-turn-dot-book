@@ -16,6 +16,10 @@ export const AppState = reactive({
  /** @type {import('./models/Club').Club[]} */
   clubs: [],
 
+   /** @type {import('./models/Club').Club | null} */
+  activeClub: null,
 
+  /** @type {import('./models/ClubMember').ClubMember[]} */
+  members: [],
 
 })

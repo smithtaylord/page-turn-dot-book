@@ -25,7 +25,10 @@ const routes = [
     path: '/book/:isbn',
     name: 'Book',
     component: loadPage('BookPage'),
-
+  },{
+    path: '/clubs/:clubId',
+    name: 'Club',
+    component: loadPage('ClubPage')
   }
 
 

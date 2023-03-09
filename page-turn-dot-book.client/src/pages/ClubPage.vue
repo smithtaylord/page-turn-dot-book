@@ -1,18 +1,110 @@
 <template>
-    <div class="component">
-
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card text-start">
+                    <img class="clubImg" :src="club.coverImg" :alt="club.name">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ club.name }}</h4>
+                        <p class="card-text">{{ club.bio }}</p>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="col-6 text-end m-2">
+                            <button class="btn bg-success" v-if="!foundMember" @click="createMember()" :disabled="club.isArchived">Join Club</button>
+                            <button class="btn bg-danger" v-else @click="removeMember(foundMember.memberId)" :disabled="club.isArchived" >Leave Club</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-3 bg-danger">
+                <h4>Club Members</h4>
+                <div v-for="m in members">
+                    <img :src="m.picture" :alt="m-name" class="profilePic">
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 
 <script>
+import { watchEffect, computed, onMounted } from 'vue';
+import { clubsService } from '../services/ClubsService';
+import { logger } from '../utils/Logger';
+import Pop from '../utils/Pop';
+import { AppState } from '../AppState.js'
+import ClubCard from '../components/ClubCard.vue';
+import { useRoute, useRouter } from 'vue-router';
+import { clubMembersService } from '../services/ClubMembersService';
+
 export default {
     setup() {
-        return {}
-    }
+        const route = useRoute();
+        const router = useRouter();
+        async function getClubById() {
+            try {
+                const clubId = route.params.clubId;
+                logger.log(clubId);
+                await clubsService.getClubById(clubId);
+            }
+            catch (error) {
+                Pop.error("getting club by id");
+                router.push("/");
+            }
+        }
+        async function getMembersByClubId(){
+            try {
+                const clubId = route.params.clubId
+                await clubMembersService.getMembersByClubId(clubId)
+            } catch (error) {
+                Pop.error(error.message)
+            }
+        }
+
+        watchEffect(() => {
+            if (route.params.clubId){
+                getClubById();
+                getMembersByClubId();
+            }
+        })
+
+        return {
+            route,
+            club: computed(() => AppState.activeClub),
+            members: computed(() => AppState.members),
+            foundMember: computed(() => AppState.members.find(m => m.id == AppState.account.id)),
+            myMembership: computed(() => AppState.members.find(m => m.clubId == AppState.activeClub.id)),
+            account: computed(() => AppState.account),
+            async createMember(){
+                try {
+                    await clubMembersService.createMember({clubId: route.params.clubId})
+                } catch (error) {
+                    Pop.error('creating member')
+                    logger.error(error)
+                }
+            },
+            async removeMember(memberId){
+                try {
+                    if(await Pop.confirm()){
+                        await clubMembersService.removeMember(memberId)
+                        logger.log(memberId)
+                    }
+                } catch (error) {
+                    Pop.error('removing member')
+                    logger.error(error)
+                }
+            }
+        };
+    },
+    components: { ClubCard }
 }
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.clubImg {
+    height: 50vh;
+    width: auto;
+
+}
+</style>
