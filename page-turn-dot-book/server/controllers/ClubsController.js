@@ -14,40 +14,41 @@ export class ClubsController extends BaseController {
     constructor() {
         super('api/clubs')
         this.router
-        .get('/:clubId/clubBooks', this.getClubBooks)
-        .get('', this.getAllClubs)
-        .get('/:clubId', this.getClubById)
-        .get('/:clubId/members', this.getClubMembers)
-        .get('/:parentId/comments', this.getClubComments)
-        .use(Auth0Provider.getAuthorizedUserInfo)
-        .put('/:clubId/book', this.setActiveBook)
-        .post('', this.createClub)
-        .put('/:clubId', this.editClub)
-        .delete('/:clubId', this.archiveClub)
+            .get('/:clubId/clubBooks', this.getClubBooks)
+            .get('', this.getAllClubs)
+            .get('/:clubId', this.getClubById)
+            .get('/:clubId/members', this.getClubMembers)
+            .get('/:parentId/comments', this.getClubComments)
+            .use(Auth0Provider.getAuthorizedUserInfo)
+            .put('/:clubId/book', this.setActiveBook)
+            .post('', this.createClub)
+            .put('/:clubId', this.editClub)
+            .delete('/:clubId', this.archiveClub)
     }
-    async setActiveBook(req, res, next)    {
+    async setActiveBook(req, res, next) {
         try {
+            const accountId = req.userInfo.Id
             const clubId = req.params.clubId
-             const bookData = req.body
-            const activeBook = await clubsService.setActiveBook(clubId, bookData)
+            const bookData = req.body
+            const activeBook = await clubsService.setActiveBook(clubId, bookData, accountId)
             return res.send(activeBook)
         } catch (error) {
-        next(error)    
+            next(error)
         }
     }
 
     async getClubBooks(req, res, next) {
-    try {
-        const clubId = req.params.clubId
-        const clubBooks = await clubBooksService.getClubBooks(clubId)
-        return res.send(clubBooks)
+        try {
+            const clubId = req.params.clubId
+            const clubBooks = await clubBooksService.getClubBooks(clubId)
+            return res.send(clubBooks)
         } catch (error) {
-        next(error)
+            next(error)
         }
     }
 
 
-    async getClubComments(req, res, next){
+    async getClubComments(req, res, next) {
         try {
             const parentId = req.params.parentId
             const comments = await commentsService.getCommentbyParentId(parentId)
@@ -75,7 +76,7 @@ export class ClubsController extends BaseController {
         }
     }
 
-    async getClubById(req,res,next) {
+    async getClubById(req, res, next) {
         try {
             const clubId = req.params.clubId
             const club = await clubsService.getClubById(clubId)

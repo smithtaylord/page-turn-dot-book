@@ -1,5 +1,6 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { accountService } from '../services/AccountService'
+import { membersService } from '../services/MembersService.js'
 import BaseController from '../utils/BaseController'
 
 export class AccountController extends BaseController {
@@ -8,12 +9,23 @@ export class AccountController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
-      // .get('', this.getProfileBooks)
+      .get('/members', this.getMyClubs)
+    // .get('', this.getProfileBooks)
   }
   async getUserAccount(req, res, next) {
     try {
       const account = await accountService.getAccount(req.userInfo)
       res.send(account)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getMyClubs(req, res, next) {
+    try {
+      const accountId = req.userInfo.id
+      const clubs = await membersService.getMyClubs(accountId)
+      return res.send(clubs)
     } catch (error) {
       next(error)
     }

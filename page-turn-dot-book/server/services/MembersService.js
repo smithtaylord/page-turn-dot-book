@@ -7,8 +7,8 @@ import { clubsService } from "./ClubsService.js"
 
 class MembersService {
     async getProfileBookClubs(accountId) {
-      const club = await dbContext.ClubMembers.find({accountId}).populate('club')
-      return club
+        const club = await dbContext.ClubMembers.find({ accountId }).populate('club')
+        return club
     }
     async deleteMember(memberId, userId) {
         const member = await dbContext.ClubMembers.findById(memberId)
@@ -27,12 +27,17 @@ class MembersService {
     }
 
     async getClubMembers(clubId) {
-        const members = await dbContext.ClubMembers.find({clubId})
-        .populate('profile')
-        .populate('club')
+        const members = await dbContext.ClubMembers.find({ clubId })
+            .populate('profile')
+            .populate('club')
         return members
     }
-    
+
+    async getMyClubs(accountId) {
+        const clubs = await dbContext.ClubMembers.find({ accountId }).populate('club')
+        return clubs
+    }
+
     async createMember(memberData) {
         const club = await clubsService.getClubById(memberData.clubId)
         if (club.isArchived) {

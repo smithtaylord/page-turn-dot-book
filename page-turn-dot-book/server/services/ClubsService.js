@@ -4,11 +4,18 @@ import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 
 class ClubsService {
-    async setActiveBook(clubId, bookData) {
+    async setActiveBook(clubId, bookData, accountId) {
         const club = await this.getClubById(clubId)
+
+        if (club.creatorId != accountId) {
+            throw new Forbidden('Please stop breaking the rules... this is not allowed')
+        }
+        if (!club) {
+            throw new BadRequest('We could not find that club, please try not to cry')
+        }
         // NOTE check to see who is making this request
         // NOTE go and make sure that this id we sent up can get a clubBook for this club
-        
+
         club.clubBookId = bookData.clubBookId
         club.populate('activeBook')
         // populate the clubBook here
@@ -16,7 +23,7 @@ class ClubsService {
         return club
     }
 
-    async archiveClub(clubId, userId){
+    async archiveClub(clubId, userId) {
         const club = await this.getClubById(clubId)
         if (club.creatorId.toString() != userId) {
             throw new Forbidden('You Are Not A Club Owner!!')
