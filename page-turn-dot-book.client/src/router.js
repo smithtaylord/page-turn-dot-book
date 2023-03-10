@@ -34,7 +34,7 @@ const routes = [
     name: 'Search',
     component: loadPage('SearchResultsPage')
   }, {
-    path: '/profile',
+    path: '/profiles/:profileId',
     name: 'Profile',
     component: loadPage('ProfilePage')
   }
