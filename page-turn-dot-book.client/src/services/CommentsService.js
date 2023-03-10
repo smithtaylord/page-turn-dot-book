@@ -18,7 +18,7 @@ class CommentsService {
         logger.log(commentData)
         const res = await api.post('api/comments', commentData)
         AppState.comments.push(new Comment(res.data))
-        // logger.log(res.data)
+        
         return res.data
     }
 

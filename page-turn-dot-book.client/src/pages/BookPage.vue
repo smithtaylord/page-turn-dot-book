@@ -13,7 +13,12 @@
         <div class="row">
             <div class="col-12 mt-1 mb-4 d-flex justify-content-between">
                 <button class="btn bg-danger selectable">Add To My Books</button>
-                <button class="btn bg-danger selectable">Add To My Club</button>
+                <div v-if="myClubs" >
+                    <div v-for="m in myClubs" >
+                        <button :club="m" @click="addBookToClub(m.clubId)" class="btn bg-danger selectable">Add To My Club</button>   
+                           <div>sample</div>          
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -60,6 +65,7 @@ import { watchEffect, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { AppState } from '../AppState.js';
 import { booksService } from '../services/BooksService';
+import { clubsService } from '../services/ClubsService';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 
@@ -68,6 +74,15 @@ export default {
         // const editable = ref({})
         const route = useRoute()
 
+            async function getMyClubs(){
+                try {
+                    let profileId = AppState.account.id
+                    await clubsService.getMyClubs(profileId) 
+                } catch (error) {
+                    Pop.error(error)
+                }
+            }
+        
 
         async function getBookByISBN() {
             try {
@@ -81,9 +96,12 @@ export default {
         watchEffect(() => {
             if (route.params.isbn) {
                 getBookByISBN()
+                getMyClubs()
             }
         })
         return {
+            account: computed(() => AppState.account),
+            myClubs: computed(() => AppState.members ),
             googleBook: computed(() => AppState.googleBook),
             expanded: computed(() => AppState.expanded),
             onImageError() {
@@ -101,7 +119,8 @@ export default {
 
             async addBookToClub() {
                 try {
-
+                    const isbn = route.params.id
+                    await clubsService.addBookToClub(isbn)
                 } catch (error) {
                     logger.log(error)
                     Pop.error(error.message)

@@ -26,10 +26,10 @@
             <div v-for="c in comments" class="col-12 my-3">
                 <div class="row d-flex align-content-center">
                     <div class="col-2">
-                        <img :src="c.creator?.picture" alt="" class="profilePic">
+                        <img :src="c?.creator?.picture" alt="" class="profilePic">
                     </div>
                     <div class="col-8 bg-warning ms-2 rounded">
-                        <p class="fw-bold m-0"> {{ c.creator.name }}</p>
+                        <p class="fw-bold m-0"> {{ c?.creator?.name }}</p>
                         <p class="m-0 mb-2">
                             {{ c.body }}
                         </p>
@@ -54,8 +54,10 @@ export default {
         const editable = ref({})
         const route = useRoute()
         watchEffect(() => {
+
             if (route.params.clubId) {
                 getCommentsByClubId();
+                
             }
         })
         async function getCommentsByClubId() {
@@ -71,6 +73,8 @@ export default {
             editable,
             profile: computed(() => AppState.account),
             comments: computed(() => AppState.comments),
+            clubs: computed(() => AppState.clubs),
+            account: computed(() => AppState.account),
 
             async handleSubmit() {
                 try {
