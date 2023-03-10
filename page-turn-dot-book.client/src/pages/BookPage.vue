@@ -14,10 +14,25 @@
             <div class="col-12 mt-1 mb-4 d-flex justify-content-between">
                 <button class="btn bg-danger selectable">Add To My Books</button>
                 <div v-if="myClubs">
-                    <div v-for="m in myClubs">
-                        <button :club="m" @click="addBookToClub(m.clubId)" class="btn bg-danger selectable">Add To My
-                            Club</button>
-                        <div>sample</div>
+                    <div >
+
+                        <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Dropdown button
+      </button>
+      <ul  class="dropdown-menu">
+        <div v-for="m in myClubs" >
+            <li class="dropdown-item" @click="addBookToClub(m.club.id)">{{ m.club.name }}</li>
+        </div>
+
+      </ul>
+    </div>
+
+
+
+<!-- 
+                        <button   class="btn bg-danger selectable">{{ m.club.name }}</button>
+                        <div>sample</div> -->
                     </div>
                 </div>
             </div>
@@ -63,7 +78,7 @@
 
 <script>
 import { watchEffect, computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { AppState } from '../AppState.js';
 import { booksService } from '../services/BooksService';
 import { clubsService } from '../services/ClubsService';
@@ -74,16 +89,17 @@ export default {
     setup() {
         // const editable = ref({})
         const route = useRoute()
+        const router = useRouter()
 
-        async function getMyClubs() {
-            try {
-                let profileId = AppState.account.id
-                logger.log(profileId, "getmyclub profile id on active book page")
-                await clubsService.getMyClubs(profileId)
-            } catch (error) {
-                Pop.error(error)
-            }
-        }
+        // async function getMyClubs() {
+        //     try {
+        //         let profileId = AppState.account.id
+        //         logger.log(profileId, "getmyclub profile id on active book page")
+        //         await clubsService.getMyClubs(profileId)
+        //     } catch (error) {
+        //         Pop.error(error)
+        //     }
+        // }
 
 
         async function getBookByISBN() {
@@ -103,7 +119,7 @@ export default {
         })
         return {
             account: computed(() => AppState.account),
-            myClubs: computed(() => AppState.members),
+            myClubs: computed(() => AppState.myClubs),
             googleBook: computed(() => AppState.googleBook),
             expanded: computed(() => AppState.expanded),
             onImageError() {
@@ -119,10 +135,14 @@ export default {
                 logger.log(AppState.expanded)
             },
 
-            async addBookToClub() {
+            async addBookToClub(clubId) {
                 try {
-                    const isbn = route.params.id
-                    await clubsService.addBookToClub(isbn)
+                    const book = this.googleBook
+                    book.ISBN = route.params.isbn
+                    book.clubId = clubId
+                    book.coverImg = this.googleBook.img
+                    await clubsService.addBookToClub(book)
+                    router.push({name: "Club", params: {clubId: clubId}})
                 } catch (error) {
                     logger.log(error)
                     Pop.error(error.message)

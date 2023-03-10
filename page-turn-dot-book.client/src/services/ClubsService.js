@@ -5,6 +5,14 @@ import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 class ClubsService {
+
+
+    async addBookToClub(book){
+        // logger.log(book,'this is addbook to club function, and you are looking at the book object that is created' )
+const res = await api.post('api/clubBooks',book)
+logger.log(res.data, 'book added to club')
+    }
+
     async getMyClubs(profileId) {
         const res = await api.get('/api/profiles/' + profileId + '/profileBookClubs')
         logger.log(res.data, "Gotten Clubs")
