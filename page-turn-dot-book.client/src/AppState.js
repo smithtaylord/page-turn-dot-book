@@ -16,6 +16,9 @@ export const AppState = reactive({
   /** @type {import('./models/GoogleBook').GoogleBook | null} */
   googleBook: null,
 
+   /** @type {import('./models/GoogleBook').GoogleBook[]} */
+   googleBooks: [],
+
   /** @type {import('./models/Club').Club[]} */
   clubs: [],
   
