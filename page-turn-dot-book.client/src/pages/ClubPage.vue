@@ -41,22 +41,23 @@
             <CommentComponent />
         </div>
     </div>
-    <div class="container-fluid bg-dark">
+    <!-- <div class="container-fluid bg-dark">
         <div class="row">
             <div v-for="c in comments" class="col-12 my-3">
                 <div class="row d-flex align-content-center">
                     <div class="col-2">
-                        <img :src="c.creator?.picture" alt="" class="img-fluid profilePic">
+                        <img :src="c.creator?.picture" alt="" class="profilePic">
                     </div>
-                    <div class="col-8 bg-warning">
-                        <p>
+                    <div class="col-8 bg-warning ms-2 rounded">
+                        <p class="fw-bold m-0"> {{ c.creator.name }}</p>
+                        <p class="m-0 mb-2">
                             {{ c.body }}
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="container-fluid bg-warning">
         <div class="row">
             <div class="col-12 text-center">
@@ -114,21 +115,21 @@ export default {
             }
         }
 
-        async function getCommentsByClubId() {
-            try {
-                const clubId = route.params.clubId
-                await commentsService.getCommentsByClubId(clubId)
-            } catch (error) {
-                logger.error(error)
-                Pop.error(error.message)
-            }
-        }
+        // async function getCommentsByClubId() {
+        //     try {
+        //         const clubId = route.params.clubId
+        //         await commentsService.getCommentsByClubId(clubId)
+        //     } catch (error) {
+        //         logger.error(error)
+        //         Pop.error(error.message)
+        //     }
+        // }
 
         watchEffect(() => {
             if (route.params.clubId) {
                 getClubById();
                 getMembersByClubId();
-                getCommentsByClubId();
+                // getCommentsByClubId();
             }
         })
 
@@ -139,7 +140,7 @@ export default {
             foundMember: computed(() => AppState.members.find(m => m.id == AppState.account.id)),
             myMembership: computed(() => AppState.members.find(m => m.clubId == AppState.activeClub.id)),
             account: computed(() => AppState.account),
-            comments: computed(() => AppState.comments),
+            // comments: computed(() => AppState.comments),
             async createMember() {
                 try {
                     await clubMembersService.createMember({ clubId: route.params.clubId })
