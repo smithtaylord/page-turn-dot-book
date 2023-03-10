@@ -10,9 +10,11 @@
             </div>
             <div class="offcanvas-body bg-warning">
                 <div class="d-flex flex-column">
-
-                    <button class="btn bg-primary mb-2 w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Create
-                        Club</button>
+                    <router-link :to="{ name: 'CreateClub' }">
+                        <button class="btn bg-primary mb-2 w-100" data-bs-dismiss="offcanvas"
+                            aria-label="Close-OffCanvas">Create
+                            Club</button>
+                    </router-link>
                     <router-link :to="{ name: 'Search' }">
                         <button class="btn bg-success mb-2 w-100" data-bs-dismiss="offcanvas"
                             aria-label="Close-OffCanvas">Search
