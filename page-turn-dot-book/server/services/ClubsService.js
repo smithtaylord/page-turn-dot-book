@@ -21,7 +21,11 @@ class ClubsService {
         // if (club.clubBookId != clubBooks)
         // NOTE check to see who is making this request
         // NOTE go and make sure that this id we sent up can get a clubBook for this club
-
+        if (club.clubBookId) {
+            const readBook = await clubBooksService.getClubBookById(club.clubBookId)
+            readBook.isArchived = true
+            await club.save()
+        }
         club.clubBookId = bookData.clubBookId
         club.populate('activeBook')
         // populate the clubBook here

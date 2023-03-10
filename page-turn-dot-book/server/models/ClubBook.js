@@ -7,6 +7,7 @@ export const ClubBookSchema = new Schema(
         title: basicStringType,
         coverImg: basicStringType,
         ISBN: { type: Number, required: true },
+        isArchived: { type: Boolean, required: true, default: false },
         // genre: basicStringType,
         // isActive: {type: Boolean, required: true, default: false}
         // NOTE come back and maybe add votes somehow, maybe
