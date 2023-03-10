@@ -7,12 +7,14 @@ class ClubMembersService {
 
   async getMembersByClubId(clubId){
     const res = await api.get(`api/clubs/${clubId}/members`)
-    logger.log(res.data)
+    logger.log('getting members by id', res.data)
     AppState.members = res.data.map(m => new ClubMember(m))
   }
 
   async createMember(memberData){
+    logger.log(memberData, 'this is the member data we are sending')
     const res = await api.post('api/members', memberData)
+    logger.log(res.data, 'getting the member data back')
     AppState.members.push(new ClubMember(res.data));
   }
 

@@ -5,7 +5,11 @@ import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 class ClubsService {
-
+    async createClub(formData) {
+        const res = await api.post('api/clubs', formData)
+        logger.log('creating a Club', res.data)
+        return new Club(res.data)
+    }
 
     async addBookToClub(book){
         // logger.log(book,'this is addbook to club function, and you are looking at the book object that is created' )

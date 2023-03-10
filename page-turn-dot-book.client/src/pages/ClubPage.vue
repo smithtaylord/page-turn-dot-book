@@ -22,7 +22,7 @@
                 <h4>Club Members</h4>
                 <div class="d-flex">
                     <div v-for="m in members">
-                        <img :src="m.picture" :alt="m - name" class="profilePic m-1">
+                        <img :src="m.profile.picture" :alt="m - name" class="profilePic m-1">
                     </div>
                 </div>
             </div>

@@ -6,6 +6,6 @@ export const BookSchema = new Schema(
         title: basicStringType,
         coverImg: basicStringType,
         ISBN: basicStringType,
-        genre: basicStringType,
+        // genre: basicStringType,
     }
 )
