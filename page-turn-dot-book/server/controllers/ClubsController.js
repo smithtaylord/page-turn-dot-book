@@ -27,7 +27,7 @@ export class ClubsController extends BaseController {
     }
     async setActiveBook(req, res, next) {
         try {
-            const accountId = req.userInfo.Id
+            const accountId = req.userInfo.id
             const clubId = req.params.clubId
             const bookData = req.body
             const activeBook = await clubsService.setActiveBook(clubId, bookData, accountId)
