@@ -1,18 +1,24 @@
 import { dbContext } from "../db/DbContext.js"
 import { BadRequest, Forbidden } from "../utils/Errors.js"
+import { clubBooksService } from "./ClubBooksService.js"
 
 
 
 class ClubsService {
     async setActiveBook(clubId, bookData, accountId) {
         const club = await this.getClubById(clubId)
-
-        if (club.creatorId != accountId) {
+        const clubBook = await clubBooksService.getClubBookById(bookData.clubBookId)
+        // const foundBook = clubBooks.findById()
+        if (club.creatorId.toString() != accountId) {
             throw new Forbidden('Please stop breaking the rules... this is not allowed')
         }
-        if (!club) {
-            throw new BadRequest('We could not find that club, please try not to cry')
+        // if (!club) {
+        //     throw new BadRequest('We could not find that club, please try not to cry')
+        // }
+        if (clubBook.clubId.toString() != clubId) {
+            throw new BadRequest('This book is not in the club... yet?')
         }
+        // if (club.clubBookId != clubBooks)
         // NOTE check to see who is making this request
         // NOTE go and make sure that this id we sent up can get a clubBook for this club
 
