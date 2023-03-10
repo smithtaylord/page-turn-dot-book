@@ -22,7 +22,7 @@
                         <Button class="btn bg-danger mb-2 w-100" data-bs-dismiss="offcanvas"
                             aria-label="Close-OffCanvas">About</Button>
                     </router-link>
-                    <router-link :to="{ name: 'Profile' }">
+                    <router-link v-if="account.id" :to="{ name: 'Profile', params: { profileId: account.id } }">
                         <button class="btn bg-danger w-100" data-bs-dismiss="offcanvas" aria-label="Close-OffCanvas">My
                             Profile</button>
                     </router-link>
@@ -40,11 +40,15 @@
 
 
 <script>
+import { AppState } from '../AppState.js';
 import Login from './Login.vue';
+import { computed } from 'vue';
 
 export default {
     setup() {
-        return {};
+        return {
+            account: computed(() => AppState.account)
+        };
     },
     components: { Login }
 }
