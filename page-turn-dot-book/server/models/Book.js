@@ -5,7 +5,7 @@ export const BookSchema = new Schema(
     {
         title: basicStringType,
         coverImg: basicStringType,
-        ISBN: {type: Number, required: true},
+        ISBN: basicStringType,
         genre: basicStringType,
     }
 )

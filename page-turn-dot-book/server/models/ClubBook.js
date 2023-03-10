@@ -6,7 +6,7 @@ export const ClubBookSchema = new Schema(
         clubId: { type: Schema.Types.ObjectId, required: true, ref: 'Club' },
         title: basicStringType,
         coverImg: basicStringType,
-        ISBN: { type: Number, required: true },
+        ISBN: basicStringType,
         isArchived: { type: Boolean, required: true, default: false },
         // genre: basicStringType,
         // isActive: {type: Boolean, required: true, default: false}
