@@ -1,6 +1,10 @@
 <template>
-    <div class="component">
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                Hello There
+            </div>
+        </div>
 
     </div>
 </template>
