@@ -49,13 +49,13 @@
                 <h1 class="text-center my-3">{{ googleBook?.title }}</h1>
                 <p class="mt-2 mb-4 fs-3 px-3 py-0 text-end">-{{ googleBook?.author }}</p>
                 <p class="mt-2 mb-5 fs-4 px-3 py-0">
-                <div :class="expanded ? 'expandable' : 'expanded'">
+                <div :class="expanded ? 'expanded' : 'expandable'">
                     {{ googleBook?.description }}
                 </div>
                 </p>
                 <div class="d-flex flex-column align-items-center">
-                    <button v-if="expanded" @click="expand" class='btn-cool text-center'>read more</button>
-                    <button v-else @click="expand" class='btn-cool text-center'>read less</button>
+                    <button v-if="expanded" @click="expand" class='btn-cool text-center'>read less</button>
+                    <button v-else @click="expand" class='btn-cool text-center'>read more</button>
                 </div>
                 <p class="my-3 fs-3 p-0">{{ googleBook?.genre }}</p>
                 <!-- TODO categories need mapped through -->
