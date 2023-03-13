@@ -1,3 +1,4 @@
+
 export class GoogleBook {
     constructor(data) {
         this.title = data.volumeInfo.title
@@ -7,5 +8,6 @@ export class GoogleBook {
         this.genre = data.volumeInfo.categories
         this.img = `https://covers.openlibrary.org/b/isbn/${data.volumeInfo.industryIdentifiers[1].identifier}-L.jpg?default=false` 
         this.googleImg = data.volumeInfo.imageLinks.thumbnail
+        this.isbn = data.ISBN
     }
 }
