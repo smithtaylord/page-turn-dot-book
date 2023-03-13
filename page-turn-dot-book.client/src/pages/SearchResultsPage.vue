@@ -29,7 +29,7 @@
 
 <script>
 
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { AppState } from "../AppState";
 import { booksService } from "../services/BooksService";
 import { logger } from "../utils/Logger";
@@ -38,6 +38,10 @@ import Pop from "../utils/Pop";
 export default {
     setup() {
         const editable = ref({})
+        onMounted(() => {
+            AppState.googleBooks = []
+        })
+
         return {
 
             editable,
