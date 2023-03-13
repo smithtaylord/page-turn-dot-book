@@ -35,6 +35,7 @@ class ClubsService {
         const res = await api.get('api/clubs/' + clubId)
         logger.log(res.data)
         AppState.activeClub = new Club(res.data)
+        AppState.activeClubBook = res.data.activeBook
     }
 
     // TODO Check this out! Cannot log in, but we should test that this works. 
@@ -42,6 +43,12 @@ class ClubsService {
         const res = await api.get(`/api/clubs/${clubId}/clubBooks`)
         logger.log(res.data, '[getting club books]')
         AppState.activeClubBooks = res.data
+    }
+
+    async setBookActive(clubBookId, clubId) {
+        const res = await api.put(`/api/clubs/${clubId}/book`, { clubBookId: clubBookId })
+        logger.log(res.data, '[setting book to active]')
+        AppState.activeClubBook = res.data.activeBook
     }
 
 }

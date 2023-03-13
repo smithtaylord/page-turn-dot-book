@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-12 text-center bg-primary">
                 <h1 class="my-3">Currently Reading</h1>
-                <div v-if="!activeClubBook">
+                <div v-if="!activeClubBook.id">
                     <img class=" mb-3 bookCover"
                         src="https://jackchovet.files.wordpress.com/2022/05/placeholder-cover-to-be-revealed.png?w=335"
                         alt="">
@@ -42,10 +42,10 @@
                         owner for more information on the upcoming book.</p>
                 </div>
                 <div v-else>
-                    <div v-for="b in activeClubBook">
-                        <BookCard :book="b" />
+                    <div>
+                        <BookCard :book="activeClubBook" />
                     </div>
-                    <h3>{{ activeClubBook.title }}</h3>
+                    <h3 class="my-3">{{ activeClubBook.title }}</h3>
                 </div>
             </div>
         </div>
@@ -80,11 +80,14 @@
                 <div class="d-flex scroll-x">
                     <div v-for="b in clubBooks">
                         <div>
-                            <i v-if="account.id == club.creatorId" class="mdi mdi-book-heart-outline selectable fs-3"
-                                title="set book active"></i>
+
                             <BookCard :book="b" />
-                            <i class="mdi mdi-star-outline selectable fs-5" title="vote for book"></i>
-                            <p>total votes</p>
+                            <div class="d-flex justify-content-between align-items-baseline px-3 pt-2">
+                                <i class="mdi mdi-star-outline selectable fs-4" title="vote for book"></i>
+                                <p class="fw-bold">Votes 0</p>
+                                <i v-if="account.id == club.creatorId" class="mdi mdi-book-heart-outline selectable fs-3"
+                                    title="set book active" @click="setBookActive(b.id)"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -189,7 +192,16 @@ export default {
                     Pop.error('removing member')
                     logger.error(error)
                 }
+            },
+            async setBookActive(clubBookId) {
+                try {
+                    const clubId = route.params.clubId;
+                    await clubsService.setBookActive(clubBookId, clubId)
+                } catch (error) {
+                    Pop.error(error, '[setting book to active]')
+                }
             }
+
         };
     },
     components: { ClubCard, CommentComponent }
@@ -214,7 +226,7 @@ export default {
 .scroll-x {
     overflow-x: scroll;
     width: 100%;
-    height: 40vh;
+    height: 45vh;
 }
 
 .bookCover {
