@@ -47,9 +47,9 @@
                                 <h4 class="my-3">{{ profile.name }} Clubs</h4>
                             </div>
                         </div>
-                        <div v-if="Clubs" class="row mt-2">
-                            <div v-for="c in Clubs" class="col-11 m-auto bg-dark text-center">
-                                <ClubCard :club="c" />
+                        <div v-if="clubs" class="row mt-2">
+                            <div v-for="c in clubs" class="col-11 m-auto bg-dark text-center">
+                                <ClubCard :club="c.club" />
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@ export default {
         });
         return {
             profile: computed(() => AppState.profile),
-            Clubs: computed(() => AppState.myClubs)
+            clubs: computed(() => AppState.myClubs)
         };
     },
     components: { CommentComponent, ClubCard }
