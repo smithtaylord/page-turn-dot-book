@@ -10,9 +10,9 @@
                     </div>
                     <div class="row justify-content-end">
                         <div class="col-6 text-end m-2">
-                            <button class="btn bg-success" v-if="!foundMember" @click="createMember()"
+                            <button class="btn bg-success box-shadow" v-if="!foundMember" @click="createMember()"
                                 :disabled="club?.isArchived">Join Club</button>
-                            <button class="btn bg-danger" v-else @click="removeMember(foundMember.memberId)"
+                            <button class="btn bg-danger box-shadow" v-else @click="removeMember(foundMember.memberId)"
                                 :disabled="club?.isArchived">Leave Club</button>
                         </div>
                     </div>
@@ -49,12 +49,22 @@
                 </div>
             </div>
         </div>
-        <div>
+        <h3 class="text-center py-3">
+            Club Comments!
+        </h3>
+        <div v-if="foundMember">
             <CreateCommentForm />
         </div>
         <div class="row">
-            <div v-for="c in comments">
-                <CommentComponent :comment="c" />
+            <div v-if="comments.length > 0">
+                <div v-for="c in comments">
+                    <CommentComponent :comment="c" />
+                </div>
+            </div>
+            <div v-else>
+                <div class="bg-dark text-light p-3 rounded box-shadow indent">
+                    <p>no comments... yet?</p>
+                </div>
             </div>
         </div>
     </div>
@@ -173,7 +183,7 @@ export default {
             route,
             club: computed(() => AppState.activeClub),
             members: computed(() => AppState.members),
-            foundMember: computed(() => AppState.members.find(m => m.id == AppState.account.id)),
+            foundMember: computed(() => AppState.members.find(m => m.accountId == AppState.account.id)),
             myMembership: computed(() => AppState.members.find(m => m.clubId == AppState.activeClub.id)),
             account: computed(() => AppState.account),
             clubBooks: computed(() => AppState.activeClubBooks),
