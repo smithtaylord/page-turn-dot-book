@@ -3,10 +3,10 @@ import { basicStringType, defaultSchemaOptions } from "../db/Constants";
 
 export const BooksIveReadSchema = new Schema(
     {
-        accountId: {type: Schema.Types.ObjectId, required: true, ref: 'Account'},
+        accountId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' },
         title: basicStringType,
         coverImg: basicStringType,
-        ISBN: basicStringType,
+        isbn: basicStringType,
         // genre: basicStringType,
     }, defaultSchemaOptions
 )

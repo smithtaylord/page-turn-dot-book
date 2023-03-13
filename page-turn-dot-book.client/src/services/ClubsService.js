@@ -41,7 +41,7 @@ class ClubsService {
     async getClubBooks(clubId) {
         const res = await api.get(`/api/clubs/${clubId}/clubBooks`)
         logger.log(res.data, '[getting club books]')
-        AppState.activeClubBooks = res.data.map(b => new Book(b))
+        AppState.activeClubBooks = res.data
     }
 
 }
