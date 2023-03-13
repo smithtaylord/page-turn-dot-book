@@ -12,7 +12,7 @@
 import { Book } from '../models/Book.js'
 
 export default {
-    props: { book: { type: Book, required: true, } },
+    props: { book: { type: Object, required: true, } },
     setup() {
         return {}
     }

@@ -22,7 +22,7 @@
                 <h4>Club Members</h4>
                 <div class="d-flex">
                     <div v-for="m in members">
-                        <img :src="m.profile.picture" :alt="m - name" class="profilePic m-1">
+                        <img :src="m.profile.picture" :alt="m.name" class="profilePic m-1">
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-12 text-center bg-primary">
                 <h1 class="my-3">Currently Reading</h1>
-                <div v-if="!activeClubBook.id">
+                <div v-if="!club?.activeBook">
                     <img class=" mb-3 bookCover"
                         src="https://jackchovet.files.wordpress.com/2022/05/placeholder-cover-to-be-revealed.png?w=335"
                         alt="">
@@ -49,8 +49,13 @@
                 </div>
             </div>
         </div>
+        <div>
+            <CreateCommentForm />
+        </div>
         <div class="row">
-            <CommentComponent />
+            <div v-for="c in comments">
+                <CommentComponent :comment="c" />
+            </div>
         </div>
     </div>
     <!-- <div class="container-fluid bg-dark">
@@ -85,7 +90,7 @@
                             <div class="d-flex justify-content-between align-items-baseline px-3 pt-2">
                                 <i class="mdi mdi-star-outline selectable fs-4" title="vote for book"></i>
                                 <p class="fw-bold">Votes 0</p>
-                                <i v-if="account.id == club.creatorId" class="mdi mdi-book-heart-outline selectable fs-3"
+                                <i v-if="account.id == club?.creatorId" class="mdi mdi-book-heart-outline selectable fs-3"
                                     title="set book active" @click="setBookActive(b.id)"></i>
                             </div>
                         </div>
@@ -110,12 +115,12 @@ import { clubMembersService } from '../services/ClubMembersService';
 import CommentComponent from "../components/CommentComponent.vue";
 import { commentsService } from '../services/CommentsService.js';
 import { booksService } from '../services/BooksService.js';
+import CreateCommentForm from '../components/CreateCommentForm.vue';
 
 export default {
     setup() {
         const route = useRoute();
         const router = useRouter();
-        // TODO Check this out when we can log in!
         async function getClubBooks() {
             try {
                 const clubId = route.params.clubId
@@ -145,22 +150,22 @@ export default {
             }
         }
 
-        // async function getCommentsByClubId() {
-        //     try {
-        //         const clubId = route.params.clubId
-        //         await commentsService.getCommentsByClubId(clubId)
-        //     } catch (error) {
-        //         logger.error(error)
-        //         Pop.error(error.message)
-        //     }
-        // }
+        async function getCommentsByClubId() {
+            try {
+                const clubId = route.params.clubId
+                await commentsService.getCommentsByClubId(clubId)
+            } catch (error) {
+                logger.error(error)
+                Pop.error(error.message)
+            }
+        }
 
         watchEffect(() => {
             if (route.params.clubId) {
                 getClubById();
                 getMembersByClubId();
                 getClubBooks();
-                // getCommentsByClubId();
+                getCommentsByClubId();
             }
         })
 
@@ -173,7 +178,7 @@ export default {
             account: computed(() => AppState.account),
             clubBooks: computed(() => AppState.activeClubBooks),
             activeClubBook: computed(() => AppState.activeClubBook),
-            // comments: computed(() => AppState.comments),
+            comments: computed(() => AppState.comments),
             async createMember() {
                 try {
                     await clubMembersService.createMember({ clubId: route.params.clubId })
@@ -204,7 +209,7 @@ export default {
 
         };
     },
-    components: { ClubCard, CommentComponent }
+    components: { ClubCard, CommentComponent, CreateCommentForm }
 }
 </script>
 

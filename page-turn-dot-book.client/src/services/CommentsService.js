@@ -18,6 +18,7 @@ class CommentsService {
         // logger.log(commentData)
         const res = await api.post('api/comments', commentData)
         AppState.comments.push(new Comment(res.data))
+        logger.log('[CREATING A COMMENT IN THE SERVICE]', AppState.comments)
 
         // return res.data
     }
