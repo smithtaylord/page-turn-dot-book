@@ -32,9 +32,7 @@
         <div class="row">
             <div class="col-12 text-center bg-primary">
                 <h1>Currently Reading</h1>
-                <p> PLACEHOLDER </p>
-                <h4 class="m-0"> Souper Cool Book</h4>
-                <h6 class="mb-3"> Author McAuthor</h6>
+
             </div>
         </div>
         <div class="row">
@@ -155,6 +153,7 @@ export default {
             myMembership: computed(() => AppState.members.find(m => m.clubId == AppState.activeClub.id)),
             account: computed(() => AppState.account),
             clubBooks: computed(() => AppState.activeClubBooks),
+
             // comments: computed(() => AppState.comments),
             async createMember() {
                 try {
