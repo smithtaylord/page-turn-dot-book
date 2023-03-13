@@ -64,6 +64,16 @@
                 <h1>Vote On Next Book</h1>
             </div>
             <div>
+                <!-- TODO Check this out once we can log in! -->
+                <div class="d-flex scroll-x">
+                    <div v-for="b in clubBooks">
+                        <div>
+                            Set Active
+                            <BookCard :book="b" />
+                            Vote!
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -82,16 +92,19 @@ import { useRoute, useRouter } from 'vue-router';
 import { clubMembersService } from '../services/ClubMembersService';
 import CommentComponent from "../components/CommentComponent.vue";
 import { commentsService } from '../services/CommentsService.js';
+import { booksService } from '../services/BooksService.js';
 
 export default {
     setup() {
         const route = useRoute();
         const router = useRouter();
+        // TODO Check this out when we can log in!
         async function getClubBooks() {
             try {
-
+                const clubId = route.params.clubId
+                await clubsService.getClubBooks(clubId)
             } catch (error) {
-                Pop.error("getting club books")
+                Pop.error(error, "getting club books")
             }
         }
 
@@ -129,6 +142,7 @@ export default {
             if (route.params.clubId) {
                 getClubById();
                 getMembersByClubId();
+                getClubBooks();
                 // getCommentsByClubId();
             }
         })
@@ -140,6 +154,7 @@ export default {
             foundMember: computed(() => AppState.members.find(m => m.id == AppState.account.id)),
             myMembership: computed(() => AppState.members.find(m => m.clubId == AppState.activeClub.id)),
             account: computed(() => AppState.account),
+            clubBooks: computed(() => AppState.activeClubBooks),
             // comments: computed(() => AppState.comments),
             async createMember() {
                 try {
@@ -179,5 +194,11 @@ export default {
     width: 50px;
     border-radius: 50%;
     box-shadow: 1px 1px 2px black;
+}
+
+.scroll-x {
+    overflow-x: scroll;
+    width: 100%;
+    height: 40vh;
 }
 </style>

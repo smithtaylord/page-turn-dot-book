@@ -11,10 +11,10 @@ class ClubsService {
         return new Club(res.data)
     }
 
-    async addBookToClub(book){
+    async addBookToClub(book) {
         // logger.log(book,'this is addbook to club function, and you are looking at the book object that is created' )
-const res = await api.post('api/clubBooks',book)
-logger.log(res.data, 'book added to club')
+        const res = await api.post('api/clubBooks', book)
+        logger.log(res.data, 'book added to club')
     }
 
     async getMyClubs(profileId) {
@@ -24,17 +24,24 @@ logger.log(res.data, 'book added to club')
         logger.log(AppState.myClubs)
     }
 
-async getAllClubs() {
-    const res = await api.get('/api/clubs')
-    logger.log(res.data)
-    AppState.clubs = res.data.map(c => new Club(c))
-}
+    async getAllClubs() {
+        const res = await api.get('/api/clubs')
+        logger.log(res.data)
+        AppState.clubs = res.data.map(c => new Club(c))
+    }
 
-async getClubById(clubId){
-    const res = await api.get('api/clubs/' + clubId)
-    logger.log(res.data)
-    AppState.activeClub = new Club(res.data)
-}
+    async getClubById(clubId) {
+        const res = await api.get('api/clubs/' + clubId)
+        logger.log(res.data)
+        AppState.activeClub = new Club(res.data)
+    }
+
+    // TODO Check this out! Cannot log in, but we should test that this works. 
+    async getClubBooks(clubId) {
+        const res = await api.get(`/api/${clubId}/clubBooks`)
+        logger.log(res.data, '[getting club books]')
+        AppState.activeClubBooks = res.data.map(b => new Book(b))
+    }
 
 }
 
