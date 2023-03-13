@@ -1,6 +1,6 @@
 import { AppState } from "../AppState.js"
 import { Book } from "../models/Book.js"
-import { BookIveRead } from "../models/BooksIveRead.js"
+import { BookIveRead } from "../models/BookIveRead.js"
 import { GoogleBook } from "../models/GoogleBook.js"
 import { logger } from "../utils/Logger.js"
 import { api, apiNYT } from "./AxiosService.js"
@@ -37,6 +37,13 @@ class BooksService {
         const res = await api.get('/api/profiles/' + profileId + '/booksIveRead')
         AppState.readBooks = res.data.map(b => new BookIveRead(b))
         logger.log(AppState.readBooks, 'this is the book i read')
+    }
+
+    async addBookToReadBooks(book) {
+        const res = await api.post('/api/booksIveRead', book)
+        AppState.readBooks = new BookIveRead(res.data)
+        // AppState.readBook.push(new BooksService(res.data))
+        logger.log(res.data)
     }
 
 

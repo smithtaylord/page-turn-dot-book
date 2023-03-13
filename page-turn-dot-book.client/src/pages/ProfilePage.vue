@@ -22,9 +22,9 @@
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-10 m-auto">
+                    <!-- <div class="col-10 m-auto">
                         <CommentComponent />
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row mt-3">
                     <div class="col-11 m-auto bg-warning">

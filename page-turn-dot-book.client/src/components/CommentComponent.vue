@@ -7,7 +7,10 @@
                         <img :src="comment.creator.picture" alt="" class="profilePic box-shadow">
                     </div>
                     <div class="col-8 bg-warning w-75 box-shadow ms-3 rounded">
-                        <p class="fw-bold m-0">{{ comment.creator.name }}</p>
+                        <p class="fw-bold m-0">{{ comment.creator.name }} <i v-if="account.id == comment.creatorId"
+                                class="text-end mdi mdi-close-circle-outline text-danger selectable" title="delete comment"
+                                @click="deleteComment(comment.id)"></i>
+                        </p>
                         <p class="m-0 mb-2">
                             {{ comment.body }}
                         </p>
@@ -79,7 +82,13 @@ export default {
             comments: computed(() => AppState.comments),
             clubs: computed(() => AppState.clubs),
             account: computed(() => AppState.account),
-
+            async deleteComment(commentId) {
+                try {
+                    await commentsService.deleteComment(commentId)
+                } catch (error) {
+                    Pop.error(error, '[delete comment]')
+                }
+            }
             // async handleSubmit() {
             //     try {
             //         const commentData = editable.value

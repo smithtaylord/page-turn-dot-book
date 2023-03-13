@@ -10,9 +10,9 @@
                     </div>
                     <div class="row justify-content-end">
                         <div class="col-6 text-end m-2">
-                            <button class="btn bg-success" v-if="!foundMember" @click="createMember()"
+                            <button class="btn bg-success box-shadow" v-if="!foundMember" @click="createMember()"
                                 :disabled="club?.isArchived">Join Club</button>
-                            <button class="btn bg-danger" v-else @click="removeMember(foundMember.memberId)"
+                            <button class="btn bg-danger box-shadow" v-else @click="removeMember(foundMember.memberId)"
                                 :disabled="club?.isArchived">Leave Club</button>
                         </div>
                     </div>
@@ -49,12 +49,26 @@
                 </div>
             </div>
         </div>
-        <div>
+        <h3 class="text-center py-3">
+            Club Comments!
+        </h3>
+        <div v-if="foundMember">
             <CreateCommentForm />
         </div>
         <div class="row">
-            <div v-for="c in comments">
-                <CommentComponent :comment="c" />
+            <div v-if="comments.length > 0" :class="expanded ? 'expanded' : 'expandable'">
+                <div v-for="c in comments">
+                    <CommentComponent :comment="c" />
+                </div>
+            </div>
+            <div v-else>
+                <div class="bg-dark text-light p-3 rounded box-shadow indent">
+                    <p>no comments... yet?</p>
+                </div>
+            </div>
+            <div class="d-flex flex-column align-items-center" v-if="comments.length > 2">
+                <button v-if="expanded" @click="expand" class='btn-cool text-center'>read less</button>
+                <button v-else @click="expand" class='btn-cool text-center'>read more</button>
             </div>
         </div>
     </div>
@@ -173,12 +187,13 @@ export default {
             route,
             club: computed(() => AppState.activeClub),
             members: computed(() => AppState.members),
-            foundMember: computed(() => AppState.members.find(m => m.id == AppState.account.id)),
+            foundMember: computed(() => AppState.members.find(m => m.accountId == AppState.account.id)),
             myMembership: computed(() => AppState.members.find(m => m.clubId == AppState.activeClub.id)),
             account: computed(() => AppState.account),
             clubBooks: computed(() => AppState.activeClubBooks),
             activeClubBook: computed(() => AppState.activeClubBook),
             comments: computed(() => AppState.comments),
+            expanded: computed(() => AppState.expanded),
             async createMember() {
                 try {
                     await clubMembersService.createMember({ clubId: route.params.clubId })
@@ -205,7 +220,16 @@ export default {
                 } catch (error) {
                     Pop.error(error, '[setting book to active]')
                 }
-            }
+            },
+            expand() {
+                logger.log(AppState.expanded)
+                if (AppState.expanded) {
+                    AppState.expanded = false
+                } else {
+                    AppState.expanded = true
+                }
+                logger.log(AppState.expanded)
+            },
 
         };
     },
@@ -239,5 +263,75 @@ export default {
     // width: 100%;
     object-fit: cover;
 
+}
+
+.expandable {
+    max-height: 35vh;
+    overflow: hidden;
+}
+
+.expanded {
+    max-height: none;
+}
+
+.btn-cool {
+    width: 140px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    position: relative;
+    background-color: transparent;
+    transition: .2s cubic-bezier(0.19, 1, 0.22, 1);
+    opacity: 0.6;
+}
+
+.btn-cool::after {
+    content: '';
+    border-bottom: 3px double rgb(214, 207, 113);
+    width: 0;
+    height: 100%;
+    position: absolute;
+    margin-top: -5px;
+    top: 0;
+    left: 5px;
+    visibility: hidden;
+    opacity: 1;
+    transition: .2s linear;
+}
+
+.btn-cool .icon {
+    transform: translateX(0%);
+    transition: .2s linear;
+    animation: attention 1.2s linear infinite;
+}
+
+.btn-cool:hover::after {
+    visibility: visible;
+    opacity: 0.7;
+    width: 90%;
+}
+
+.btn-cool:hover {
+    letter-spacing: 2px;
+    opacity: 1;
+}
+
+.btn-cool:hover>.icon {
+    transform: translateX(30%);
+    animation: none;
+}
+
+@keyframes attention {
+    0% {
+        transform: translateX(0%);
+    }
+
+    50% {
+        transform: translateX(30%);
+    }
 }
 </style>
