@@ -18,7 +18,7 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-11 m-auto bg-warning fs-3">
-                        This is where your biography will go! Coming soon to you!!!
+                        <p>{{ profile.bio }}</p>
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -33,9 +33,9 @@
                                 <h4 class="my-3">{{ profile.name }} Read Books</h4>
                             </div>
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-11 m-auto bg-dark text-center">
-                                This is Where The Books Ive Read Will Go!
+                        <div v-if="profileBooks" class="row mt-2">
+                            <div v-for="b in profileBooks" class="col-11 m-auto bg-dark text-center">
+                                <BookCard :book="b" />
                             </div>
                         </div>
                     </div>
@@ -70,6 +70,8 @@ import { profilesService } from '../services/ProfilesService.js'
 import CommentComponent from '../components/CommentComponent.vue';
 import { clubsService } from '../services/ClubsService.js';
 import ClubCard from '../components/ClubCard.vue';
+import { booksService } from '../services/BooksService.js';
+import BookCard from '../components/BookCard.vue';
 
 export default {
     setup() {
@@ -95,16 +97,27 @@ export default {
             }
         }
 
+        async function getProfilesBooks() {
+            try {
+                const profileId = route.params.profileId;
+                await booksService.getProfilesBooks(profileId)
+            } catch (error) {
+                Pop.error(error.message)
+            }
+        }
+
         onMounted(() => {
             getProfileById();
             getProfilesClubs();
+            getProfilesBooks();
         });
         return {
             profile: computed(() => AppState.profile),
-            clubs: computed(() => AppState.myClubs)
+            clubs: computed(() => AppState.myClubs),
+            profileBooks: computed(() => AppState.readBooks)
         };
     },
-    components: { CommentComponent, ClubCard }
+    components: { CommentComponent, ClubCard, BookCard }
 }
 </script>
 

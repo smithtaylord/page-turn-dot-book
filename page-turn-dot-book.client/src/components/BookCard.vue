@@ -25,6 +25,5 @@ export default {
     height: 35vh;
     // width: 100%;
     object-fit: cover;
-
 }
 </style>

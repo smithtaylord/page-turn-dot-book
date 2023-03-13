@@ -1,5 +1,6 @@
 import { AppState } from "../AppState.js"
 import { Book } from "../models/Book.js"
+import { BookIveRead } from "../models/BooksIveRead.js"
 import { GoogleBook } from "../models/GoogleBook.js"
 import { logger } from "../utils/Logger.js"
 import { api, apiNYT } from "./AxiosService.js"
@@ -30,6 +31,12 @@ class BooksService {
         const res = await googleAPI.get(`/v1/volumes?q=+isbn:${isbn}`)
         // logger.log(res.data.items[0], 'RES . DATA FOR ISBN GET FROM GOOGLE API LOOKS LIKE>>>>>>>')
         AppState.googleBook = new GoogleBook(res.data.items[0])
+    }
+
+    async getProfilesBooks(profileId) {
+        const res = await api.get('/api/profiles/' + profileId + '/booksIveRead')
+        AppState.readBooks = res.data.map(b => new BookIveRead(b))
+        logger.log(AppState.readBooks, 'this is the book i read')
     }
 
 

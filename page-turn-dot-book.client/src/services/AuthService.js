@@ -4,6 +4,7 @@ import { audience, clientId, domain } from '../env'
 import { router } from '../router'
 import { accountService } from './AccountService'
 import { api } from './AxiosService'
+import { booksService } from './BooksService.js'
 import { clubsService } from './ClubsService.js'
 import { socketService } from './SocketService'
 
@@ -29,7 +30,7 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   socketService.authenticate(AuthService.bearer)
   // NOTE if there is something you want to do once the user is authenticated, place that here
   await clubsService.getMyClubs(AppState.user.id)
-
+  await booksService.getProfilesBooks(AppState.user.id)
   
 })
 
