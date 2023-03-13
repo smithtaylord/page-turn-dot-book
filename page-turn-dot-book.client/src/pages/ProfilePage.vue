@@ -47,9 +47,9 @@
                                 <h4 class="my-3">{{ profile.name }} Clubs</h4>
                             </div>
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-11 m-auto bg-dark text-center">
-                                This is where my profiles clubs will go!!
+                        <div v-if="Clubs" class="row mt-2">
+                            <div v-for="c in Clubs" class="col-11 m-auto bg-dark text-center">
+                                <ClubCard :club="c" />
                             </div>
                         </div>
                     </div>
@@ -68,6 +68,8 @@ import Pop from '../utils/Pop.js';
 import { useRoute } from 'vue-router';
 import { profilesService } from '../services/ProfilesService.js'
 import CommentComponent from '../components/CommentComponent.vue';
+import { clubsService } from '../services/ClubsService.js';
+import ClubCard from '../components/ClubCard.vue';
 
 export default {
     setup() {
@@ -83,14 +85,26 @@ export default {
                 Pop.error(error.message);
             }
         }
+
+        async function getProfilesClubs() {
+            try {
+                const profileId = route.params.profileId;
+                await clubsService.getMyClubs(profileId)
+            } catch (error) {
+                Pop.error(error.message)
+            }
+        }
+
         onMounted(() => {
             getProfileById();
+            getProfilesClubs();
         });
         return {
-            profile: computed(() => AppState.profile)
+            profile: computed(() => AppState.profile),
+            Clubs: computed(() => AppState.myClubs)
         };
     },
-    components: { CommentComponent }
+    components: { CommentComponent, ClubCard }
 }
 </script>
 

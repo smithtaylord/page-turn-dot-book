@@ -1,21 +1,21 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid bg-warning container-ht">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 mt-5">
                 <form @submit.prevent="createClub()">
-                    <div>
-                        <label for="name" class="form-label">Name</label>
+                    <div class="form-floating">
                         <input v-model="editable.name" required type="text" class="form-control" id="name">
+                        <label for="floatingInput" class="form-label">Name</label>
                     </div>
-                    <div>
-                        <label for="bio" class="form-label">Bio</label>
+                    <div class="form-floating my-3">
                         <input v-model="editable.bio" required type="text" class="form-control" id="bio">
+                        <label for="floatingInput" class="form-label">Bio</label>
                     </div>
-                    <div>
-                        <label for="coverImg" class="form-label">CoverImg</label>
+                    <div class="form-floating">
                         <input v-model="editable.coverImg" required type="text" class="form-control" id="coverImg">
+                        <label for="floatingInput" class="form-label">Url</label>
                     </div>
-                    <button class="btn bg-danger" type="submit">Create Club</button>
+                    <button class="btn bg-danger mt-4" type="submit">Create Club</button>
                 </form>
             </div>
         </div>
@@ -62,4 +62,17 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.container-ht {
+    min-height: 100vh;
+}
+
+input {
+    text-shadow: 0px 0px 1px black;
+    letter-spacing: 1px;
+    font-family: 'Lato', sans-serif;
+
+}
+
+// font-family: 'Playfair Display', serif;
+</style>
