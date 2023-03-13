@@ -14,23 +14,24 @@
             <div class="col-12 mt-1 mb-4 d-flex justify-content-between">
                 <button class="btn bg-danger selectable">Add To My Books</button>
                 <div v-if="myClubs">
-                    <div >
+                    <div>
 
                         <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Dropdown button
-      </button>
-      <ul  class="dropdown-menu">
-        <div v-for="m in myClubs" >
-            <li class="dropdown-item" @click="addBookToClub(m.club.id)">{{ m.club.name }}</li>
-        </div>
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Dropdown button
+                            </button>
+                            <ul class="dropdown-menu">
+                                <div v-for="m in myClubs">
+                                    <li class="dropdown-item" @click="addBookToClub(m.club.id)">{{ m.club.name }}</li>
+                                </div>
 
-      </ul>
-    </div>
+                            </ul>
+                        </div>
 
 
 
-<!-- 
+                        <!-- 
                         <button   class="btn bg-danger selectable">{{ m.club.name }}</button>
                         <div>sample</div> -->
                     </div>
@@ -138,11 +139,11 @@ export default {
             async addBookToClub(clubId) {
                 try {
                     const book = this.googleBook
-                    book.ISBN = route.params.isbn
+                    book.isbn = route.params.isbn
                     book.clubId = clubId
                     book.coverImg = this.googleBook.img
                     await clubsService.addBookToClub(book)
-                    router.push({name: "Club", params: {clubId: clubId}})
+                    router.push({ name: "Club", params: { clubId: clubId } })
                 } catch (error) {
                     logger.log(error)
                     Pop.error(error.message)

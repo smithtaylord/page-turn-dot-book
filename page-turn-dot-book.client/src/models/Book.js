@@ -4,8 +4,8 @@ export class Book {
     constructor(data) {
         this.isbn = data.primary_isbn10 || data.volumeInfo.industryIdentifiers[0].identifier
         this.title = data.title || data.volumeInfo.title
-        this.coverImg = data.volumeInfo? data.volumeInfo.imageLinks? data.volumeInfo.imageLinks.thumbnail: defaultImg: data.book_image
-        
+        this.coverImg = data.volumeInfo ? data.volumeInfo.imageLinks ? data.volumeInfo.imageLinks.thumbnail : defaultImg : data.book_image
+
 
     }
 }

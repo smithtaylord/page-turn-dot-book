@@ -1,4 +1,5 @@
 import { AppState } from "../AppState.js"
+import { Book } from "../models/Book.js"
 import { Club } from "../models/Club.js"
 import { ClubMember } from "../models/ClubMember.js"
 import { logger } from "../utils/Logger.js"
@@ -38,7 +39,7 @@ class ClubsService {
 
     // TODO Check this out! Cannot log in, but we should test that this works. 
     async getClubBooks(clubId) {
-        const res = await api.get(`/api/${clubId}/clubBooks`)
+        const res = await api.get(`/api/clubs/${clubId}/clubBooks`)
         logger.log(res.data, '[getting club books]')
         AppState.activeClubBooks = res.data.map(b => new Book(b))
     }

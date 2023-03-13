@@ -31,8 +31,22 @@
     <div class="container-fluid my-3">
         <div class="row">
             <div class="col-12 text-center bg-primary">
-                <h1>Currently Reading</h1>
-
+                <h1 class="my-3">Currently Reading</h1>
+                <div v-if="!activeClubBook">
+                    <img class=" mb-3 bookCover"
+                        src="https://jackchovet.files.wordpress.com/2022/05/placeholder-cover-to-be-revealed.png?w=335"
+                        alt="">
+                    <p class="mb-3 px-2 text-start">We're eagerly awaiting the club's next book selection. Please reach out
+                        to
+                        your club
+                        owner for more information on the upcoming book.</p>
+                </div>
+                <div v-else>
+                    <div v-for="b in activeClubBook">
+                        <BookCard :book="b" />
+                    </div>
+                    <h3>{{ activeClubBook.title }}</h3>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -66,9 +80,11 @@
                 <div class="d-flex scroll-x">
                     <div v-for="b in clubBooks">
                         <div>
-                            Set Active
+                            <i v-if="account.id == club.creatorId" class="mdi mdi-book-heart-outline selectable fs-3"
+                                title="set book active"></i>
                             <BookCard :book="b" />
-                            Vote!
+                            <i class="mdi mdi-star-outline selectable fs-5" title="vote for book"></i>
+                            <p>total votes</p>
                         </div>
                     </div>
                 </div>
@@ -153,7 +169,7 @@ export default {
             myMembership: computed(() => AppState.members.find(m => m.clubId == AppState.activeClub.id)),
             account: computed(() => AppState.account),
             clubBooks: computed(() => AppState.activeClubBooks),
-
+            activeClubBook: computed(() => AppState.activeClubBook),
             // comments: computed(() => AppState.comments),
             async createMember() {
                 try {
@@ -199,5 +215,12 @@ export default {
     overflow-x: scroll;
     width: 100%;
     height: 40vh;
+}
+
+.bookCover {
+    height: 40vh;
+    // width: 100%;
+    object-fit: cover;
+
 }
 </style>
