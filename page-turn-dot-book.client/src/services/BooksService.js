@@ -13,7 +13,7 @@ class BooksService {
         // logger.log(searchData, '[Search Data]')
         const res = await googleAPI.get('/v1/volumes?q=' + searchData.query)
         logger.log(res.data.items, '[Google Book Search Results (hopefully)]')
-        AppState.googleBooks = res.data.items.filter(c => c.volumeInfo.industryIdentifiers[0].type != 'OTHER').map(gb => new Book(gb))
+        AppState.googleBooks = res.data.items.filter(c => c.volumeInfo.industryIdentifiers ? c.volumeInfo.industryIdentifiers[0].type != 'OTHER': null).map(gb => new Book(gb))
         //  AppState.googleBooks = res.data.items.forEach(gb=>{
         //     logger.log('author test',gb.volumeInfo.authors[0])
         //  })
