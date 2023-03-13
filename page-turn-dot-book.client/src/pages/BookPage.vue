@@ -12,14 +12,17 @@
     <div class="container-fluid bg-primary">
         <div class="row">
             <div class="col-12 mt-1 mb-4 d-flex justify-content-between">
-                <button class="btn bg-danger selectable">Add To My Books</button>
+                <div v-if="!alreadyMyBook">
+                    <button @click="addBookToReadBooks()" class="btn bg-danger selectable">Add To My Books</button>
+                </div>
+
+
                 <div v-if="myClubs">
                     <div>
-
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Dropdown button
+                                Add Book To Club
                             </button>
                             <ul class="dropdown-menu">
                                 <div v-for="m in myClubs">
@@ -91,6 +94,7 @@ export default {
         // const editable = ref({})
         const route = useRoute()
         const router = useRouter()
+        const activeBook = route.params.isbn
 
         // async function getMyClubs() {
         //     try {
@@ -119,10 +123,14 @@ export default {
             }
         })
         return {
+            activeBook,
             account: computed(() => AppState.account),
             myClubs: computed(() => AppState.myClubs),
             googleBook: computed(() => AppState.googleBook),
             expanded: computed(() => AppState.expanded),
+            myBooks: computed(() => AppState.readBooks),
+            alreadyMyBook: computed(() => AppState.readBooks.find(a => a.isbn == activeBook)),
+
             onImageError() {
                 event.target.src = this.googleBook.googleImg
             },
@@ -144,6 +152,20 @@ export default {
                     book.coverImg = this.googleBook.img
                     await clubsService.addBookToClub(book)
                     router.push({ name: "Club", params: { clubId: clubId } })
+                } catch (error) {
+                    logger.log(error)
+                    Pop.error(error.message)
+                }
+            },
+
+            async addBookToReadBooks() {
+                try {
+
+                    const book = this.googleBook
+                    book.ISBN = route.params.isbn
+                    book.coverImg = this.googleBook.img
+                    book.accountId = AppState.account.id
+                    await booksService.addBookToReadBooks(book)
                 } catch (error) {
                     logger.log(error)
                     Pop.error(error.message)

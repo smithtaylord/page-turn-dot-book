@@ -6,6 +6,6 @@ export class BookIveRead {
         this.accountId = data.accountId
         this.title = data.title
         this.coverImg = data.coverImg
-        this.isbn = data.isbn
+        this.isbn = data.isbn || data.ISBN 
     }
 }
