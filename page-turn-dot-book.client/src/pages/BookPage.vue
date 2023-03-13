@@ -162,7 +162,7 @@ export default {
                 try {
 
                     const book = this.googleBook
-                    book.ISBN = route.params.isbn
+                    book.isbn = route.params.isbn
                     book.coverImg = this.googleBook.img
                     book.accountId = AppState.account.id
                     await booksService.addBookToReadBooks(book)
