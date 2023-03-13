@@ -2,7 +2,7 @@
   <header class="sticky-top">
     <Navbar />
   </header>
-  <main>
+  <main class="bg-success">
     <router-view />
   </main>
   <footer class="bg-dark text-light">
