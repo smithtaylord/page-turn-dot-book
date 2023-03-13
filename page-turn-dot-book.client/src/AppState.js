@@ -6,7 +6,7 @@ export const AppState = reactive({
   /** @type {import('./models/Account.js').Account} */
   account: {},
   expanded: false,
-  
+
   /** @type {import('./models/Profile.js').Profile} */
   profile: {},
 
@@ -16,22 +16,24 @@ export const AppState = reactive({
   /** @type {import('./models/GoogleBook').GoogleBook | null} */
   googleBook: null,
 
-   /** @type {import('./models/GoogleBook').GoogleBook[]} */
-   googleBooks: [],
+  /** @type {import('./models/GoogleBook').GoogleBook[]} */
+  googleBooks: [],
 
   /** @type {import('./models/Club').Club[]} */
   clubs: [],
-  
+
   /** @type {import('./models/Club').Club | null} */
   activeClub: null,
-  
+  /** @type {import('./models/Book').Book[]} */
+  activeClubBooks: [],
+
   /** @type {import('./models/Club').Club[]} */
-  myClubs: [], 
+  myClubs: [],
 
   /** @type {import('./models/ClubMember').ClubMember[]} */
   members: [],
-  
-  
+
+
   /** @type {import('./models/Comment').Comment[]} */
   comments: [],
 
