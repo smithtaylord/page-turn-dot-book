@@ -5,7 +5,7 @@
     <img class="rounded-circle club-picture mb-2" :src="club.coverImg" :alt="club.name">
     <h4 class="text-limit" >{{ club.name }}</h4>
     <router-link class="selectable" :to="{name: 'Club', params: {clubId: club.id}}">
-        <button class="btn bg-danger selectable mt-2">Join</button>
+        <button class="btn bg-danger selectable mt-2">View</button>
     </router-link>
 </div>
 </div>
