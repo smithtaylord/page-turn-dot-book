@@ -61,7 +61,8 @@ export default {
           logger.error(error)
         }
       },
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      profile: computed(() => AppState.profile)
     }
   }
 }

@@ -40,7 +40,9 @@ async function mergeSubsIfNeeded(account, user) {
 function sanitizeBody(body) {
   const writable = {
     name: body.name,
-    picture: body.picture
+    picture: body.picture,
+    bio: body.bio
+    // NOTE If you want to edit your account add new stuff here!!!!
   }
   return writable
 }

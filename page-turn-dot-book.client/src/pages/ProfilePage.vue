@@ -119,7 +119,8 @@ export default {
         return {
             profile: computed(() => AppState.profile),
             clubs: computed(() => AppState.myClubs),
-            profileBooks: computed(() => AppState.readBooks)
+            profileBooks: computed(() => AppState.readBooks),
+            // account: computed(() => AppState.account)
         };
     },
     components: { CommentComponent, ClubCard, BookCard }
