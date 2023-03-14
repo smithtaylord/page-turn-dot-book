@@ -26,7 +26,7 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <div v-for="m in myClubs">
-                                    <li class="dropdown-item" @click="addBookToClub(m.club.id)">{{ m.club.name }}</li>
+                                    <li class="dropdown-item" @click="addBookToClub(m.club?.id)">{{ m.club?.name }}</li>
                                 </div>
 
                             </ul>
