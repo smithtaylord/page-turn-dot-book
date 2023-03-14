@@ -31,26 +31,28 @@
                         <button v-else @click="expand" class='btn-cool text-center'>read more</button>
                     </div>
                 </div>
-                <h3 class="text-center py-3">
-                    Profile Comments!
-                </h3>
-                <div>
-                    <CreateCommentForm />
-                </div>
-                <div class="row mt-4">
-                    <div v-if="comments.length > 0" :class="expanded ? 'expanded' : 'expandable'">
-                        <div v-for="c in comments">
-                            <CommentComponent :comment="c" />
-                        </div>
+                <div class="row bg-success">
+                    <h3 class="text-center py-3">
+                        Profile Comments!
+                    </h3>
+                    <div class="">
+                        <CreateCommentForm />
                     </div>
-                    <div v-else>
-                        <div class="bg-dark text-light p-3 rounded box-shadow indent">
-                            <p>no comments... yet?</p>
+                    <div class=" mt-4 bg-dark">
+                        <div v-if="comments.length > 0" :class="expanded ? 'expanded' : 'expandable'">
+                            <div v-for="c in comments">
+                                <CommentComponent :comment="c" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="d-flex flex-column align-items-center" v-if="comments.length > 2">
-                        <button v-if="expanded" @click="expand" class='btn-cool text-center'>read less</button>
-                        <button v-else @click="expand" class='btn-cool text-center'>read more</button>
+                        <div v-else>
+                            <div class="bg-dark text-light p-3 rounded box-shadow indent">
+                                <p>no comments... yet?</p>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column align-items-center" v-if="comments.length > 2">
+                            <button v-if="expanded" @click="expand" class='btn-cool text-center'>read less</button>
+                            <button v-else @click="expand" class='btn-cool text-center'>read more</button>
+                        </div>
                     </div>
                 </div>
                 <div class="row mt-3">
