@@ -35,7 +35,7 @@ export const AppState = reactive({
   activeClubBooks: [],
 
   /** @type {import('./models/Book').Book{}} */
-  activeClubBook: {},
+  activeClubBook: null,
 
   /** @type {import('./models/Club').Club[]} */
   myClubs: [],

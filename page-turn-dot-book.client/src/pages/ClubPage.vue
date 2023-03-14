@@ -38,7 +38,7 @@
         <div class="row">
             <div class="col-12 text-center bg-primary">
                 <h1 class="my-3">Currently Reading</h1>
-                <div v-if="!club?.activeBook">
+                <div v-if="!activeClubBook">
                     <img class=" mb-3 bookCover"
                         src="https://jackchovet.files.wordpress.com/2022/05/placeholder-cover-to-be-revealed.png?w=335"
                         alt="">
