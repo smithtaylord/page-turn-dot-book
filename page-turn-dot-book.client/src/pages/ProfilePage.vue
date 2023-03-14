@@ -31,10 +31,27 @@
                         <button v-else @click="expand" class='btn-cool text-center'>read more</button>
                     </div>
                 </div>
+                <h3 class="text-center py-3">
+                    Profile Comments!
+                </h3>
+                <div>
+                    <CreateCommentForm />
+                </div>
                 <div class="row mt-4">
-                    <!-- <div class="col-10 m-auto">
-                        <CommentComponent />
-                    </div> -->
+                    <div v-if="comments.length > 0" :class="expanded ? 'expanded' : 'expandable'">
+                        <div v-for="c in comments">
+                            <CommentComponent :comment="c" />
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div class="bg-dark text-light p-3 rounded box-shadow indent">
+                            <p>no comments... yet?</p>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center" v-if="comments.length > 2">
+                        <button v-if="expanded" @click="expand" class='btn-cool text-center'>read less</button>
+                        <button v-else @click="expand" class='btn-cool text-center'>read more</button>
+                    </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-11 m-auto bg-warning">
@@ -87,6 +104,8 @@ import { clubsService } from '../services/ClubsService.js';
 import ClubCard from '../components/ClubCard.vue';
 import { booksService } from '../services/BooksService.js';
 import BookCard from '../components/BookCard.vue';
+import CreateCommentForm from '../components/CreateCommentForm.vue';
+import { commentsService } from '../services/CommentsService.js';
 
 export default {
     setup() {
@@ -121,11 +140,22 @@ export default {
             }
         }
 
+        async function getCommentsByProfileId() {
+            try {
+                const profileId = route.params.profileId
+                await commentsService.getCommentsByProfileId(profileId)
+            } catch (error) {
+                logger.error(error)
+                Pop.error(error.message)
+            }
+        }
+
         watchEffect(() => {
             if (route.params.profileId) {
                 getProfileById();
                 getProfilesClubs();
                 getProfilesBooks();
+                getCommentsByProfileId();
             }
         });
         return {
@@ -134,6 +164,7 @@ export default {
             profileBooks: computed(() => AppState.readBooks),
             expanded: computed(() => AppState.expanded),
             account: computed(() => AppState.account),
+            comments: computed(() => AppState.comments),
 
             expand() {
                 logger.log(AppState.expanded)
@@ -146,7 +177,7 @@ export default {
             },
         };
     },
-    components: { CommentComponent, ClubCard, BookCard }
+    components: { CommentComponent, ClubCard, BookCard, CreateCommentForm }
 }
 </script>
 

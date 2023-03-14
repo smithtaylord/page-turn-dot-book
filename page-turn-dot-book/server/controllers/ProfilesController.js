@@ -2,6 +2,7 @@ import { booksIveReadService } from '../services/BooksIveReadService.js'
 import { profileService } from '../services/ProfileService.js'
 import BaseController from '../utils/BaseController'
 import { membersService } from '../services/MembersService.js'
+import { commentsService } from '../services/CommentsService.js'
 export class ProfilesController extends BaseController {
   constructor() {
     super('api/profiles')
@@ -10,6 +11,17 @@ export class ProfilesController extends BaseController {
       .get('/:id', this.getProfile)
       .get('/:profileId/booksIveRead', this.getProfileBooks)
       .get('/:profileId/profileBookClubs', this.getProfileBookClubs)
+      .get('/:parentId/comments', this.getProfileComments)
+  }
+
+  async getProfileComments(req, res, next) {
+    try {
+      const parentId = req.params.parentId
+      const comments = await commentsService.getCommentbyParentId(parentId)
+      return res.send(comments)
+    } catch (error) {
+      next(error)
+    }
   }
   async getProfileBookClubs(req, res, next) {
   const accountId = req.params.profileId

@@ -34,7 +34,7 @@ export default {
             async handleSubmit() {
                 try {
                     const commentData = editable.value
-                    commentData.parentId = route.params.clubId
+                    commentData.parentId = route.params.clubId || route.params.profileId
                     logger.log(commentData)
                     await commentsService.createComment(commentData)
                     editable.value = {}

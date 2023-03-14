@@ -7,6 +7,12 @@ import { api } from "./AxiosService.js"
 
 
 class CommentsService {
+    async getCommentsByProfileId(profileId) {
+        logger.log(profileId)
+        const res = await api.get('api/profiles/' + profileId + '/comments')
+        AppState.comments = res.data.map(c => new Comment(c))
+        logger.log(profileId, 'WILL YOU WORK')
+    }
     async getCommentsByClubId(clubId) {
         const res = await api.get('api/clubs/' + clubId + '/comments')
         // logger.log(res.data)
