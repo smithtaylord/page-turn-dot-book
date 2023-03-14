@@ -96,15 +96,15 @@ export default {
         const router = useRouter()
         const activeBook = route.params.isbn
 
-        // async function getMyClubs() {
-        //     try {
-        //         let profileId = AppState.account.id
-        //         logger.log(profileId, "getmyclub profile id on active book page")
-        //         await clubsService.getMyClubs(profileId)
-        //     } catch (error) {
-        //         Pop.error(error)
-        //     }
-        // }
+        async function getMyClubs() {
+            try {
+                let profileId = AppState.account.id
+                logger.log(profileId, "getmyclub profile id on active book page")
+                await clubsService.getMyClubs(profileId)
+            } catch (error) {
+                Pop.error(error)
+            }
+        }
 
 
         async function getBookByISBN() {
@@ -119,7 +119,7 @@ export default {
         watchEffect(() => {
             if (route.params.isbn) {
                 getBookByISBN()
-                // getMyClubs()
+                getMyClubs()
             }
         })
         return {
