@@ -51,6 +51,11 @@ class ClubsService {
         AppState.activeClubBook = res.data.activeBook
     }
 
+    async archiveClub(clubId) {
+        const res = await api.delete('api/clubs/' + clubId)
+        logger.log(res.data, '[archive club]')
+    }
+
 }
 
 export const clubsService = new ClubsService()
