@@ -12,7 +12,7 @@
                         <div class="col-6 text-end m-2">
                             <button class="btn bg-success box-shadow" v-if="!foundMember" @click="createMember()"
                                 :disabled="club?.isArchived">Join Club</button>
-                            <button class="btn bg-danger box-shadow" v-else @click="removeMember(account.id)"
+                            <button class="btn bg-danger box-shadow" v-else @click="removeMember(foundMember.id)"
                                 :disabled="club?.isArchived">Leave Club</button>
                         </div>
                     </div>
