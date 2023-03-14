@@ -7,11 +7,13 @@
           book clubs and tools for finding book club
           members.
         </p>
-        <router-link class="selectable" :to="{ name: 'CreateClub' }">
-        <button class="mb-3 btn bg-danger selectable">
-          Create a Club
-        </button>
-        </router-link>
+        <div v-if="account.id">
+          <router-link class="selectable" :to="{ name: 'CreateClub' }">
+            <button class="mb-3 btn bg-danger selectable">
+              Create a Club
+            </button>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -80,6 +82,7 @@ export default {
     return {
       Books: computed(() => AppState.Books),
       clubs: computed(() => AppState.clubs),
+      account: computed(() => AppState.account),
     };
   },
   components: { BookCard, ClubCard }

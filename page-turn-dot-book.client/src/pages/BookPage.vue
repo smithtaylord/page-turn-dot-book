@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div v-if="notSignedIn" class="container-fluid bg-primary">
+    <div v-if="account.id" class="container-fluid bg-primary">
         <div class="row">
             <div class="col-12 mt-1 mb-4 d-flex justify-content-between">
                 <div v-if="!alreadyMyBook">
@@ -130,7 +130,6 @@ export default {
             expanded: computed(() => AppState.expanded),
             myBooks: computed(() => AppState.readBooks),
             alreadyMyBook: computed(() => AppState.readBooks.find(a => a.isbn == activeBook)),
-            notSignedIn: computed(() => AppState.account.id != AppState.profile.id),
 
             onImageError() {
                 event.target.src = this.googleBook.googleImg

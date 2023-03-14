@@ -10,7 +10,7 @@
             </div>
             <div class="offcanvas-body bg-warning">
                 <div class="d-flex flex-column">
-                    <div v-if="notSignedIn">
+                    <div v-if="account.id">
                         <router-link :to="{ name: 'CreateClub' }">
                             <button class="btn bg-primary mb-2 w-100" data-bs-dismiss="offcanvas"
                             aria-label="Close-OffCanvas">Create
@@ -53,7 +53,6 @@ export default {
         return {
             account: computed(() => AppState.account),
             profile: computed(() => AppState.profile),
-            notSignedIn: computed(() => AppState.account.id != AppState.profile.id),
         };
     },
     components: { Login }
