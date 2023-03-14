@@ -218,6 +218,7 @@ export default {
             async setBookActive(clubBookId) {
                 try {
                     const clubId = route.params.clubId;
+                    logger.log(clubBookId + '- club book id     ' + clubId + '-clubId')
                     await clubsService.setBookActive(clubBookId, clubId)
                 } catch (error) {
                     Pop.error(error, '[setting book to active]')
