@@ -4,7 +4,7 @@
             <div class="col-12 mt-5">
                 <form @submit.prevent="createClub()">
                     <div class="form-floating">
-                        <input v-model="editable.name" required type="text" class="form-control" id="name">
+                        <input v-model="editable.name" required type="text" class="form-control" id="name" maxlength="20">
                         <label for="floatingInput" class="form-label">Name</label>
                     </div>
                     <div class="form-floating my-3">
