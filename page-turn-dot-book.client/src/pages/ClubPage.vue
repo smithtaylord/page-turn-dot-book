@@ -2,8 +2,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="card text-start">
-                    <img class="clubImg" :src="club?.coverImg" :alt="club?.name">
+                <div class="card text-start mt-2">
+                    <img class="clubImg image-container" :src="club?.coverImg" :alt="club?.name">
+                    <div class="text-end icon-container"><i
+                            class="mdi mdi-book-lock-outline selectable fs-3 text-light text-shadow p-2"
+                            @click="archiveClub"></i>
+                    </div>
                     <div class="card-body">
                         <h4 class="card-title">{{ club?.name }}</h4>
                         <p class="card-text">{{ club?.bio }}</p>
@@ -336,5 +340,16 @@ export default {
     50% {
         transform: translateX(30%);
     }
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.icon-container {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 </style>
