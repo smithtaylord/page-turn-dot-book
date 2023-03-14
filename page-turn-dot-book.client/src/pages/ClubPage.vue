@@ -5,7 +5,7 @@
                 <div class="card text-start mt-2">
                     <img class="clubImg image-container" :src="club?.coverImg" :alt="club?.name">
                     <div class="text-end icon-container"><i
-                            class="mdi mdi-book-lock-outline selectable fs-3 text-light text-shadow p-2"
+                            class="mdi mdi-bookmark-remove selectable fs-1 px-2 pb-1 mx-2 glass-card rounded"
                             @click="archiveClub"></i>
                     </div>
                     <div class="card-body">
@@ -351,5 +351,13 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.glass-card {
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    background-color: #5360645a;
+    width: 100%;
+    backdrop-filter: blur(7px)
 }
 </style>
