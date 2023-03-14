@@ -165,7 +165,9 @@ export default {
                     book.isbn = route.params.isbn
                     book.coverImg = this.googleBook.img
                     book.accountId = AppState.account.id
-                    await booksService.addBookToReadBooks(book)
+                    if (await Pop.confirm('Have you read this book?')) {
+                        await booksService.addBookToReadBooks(book)
+                    }
                 } catch (error) {
                     logger.log(error)
                     Pop.error(error.message)

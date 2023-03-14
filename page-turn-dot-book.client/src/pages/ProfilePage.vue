@@ -33,23 +33,28 @@
                                 <h4 class="my-3">{{ profile.name }} Read Books</h4>
                             </div>
                         </div>
-                        <div v-if="profileBooks" class="row mt-2">
-                            <div v-for="b in profileBooks" class="col-11 m-auto bg-dark text-center">
-                                <BookCard :book="b" />
+                        <div v-if="profileBooks" class="row my-2">
+                            <div class="d-flex scroll-x">
+                                <div v-for="b in profileBooks" class="col-11 m-auto text-center">
+                                    <BookCard :book="b" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-11 m-auto bg-warning">
+                    <div class="col-11 m-auto bg-danger">
                         <div class="row mt-3">
                             <div class="col-8 m-auto bg-danger text-center">
                                 <h4 class="my-3">{{ profile.name }} Clubs</h4>
                             </div>
                         </div>
+
                         <div v-if="clubs" class="row mt-2">
-                            <div v-for="c in clubs" class="col-11 m-auto bg-dark text-center">
-                                <ClubCard :club="c.club" />
+                            <div class="d-flex scroll-x">
+                                <div v-for="c in clubs" class="col-11 m-auto text-center">
+                                    <ClubCard :club="c.club" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -127,5 +132,11 @@ export default {
     height: 160px;
     width: 160px;
     border-radius: 50%;
+}
+
+.scroll-x {
+    overflow-x: scroll;
+    width: 100%;
+    height: 40vh;
 }
 </style>
