@@ -22,7 +22,9 @@
                 <h4>Club Members</h4>
                 <div class="d-flex">
                     <div v-for="m in members">
-                        <img :src="m.profile.picture" :alt="m.name" class="profilePic m-1">
+                        <router-link class="selectable" :to="{ name: 'Profile', params: { profileId: m.profile.id } }">
+                            <img :src="m.profile.picture" :alt="m.name" class="profilePic m-1">
+                        </router-link>
                     </div>
                 </div>
             </div>
