@@ -31,8 +31,8 @@
                 class="profile-picture rounded-circle my-3 box-shadow">
               <div class="ps-3 my-3">
                 <h4 class="fw-bold">Jaden Hawkes</h4>
-                <span><a href="" class="mdi mdi-linkedin fs-3 text-dark"></a> <a href=""
-                    class="mdi mdi-github fs-3 text-dark"></a></span>
+                <span><a href="" class="mdi mdi-linkedin fs-3 text-dark"></a> <a href="https://github.com/HawkesJ02"
+                    class="mdi mdi-github fs-3 text-dark selectable"></a></span>
                 <h6>Full-Stack Developer</h6>
               </div>
             </div>
@@ -45,8 +45,8 @@
                 class="profile-picture rounded-circle my-3 box-shadow">
               <div class="ps-3 my-3">
                 <h4 class="fw-bold">Dustin Bates</h4>
-                <span><a href="" class="mdi mdi-linkedin fs-3 text-dark"></a> <a href=""
-                    class="mdi mdi-github fs-3 text-dark"></a></span>
+                <span><a href="" class="mdi mdi-linkedin fs-3 text-dark selectable"></a> <a href="https://github.com/dustinbates"
+                    class="mdi mdi-github fs-3 text-dark selectable"></a></span>
                 <h6>Full-Stack Developer</h6>
               </div>
             </div>
@@ -59,8 +59,8 @@
                 class="profile-picture rounded-circle my-3 box-shadow">
               <div class="ps-3 my-3">
                 <h4 class="fw-bold">Payton Boone</h4>
-                <span><a href="" class="mdi mdi-linkedin fs-3 text-dark"></a> <a href=""
-                    class="mdi mdi-github fs-3 text-dark"></a></span>
+                <span><a href="https://www.linkedin.com/in/payton-boone-352661162/" class="mdi mdi-linkedin fs-3 text-dark selectable"></a> <a href="https://github.com/PKILB"
+                    class="mdi mdi-github fs-3 text-dark selectable"></a></span>
                 <h6>Full-Stack Developer</h6>
               </div>
             </div>
@@ -73,8 +73,8 @@
                 class="profile-picture rounded-circle my-3 box-shadow">
               <div class="ps-3 my-3">
                 <h4 class="fw-bold">Thomas Peek</h4>
-                <span><a href="" class="mdi mdi-linkedin fs-3 text-dark"></a> <a href=""
-                    class="mdi mdi-github fs-3 text-dark"></a></span>
+                <span><a href="https://www.linkedin.com/in/thomas-peek-30b562250/" class="mdi mdi-linkedin fs-3 text-dark selectable"></a> <a href="https://github.com/good-ol-peekers"
+                    class="mdi mdi-github fs-3 text-dark selectable"></a></span>
                 <h6>Full-Stack Developer</h6>
               </div>
             </div>
@@ -87,8 +87,8 @@
                 class="profile-picture rounded-circle my-3 box-shadow">
               <div class="ps-3 my-3">
                 <h4 class="fw-bold">Taylor Smith</h4>
-                <span><a href="" class="mdi mdi-linkedin fs-3 text-dark"></a> <a href=""
-                    class="mdi mdi-github fs-3 text-dark"></a></span>
+                <span><a href="https://www.linkedin.com/in/taylor-smith-3b63405a/" class="mdi mdi-linkedin fs-3 text-dark selectable"></a> <a href="https://github.com/smithtaylord"
+                    class="mdi mdi-github fs-3 text-dark selectable"></a></span>
                 <h6>Full-Stack Developer</h6>
               </div>
             </div>
