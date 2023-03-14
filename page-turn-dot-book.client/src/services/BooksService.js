@@ -41,7 +41,7 @@ class BooksService {
 
     async addBookToReadBooks(book) {
         const res = await api.post('/api/booksIveRead', book)
-        AppState.readBooks = new BookIveRead(res.data)
+        AppState.readBooks.push(new BookIveRead(res.data))
         // AppState.readBook.push(new BooksService(res.data))
         logger.log(res.data)
     }
