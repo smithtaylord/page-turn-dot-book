@@ -4,7 +4,9 @@
             <div class="row">
                 <div class="row d-flex align-content-center p-2">
                     <div class="col-2">
-                        <img :src="comment.creator.picture" alt="" class="profilePic box-shadow">
+                        <router-link class="selectable" :to="{ name: 'Profile', params: { profileId: comment.creatorId } }">
+                            <img :src="comment.creator.picture" alt="" class="profilePic box-shadow">
+                        </router-link>
                     </div>
                     <div class="col-8 bg-warning w-75 box-shadow ms-3 rounded">
                         <p class="fw-bold m-0">{{ comment.creator.name }} <i v-if="account.id == comment.creatorId"
