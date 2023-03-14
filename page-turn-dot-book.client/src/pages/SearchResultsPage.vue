@@ -1,10 +1,14 @@
 <template>
     <div class="container-fluid bg-success">
         <div class="row">
-            <div class="col-12 mt-2 d-flex flex-row justify-content-end">
+            <div class="col-12 mt-2 d-flex flex-row justify-content-center justify-content-sm-end">
                 <form @submit.prevent="searchBooks()" class="d-flex">
-                    <input v-model="editable.query" type="text" class="form-control" placeholder="Search">
-                    <button class="btn bg-danger" type="submit"> <i class="mdi mdi-magnify"></i></button>
+                    <div>
+                        <input p-3 v-model="editable.query" type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <div  >
+                        <button class="btn bg-danger" type="submit"> <i class="mdi mdi-magnify"></i></button>
+                    </div>
                 </form>
             </div>
             <div v-if="googleBooks[0]" v-for="b in googleBooks" class="col-6 col-md-4">
