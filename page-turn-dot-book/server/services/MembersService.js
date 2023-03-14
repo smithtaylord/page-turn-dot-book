@@ -7,7 +7,13 @@ import { clubsService } from "./ClubsService.js"
 
 class MembersService {
     async getProfileBookClubs(accountId) {
-        const club = await dbContext.ClubMembers.find({ accountId }).populate('club')
+        const club = await dbContext.ClubMembers.find({ accountId }).populate({
+            path: 'club',
+            populate: {
+                path: 'clubBooks',
+                select:'isbn'
+            }
+        })
         return club
     }
     async deleteMember(memberId, userId) {

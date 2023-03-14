@@ -27,3 +27,9 @@ ClubSchema.virtual('activeBook', {
     foreignField: '_id',
     justOne: true,
 })
+
+ClubSchema.virtual('clubBooks', {
+    ref: 'ClubBooks',
+    localField: '_id',
+    foreignField: 'clubId'
+})
