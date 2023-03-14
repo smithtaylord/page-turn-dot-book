@@ -22,7 +22,13 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-11 m-auto bg-warning fs-3">
-                        <p>{{ profile.bio }}</p>
+                        <div :class="expanded ? 'expanded' : 'expandable'">
+                            <p>{{ profile.bio }}</p>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center">
+                        <button v-if="expanded" @click="expand" class='btn-cool text-center'>read less</button>
+                        <button v-else @click="expand" class='btn-cool text-center'>read more</button>
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -126,7 +132,18 @@ export default {
             profile: computed(() => AppState.profile),
             clubs: computed(() => AppState.myClubs),
             profileBooks: computed(() => AppState.readBooks),
-            account: computed(() => AppState.account)
+            expanded: computed(() => AppState.expanded),
+            account: computed(() => AppState.account),
+
+            expand() {
+                logger.log(AppState.expanded)
+                if (AppState.expanded) {
+                    AppState.expanded = false
+                } else {
+                    AppState.expanded = true
+                }
+                logger.log(AppState.expanded)
+            },
         };
     },
     components: { CommentComponent, ClubCard, BookCard }
@@ -151,6 +168,76 @@ export default {
 
 .position-move {
     transform: translateY(1vh);
+}
+
+.expandable {
+    max-height: 25vh;
+    overflow: hidden;
+}
+
+.expanded {
+    max-height: none;
+}
+
+.btn-cool {
+    width: 140px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    position: relative;
+    background-color: transparent;
+    transition: .2s cubic-bezier(0.19, 1, 0.22, 1);
+    opacity: 0.6;
+}
+
+.btn-cool::after {
+    content: '';
+    border-bottom: 3px double rgb(214, 207, 113);
+    width: 0;
+    height: 100%;
+    position: absolute;
+    margin-top: -5px;
+    top: 0;
+    left: 5px;
+    visibility: hidden;
+    opacity: 1;
+    transition: .2s linear;
+}
+
+.btn-cool .icon {
+    transform: translateX(0%);
+    transition: .2s linear;
+    animation: attention 1.2s linear infinite;
+}
+
+.btn-cool:hover::after {
+    visibility: visible;
+    opacity: 0.7;
+    width: 90%;
+}
+
+.btn-cool:hover {
+    letter-spacing: 2px;
+    opacity: 1;
+}
+
+.btn-cool:hover>.icon {
+    transform: translateX(30%);
+    animation: none;
+}
+
+@keyframes attention {
+    0% {
+        transform: translateX(0%);
+    }
+
+    50% {
+        transform: translateX(30%);
+    }
 }
 
 .scroll-x {
