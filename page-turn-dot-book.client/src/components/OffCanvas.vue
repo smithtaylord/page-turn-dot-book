@@ -10,11 +10,13 @@
             </div>
             <div class="offcanvas-body bg-warning">
                 <div class="d-flex flex-column">
-                    <router-link :to="{ name: 'CreateClub' }">
-                        <button class="btn bg-primary mb-2 w-100" data-bs-dismiss="offcanvas"
+                    <div v-if="notSignedIn">
+                        <router-link :to="{ name: 'CreateClub' }">
+                            <button class="btn bg-primary mb-2 w-100" data-bs-dismiss="offcanvas"
                             aria-label="Close-OffCanvas">Create
                             Club</button>
-                    </router-link>
+                        </router-link>
+                    </div>
                     <router-link :to="{ name: 'Search' }">
                         <button class="btn bg-success mb-2 w-100" data-bs-dismiss="offcanvas"
                             aria-label="Close-OffCanvas">Search
@@ -49,7 +51,9 @@ import { computed } from 'vue';
 export default {
     setup() {
         return {
-            account: computed(() => AppState.account)
+            account: computed(() => AppState.account),
+            profile: computed(() => AppState.profile),
+            notSignedIn: computed(() => AppState.account.id != AppState.profile.id),
         };
     },
     components: { Login }
