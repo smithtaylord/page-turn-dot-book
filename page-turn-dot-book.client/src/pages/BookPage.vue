@@ -21,7 +21,7 @@
                     <div>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                                aria-expanded="false" @click="getMyClubs">
                                 Add Book To Club
                             </button>
                             <ul class="dropdown-menu">
@@ -96,15 +96,7 @@ export default {
         const router = useRouter()
         const activeBook = route.params.isbn
 
-        async function getMyClubs() {
-            try {
-                let profileId = AppState.account.id
-                logger.log(profileId, "getmyclub profile id on active book page")
-                await clubsService.getMyClubs(profileId)
-            } catch (error) {
-                Pop.error(error)
-            }
-        }
+
 
 
         async function getBookByISBN() {
@@ -119,7 +111,7 @@ export default {
         watchEffect(() => {
             if (route.params.isbn) {
                 getBookByISBN()
-                getMyClubs()
+                // getMyClubs()
             }
         })
         return {
@@ -171,6 +163,15 @@ export default {
                 } catch (error) {
                     logger.log(error)
                     Pop.error(error.message)
+                }
+            },
+            async getMyClubs() {
+                try {
+                    let profileId = AppState.account.id
+                    logger.log(profileId, "getmyclub profile id on active book page")
+                    await clubsService.getMyClubs(profileId)
+                } catch (error) {
+                    Pop.error(error)
                 }
             }
             // editable,
