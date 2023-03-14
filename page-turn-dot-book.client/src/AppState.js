@@ -6,10 +6,10 @@ export const AppState = reactive({
   /** @type {import('./models/Account.js').Account} */
   account: {},
   expanded: false,
-  
+
   /** @type {import('./models/BookIveRead.js').BookIveRead[]} */
   readBooks: [],
-  
+
   /** @type {import('./models/BookIveRead.js').BookIveRead} */
   readBook: {},
 
@@ -34,8 +34,8 @@ export const AppState = reactive({
   /** @type {import('./models/Book').Book[]} */
   activeClubBooks: [],
 
-  /** @type {import('./models/Book').Book | null} */
-  activeClubBook: null,
+  /** @type {import('./models/Book').Book{}} */
+  activeClubBook: {},
 
   /** @type {import('./models/Club').Club[]} */
   myClubs: [],
