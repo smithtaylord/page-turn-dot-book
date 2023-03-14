@@ -1,16 +1,20 @@
 <template>
-    <div class="container-fluid bg-success">
+    <div class="container-fluid bg-success profile-size">
         <div class="row">
             <div class="col-12">
+                <router-link v-if="profile.id == account.id" class="selectable" :to="{ name: 'Account' }">
+                    <div class="text-end"><i class="mdi mdi-pencil icon-size"></i></div>
+                </router-link>
+                <div v-else class="text-end"><i class="mdi mdi-account-circle icon-size"></i></div>
                 <div class="text-center">
-                    <img class="profile-pic" :src="profile.picture" alt="">
+                    <img class="position-move profile-pic" :src="profile.picture" alt="">
                 </div>
             </div>
         </div>
     </div>
     <div class="container-fluid bg-primary">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 mt-5">
                 <div class="row mt-5">
                     <div class="col-9 m-auto bg-danger text-center">
                         <h1 class="my-3">{{ profile.name }}</h1>
@@ -67,7 +71,7 @@
 
 <script>
 import { AppState } from '../AppState.js';
-import { computed, onMounted } from 'vue';
+import { computed, watchEffect } from 'vue';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { useRoute } from 'vue-router';
@@ -111,16 +115,18 @@ export default {
             }
         }
 
-        onMounted(() => {
-            getProfileById();
-            getProfilesClubs();
-            getProfilesBooks();
+        watchEffect(() => {
+            if (route.params.profileId) {
+                getProfileById();
+                getProfilesClubs();
+                getProfilesBooks();
+            }
         });
         return {
             profile: computed(() => AppState.profile),
             clubs: computed(() => AppState.myClubs),
             profileBooks: computed(() => AppState.readBooks),
-            // account: computed(() => AppState.account)
+            account: computed(() => AppState.account)
         };
     },
     components: { CommentComponent, ClubCard, BookCard }
@@ -133,6 +139,18 @@ export default {
     height: 160px;
     width: 160px;
     border-radius: 50%;
+}
+
+.profile-size {
+    max-height: 20vh;
+}
+
+.icon-size {
+    font-size: 30px;
+}
+
+.position-move {
+    transform: translateY(1vh);
 }
 
 .scroll-x {
