@@ -25,9 +25,9 @@
                                 Add Book To Club
                             </button>
                             <ul class="dropdown-menu">
+                                <li v-if="booksInTheClub" class="dropdown-item">Already in all your clubs</li>
+                                <li v-if="myClubs.length == 0" class="dropdown-item">You are not in any clubs</li>
                                 <div v-for="m in myClubs">
-                                    <!-- <li v-if="!booksInTheClub" class="dropdown-item" @click="addBookToClub(m.club?.id)">{{
-                                        m.club?.name }}</li> -->
                                     <AddToClubButton :club="m"/>
                                 </div>
 
@@ -121,7 +121,7 @@ export default {
             expanded: computed(() => AppState.expanded),
             myBooks: computed(() => AppState.readBooks),
             alreadyMyBook: computed(() => AppState.readBooks.find(a => a.isbn == activeBook)),
-            // booksInTheClub: computed(() => AppState.myClubs.find(c => c.clubBooks.find(b => b.isbn == route.params.isbn))),
+            booksInTheClub: computed(() => AppState.myClubs.find(c => c.clubBooks.find(b => b.isbn == route.params.isbn))),
             onImageError() {
                 event.target.src = this.googleBook.googleImg;
             },

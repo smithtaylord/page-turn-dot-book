@@ -2,7 +2,8 @@
 <template>
       <div>
         <li v-if="!club.clubBooks.find(b => b.isbn == isbn)" class="dropdown-item" @click="addBookToClub(club.club?.id)">{{
-          club.club?.name }}</li>
+          club.club?.name }}
+          </li>
       </div>
 </template>
 
