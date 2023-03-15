@@ -49,6 +49,6 @@ export default {
     overflow: hidden;
     text-overflow: clip;
     // max-width: 100%;
-    max-height: 25px;
+    max-height: 40px;
 }
 </style>

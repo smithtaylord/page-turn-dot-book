@@ -5,7 +5,7 @@
                 <div class="col-12">
                     <div class="card text-start mt-2">
                         <img class="clubImg image-container" :src="club?.coverImg" :alt="club?.name">
-                        <div v-if="!club?.isArchived" class="text-end icon-container"><i
+                        <div v-if="!club?.isArchived && club.creatorId == account.id" class="text-end icon-container"><i
                                 class="mdi mdi-bookmark-remove selectable fs-1 px-2 pb-1 mx-2 glass-card rounded"
                                 @click="archiveClub"></i>
                         </div>
