@@ -1,6 +1,7 @@
+<!-- booksInTheClub: computed(() => AppState.myClubs.find(c => c.clubBooks.find(b => b.isbn == route.params.isbn))), -->
 <template>
       <div>
-        <li class="dropdown-item" @click="addBookToClub(club.club?.id)">{{
+        <li v-if="!club.clubBooks.find(b => b.isbn == isbn)" class="dropdown-item" @click="addBookToClub(club.club?.id)">{{
           club.club?.name }}</li>
       </div>
 </template>
@@ -24,6 +25,8 @@ export default {
     const router = useRouter();
     return {
       myClubs: computed(() => AppState.myClubs),
+      isbn: computed(() => route.params.isbn),
+      googleBook: computed(() => AppState.googleBook),
       async addBookToClub(clubId) {
         try {
           // console.log(this.booksInTheClub);
@@ -55,4 +58,3 @@ export default {
 
 <style lang="scss" scoped></style>
 
-<!-- booksInTheClub: computed(() => AppState.myClubs.find(c => c.clubBooks.find(b => b.isbn == route.params.isbn))), -->
