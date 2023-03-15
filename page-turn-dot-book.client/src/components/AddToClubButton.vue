@@ -1,10 +1,12 @@
 <!-- booksInTheClub: computed(() => AppState.myClubs.find(c => c.clubBooks.find(b => b.isbn == route.params.isbn))), -->
 <template>
-      <div>
-        <li v-if="!club.clubBooks.find(b => b.isbn == isbn)" class="dropdown-item" @click="addBookToClub(club.club?.id)">{{
-          club.club?.name }}
-          </li>
-      </div>
+  <div>
+    <li v-if="!club.clubBooks.find(b => b.isbn == isbn)" class="dropdown-item" @click="addBookToClub(club.club?.id)">{{
+      club.club?.name }}
+    </li>
+    <li v-else class="dropdown-item strike text-dark">{{ club.club?.name }}
+    </li>
+  </div>
 </template>
 
 
@@ -19,7 +21,7 @@ import Pop from '../utils/Pop'
 
 export default {
   props: {
-    club: {type: Object, required: true}
+    club: { type: Object, required: true }
   },
   setup() {
     const route = useRoute();
@@ -57,5 +59,9 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.strike {
+  text-decoration: line-through;
+}
+</style>
 

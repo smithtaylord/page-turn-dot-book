@@ -25,10 +25,9 @@
                                 Add Book To Club
                             </button>
                             <ul class="dropdown-menu">
-                                <li v-if="booksInTheClub" class="dropdown-item">Already in all your clubs</li>
                                 <li v-if="myClubs.length == 0" class="dropdown-item">You are not in any clubs</li>
                                 <div v-for="m in myClubs">
-                                    <AddToClubButton :club="m"/>
+                                    <AddToClubButton :club="m" />
                                 </div>
 
                             </ul>
@@ -116,7 +115,18 @@ export default {
         return {
             activeBook,
             account: computed(() => AppState.account),
-            myClubs: computed(() => AppState.myClubs),
+            myClubs: computed(() => {
+                let array = []
+                AppState.myClubs.forEach(club => {
+                    if (club.clubBooks.find(cb => cb.isbn == activeBook.isbn)) {
+                        array.push(club)
+                    }
+                    else {
+                        array.unshift(club)
+                    }
+                })
+                return array
+            }),
             googleBook: computed(() => AppState.googleBook),
             expanded: computed(() => AppState.expanded),
             myBooks: computed(() => AppState.readBooks),
