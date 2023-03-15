@@ -7,5 +7,6 @@ export class Club {
         this.id = data.id
         this.name = data.name
         this.isArchived = data.isArchived
+        
     }
 }

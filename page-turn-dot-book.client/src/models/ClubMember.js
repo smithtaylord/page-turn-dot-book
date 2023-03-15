@@ -9,5 +9,6 @@ export class ClubMember {
         // this.clubId = new Club(data.clubId)
         this.club = data.club
         this.profile = data.profile
+        this.clubBooks = data.club.clubBooks || null
     }
 }

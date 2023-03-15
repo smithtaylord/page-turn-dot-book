@@ -26,7 +26,9 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <div v-for="m in myClubs">
-                                    <li class="dropdown-item" @click="addBookToClub(m.club?.id)">{{ m.club?.name }}</li>
+                                    <!-- <li v-if="!booksInTheClub" class="dropdown-item" @click="addBookToClub(m.club?.id)">{{
+                                        m.club?.name }}</li> -->
+                                    <AddToClubButton :club="m"/>
                                 </div>
 
                             </ul>
@@ -84,6 +86,7 @@
 import { watchEffect, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { AppState } from '../AppState.js';
+import AddToClubButton from '../components/AddToClubButton.vue';
 import { booksService } from '../services/BooksService';
 import { clubsService } from '../services/ClubsService';
 import { logger } from '../utils/Logger.js';
@@ -92,28 +95,24 @@ import Pop from '../utils/Pop.js';
 export default {
     setup() {
         // const editable = ref({})
-        const route = useRoute()
-        const router = useRouter()
-        const activeBook = route.params.isbn
-
-
-
-
+        const route = useRoute();
+        const router = useRouter();
+        const activeBook = route.params.isbn;
         async function getBookByISBN() {
             try {
-                let isbn = route.params.isbn
-                await booksService.getBookByISBN(isbn)
-            } catch (error) {
-                Pop.error(error, 'GET BOOK BY ISBN PROBS YO')
+                let isbn = route.params.isbn;
+                await booksService.getBookByISBN(isbn);
+            }
+            catch (error) {
+                Pop.error(error, "GET BOOK BY ISBN PROBS YO");
             }
         }
-
         watchEffect(() => {
             if (route.params.isbn) {
-                getBookByISBN()
+                getBookByISBN();
                 // getMyClubs()
             }
-        })
+        });
         return {
             activeBook,
             account: computed(() => AppState.account),
@@ -122,60 +121,61 @@ export default {
             expanded: computed(() => AppState.expanded),
             myBooks: computed(() => AppState.readBooks),
             alreadyMyBook: computed(() => AppState.readBooks.find(a => a.isbn == activeBook)),
-
+            // booksInTheClub: computed(() => AppState.myClubs.find(c => c.clubBooks.find(b => b.isbn == route.params.isbn))),
             onImageError() {
-                event.target.src = this.googleBook.googleImg
+                event.target.src = this.googleBook.googleImg;
             },
             expand() {
-                logger.log(AppState.expanded)
+                logger.log(AppState.expanded);
                 if (AppState.expanded) {
-                    AppState.expanded = false
-                } else {
-                    AppState.expanded = true
+                    AppState.expanded = false;
                 }
-                logger.log(AppState.expanded)
+                else {
+                    AppState.expanded = true;
+                }
+                logger.log(AppState.expanded);
             },
-
             async addBookToClub(clubId) {
                 try {
-                    const book = this.googleBook
-                    book.isbn = route.params.isbn
-                    book.clubId = clubId
-                    book.coverImg = this.googleBook.img
-                    await clubsService.addBookToClub(book)
-                    router.push({ name: "Club", params: { clubId: clubId } })
-                } catch (error) {
-                    logger.log(error)
-                    Pop.error(error.message)
+                    // console.log(this.booksInTheClub);
+                    const book = this.googleBook;
+                    book.isbn = route.params.isbn;
+                    book.clubId = clubId;
+                    book.coverImg = this.googleBook.img;
+                    await clubsService.addBookToClub(book);
+                    router.push({ name: "Club", params: { clubId: clubId } });
+                }
+                catch (error) {
+                    logger.log(error);
+                    Pop.error(error.message);
                 }
             },
-
             async addBookToReadBooks() {
                 try {
-
-                    const book = this.googleBook
-                    book.isbn = route.params.isbn
-                    book.coverImg = this.googleBook.img
-                    book.accountId = AppState.account.id
-                    if (await Pop.confirm('Have you read this book?')) {
-                        await booksService.addBookToReadBooks(book)
+                    const book = this.googleBook;
+                    book.isbn = route.params.isbn;
+                    book.coverImg = this.googleBook.img;
+                    book.accountId = AppState.account.id;
+                    if (await Pop.confirm("Have you read this book?")) {
+                        await booksService.addBookToReadBooks(book);
                     }
-                } catch (error) {
-                    logger.log(error)
-                    Pop.error(error.message)
+                }
+                catch (error) {
+                    logger.log(error);
+                    Pop.error(error.message);
                 }
             },
             async getMyClubs() {
                 try {
-                    let profileId = AppState.account.id
-                    logger.log(profileId, "getmyclub profile id on active book page")
-                    await clubsService.getMyClubs(profileId)
-                } catch (error) {
-                    Pop.error(error)
+                    let profileId = AppState.account.id;
+                    logger.log(profileId, "getmyclub profile id on active book page");
+                    await clubsService.getMyClubs(profileId);
+                }
+                catch (error) {
+                    Pop.error(error);
                 }
             }
             // editable,
-
             // async createComment() {
             //     try {
             //         const formData = editable.value
@@ -184,8 +184,9 @@ export default {
             //         Pop.error(error, "Create Comment Is Broken!")
             //     }
             // }
-        }
-    }
+        };
+    },
+    components: { AddToClubButton }
 }
 </script>
 
