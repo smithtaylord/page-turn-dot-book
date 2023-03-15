@@ -1,5 +1,6 @@
-import { Schema } from "mongoose";
+import { Schema, SchemaType, SchemaTypeOptions } from "mongoose";
 import { basicStringType, defaultSchemaOptions } from "../db/Constants";
+
 
 export const ClubBookSchema = new Schema(
     {
@@ -8,6 +9,7 @@ export const ClubBookSchema = new Schema(
         coverImg: basicStringType,
         isbn: basicStringType,
         isArchived: { type: Boolean, required: true, default: false },
+        voteId: { type: [Schema.Types.ObjectId], default: []},
         // genre: basicStringType,
         // isActive: {type: Boolean, required: true, default: false}
         // NOTE come back and maybe add votes somehow, maybe
