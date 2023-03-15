@@ -1,14 +1,14 @@
 <template>
-    <div class="ClubCard box-shadow m-3 bg-warning text-center d-flex flex-column p-3 align-items-center">
-<div>
+    <div class="ClubCard ClubCard-large box-shadow m-3 bg-warning text-center d-flex flex-column p-3 align-items-center">
+        <div>
 
-    <img class="rounded-circle club-picture mb-2" :src="club.coverImg" :alt="club.name">
-    <h4 class="text-limit" >{{ club.name }}</h4>
-    <router-link class="selectable" :to="{name: 'Club', params: {clubId: club.id}}">
-        <button class="btn bg-danger selectable mt-2">View</button>
-    </router-link>
-</div>
-</div>
+            <img class="rounded-circle club-picture mb-2" :src="club.coverImg" :alt="club.name">
+            <h4 class="text-limit">{{ club.name }}</h4>
+            <router-link class="selectable" :to="{ name: 'Club', params: { clubId: club.id } }">
+                <button class="btn bg-danger selectable mt-2">View</button>
+            </router-link>
+        </div>
+    </div>
 </template>
 
 
@@ -16,7 +16,7 @@
 import { Club } from '../models/Club.js';
 
 export default {
-    props: {club: { type: Club, required: true, }},
+    props: { club: { type: Club, required: true, } },
     setup() {
         return {}
     }
@@ -25,18 +25,27 @@ export default {
 
 
 <style lang="scss" scoped>
-.club-picture{
+.club-picture {
     height: 15vh;
     width: 15vh;
     object-fit: cover;
 }
 
-.ClubCard{
+.ClubCard {
     width: 70vw;
-    // max-height: 50vh;
     contain: content;
 }
-.text-limit{
+
+@media screen and (min-width: 600px) {
+    .ClubCard {
+        width: 25vw;
+        contain: content;
+    }
+}
+
+
+
+.text-limit {
     overflow: hidden;
     text-overflow: clip;
     // max-width: 100%;
