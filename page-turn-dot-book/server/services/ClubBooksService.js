@@ -4,18 +4,22 @@ import { BadRequest } from "../utils/Errors.js"
 class ClubBooksService {
  async addClubBookVote(clubBookId, clubMember) {
   let clubBook = await this.getClubBookById(clubBookId)
-  // if(clubBook.voteId === clubMember){
-  //   clubBook.voteId.splice(clubMember)
-  //   await clubBook.save()
-  
-    clubBook.voteId.push(clubMember)
-    await clubBook.save()
-  // }else{
-  return clubBook
-  }
-  //  const CB = await dbContext.ClubBooks.put(clubBookId)
 
-  
+  // For loop to look in voteIds
+
+  // If statement to look for where the clubMember.Id != account.id
+
+  // If the clubMember.id already exists in the voteIds array then do not push the vote 
+
+  if(clubBook.voteId == clubMember){
+
+  }
+  clubBook.voteId.push(clubMember)
+  await clubBook.save()
+  //  const CB = await dbContext.ClubBooks.put(clubBookId)
+   return clubBook
+
+  }
   async deleteClubBookById(id) {
     const book = await this.getClubBookById(id)
     await book.remove()
