@@ -15,20 +15,20 @@
           </router-link>
         </div>
       </div>
-            <div class="col-12 d-none d-md-block d-xxl-block LGhomePagePic">
-          <p class="text-light py-5 px-2 fs-3 text-shadow">
-            At PageTurn.Book, we offer tools for hosting
-            book clubs and tools for finding book club
-            members.
-          </p>
-          <div v-if="account.id">
-            <router-link class="selectable" :to="{ name: 'CreateClub' }">
-              <button class="mb-3 btn bg-danger selectable">
-                Create a Club
-              </button>
-            </router-link>
-          </div>
+      <div class="col-12 d-none d-md-block d-xxl-block LGhomePagePic">
+        <p class="text-light py-5 px-2 fs-3 text-shadow">
+          At PageTurn.Book, we offer tools for hosting
+          book clubs and tools for finding book club
+          members.
+        </p>
+        <div v-if="account.id">
+          <router-link class="selectable" :to="{ name: 'CreateClub' }">
+            <button class="mb-3 btn bg-danger selectable">
+              Create a Club
+            </button>
+          </router-link>
         </div>
+      </div>
     </div>
   </div>
   <div class="container-fluid">
@@ -120,5 +120,21 @@ export default {
   overflow-x: scroll;
   width: 100%;
   height: 40vh;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: #CCF3FD;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #56C7FB;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #56C7FB;
 }
 </style>

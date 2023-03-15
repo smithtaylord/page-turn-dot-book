@@ -25,5 +25,10 @@ export default {
     height: 35vh;
     // width: 100%;
     object-fit: cover;
+    transition: transform 0.2s;
+}
+
+.bookCover:hover {
+    transform: scale(1.05);
 }
 </style>
