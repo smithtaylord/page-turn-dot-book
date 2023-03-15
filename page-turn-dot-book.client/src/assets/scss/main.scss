@@ -59,3 +59,19 @@ form:invalid button[type="submit"] {
 .box-shadow{
   box-shadow: 2px 2px 4px black;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: #CCF3FD;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #5E6472;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #5E6472;
+}

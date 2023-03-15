@@ -38,7 +38,7 @@
                     <div class="">
                         <CreateCommentForm />
                     </div>
-                    <div class=" mt-4 bg-dark">
+                    <div class=" mt-4 p-2">
                         <div v-if="comments.length > 0" :class="expanded ? 'expanded' : 'expandable'">
                             <div v-for="c in comments">
                                 <CommentComponent :comment="c" />

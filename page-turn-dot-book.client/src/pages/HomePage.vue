@@ -47,7 +47,7 @@
   </div>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 bg-danger">
+      <div class="col-12 bg-danger bg-gradient">
         <h1 class="text-center mt-2">Let's get clubbin'!</h1>
         <div class="d-flex scroll-x mb-3">
           <div v-for="c in clubs">
@@ -122,19 +122,19 @@ export default {
   height: 40vh;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-  background-color: #CCF3FD;
-  border-radius: 10px;
-}
+// ::-webkit-scrollbar {
+//   width: 10px;
+//   height: 10px;
+//   background-color: #CCF3FD;
+//   border-radius: 10px;
+// }
 
-::-webkit-scrollbar-thumb {
-  background-color: #56C7FB;
-  border-radius: 10px;
-}
+// ::-webkit-scrollbar-thumb {
+//   background-color: #56C7FB;
+//   border-radius: 10px;
+// }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: #56C7FB;
-}
+// ::-webkit-scrollbar-thumb:hover {
+//   background-color: #56C7FB;
+// }
 </style>

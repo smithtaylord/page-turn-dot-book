@@ -3,7 +3,7 @@
         <form @submit.prevent="handleSubmit()">
             <div class="py-3">
                 <textarea required v-model="editable.body" class="form-control p-2"
-                    placeholder="Join the conversation! Leave your comments on the book below...." style="height: 100px"
+                    placeholder="Join the conversation!" style="height: 100px"
                     maxlength="2500" minlength="2"></textarea>
                 <div class="d-flex justify-content-end py-3">
                     <button class="btn bg-primary text-dark fw-bold box-shadow" type="submit">post comment</button>
