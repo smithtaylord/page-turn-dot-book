@@ -18,6 +18,15 @@ class ClubsService {
         logger.log(res.data, 'book added to club')
     }
 
+    async removeClubBook(clubBookId){
+        const res = await api.delete('api/clubBooks/' + clubBookId)
+        const index = AppState.activeClubBooks.findIndex(b => b.id == clubBookId)
+        logger.log(res.data, 'book removed from club')
+        if(index != -1){
+            AppState.activeClubBooks.splice(index, 1)
+        }
+    }
+
     async getMyClubs(profileId) {
         const res = await api.get('/api/profiles/' + profileId + '/profileBookClubs')
         logger.log(res.data, "Gotten Clubs")

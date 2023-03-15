@@ -5,7 +5,7 @@
                 <div class="col-12">
                     <div class="card text-start mt-2">
                         <img class="clubImg image-container" :src="club?.coverImg" :alt="club?.name">
-                        <div v-if="!club?.isArchived && club.creatorId == account.id" class="text-end icon-container"><i
+                        <div v-if="!club?.isArchived && club?.creatorId == account.id" class="text-end icon-container"><i
                                 class="mdi mdi-bookmark-remove selectable fs-1 px-2 pb-1 mx-2 glass-card rounded"
                                 @click="archiveClub"></i>
                         </div>
@@ -112,9 +112,25 @@
                                 <div class="d-flex justify-content-between align-items-baseline px-3 pt-2">
                                     <i class="mdi mdi-star-outline selectable fs-4" title="vote for book"></i>
                                     <p class="fw-bold">Votes 0</p>
-                                    <i v-if="account.id == club?.creatorId && !club?.isArchived"
-                                        class="mdi mdi-book-heart-outline selectable fs-3" title="set book active"
-                                        @click="setBookActive(b.id)"></i>
+                                    <div v-if="account.id == club?.creatorId && !club?.isArchived">
+                                        <div type="button" class="" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="selectable text-dark mdi mdi-dots-horizontal fs-3 "
+                                                title="remove/set active book"></i>
+                                        </div>
+                                        <div class="dropdown-menu text-center fs-1">
+                                            <div class="d-flex justify-content-evenly">
+                                                <i class="mdi mdi-book-heart-outline text-dark selectable fs-1"
+                                                    title="set book active" @click="setBookActive(b.id)"></i>
+                                                <div>|</div>
+                                                    <i @click="removeClubBook(b.id)" class="mdi mdi-cancel text-danger selectable fs-1" 
+                                                    title="remove book from club"></i>
+                                            </div>
+                                            <div class="list-group">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -230,6 +246,15 @@ export default {
                     await clubsService.setBookActive(clubBookId, clubId)
                 } catch (error) {
                     Pop.error(error, '[setting book to active]')
+                }
+            },
+            async removeClubBook(clubBookId){
+                try {
+                    if(await Pop.confirm('Are you sure you want to remove this book from the club?', 'Some members might not like that...')){
+                        await clubsService.removeClubBook(clubBookId)
+                    }
+                } catch (error) {
+                    Pop.error(error, '[removing club book]')
                 }
             },
             expand() {
