@@ -71,7 +71,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-3 bg-custom-success">
                     <div class="col-11 m-auto bg-custom-danger">
                         <div class="row mt-3">
                             <div class="col-8 m-auto bg-danger text-center rounded box-shadow">
