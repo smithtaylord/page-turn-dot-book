@@ -154,7 +154,7 @@
                     <div class="col-11 m-auto bg-custom-warning">
                         <div class="row mt-3">
                             <div class="col-8 m-auto bg-danger text-center rounded box-shadow">
-                                <h4 class="my-3">{{ profile.name }} Read Books</h4>
+                                <h4 class="my-3">{{ profile.name }}'s Read Books</h4>
                             </div>
                         </div>
                         <div v-if="profileBooks" class="row my-2">
@@ -170,7 +170,7 @@
                     <div class="col-11 m-auto bg-custom-danger">
                         <div class="row mt-3">
                             <div class="col-8 m-auto bg-danger text-center rounded box-shadow">
-                                <h4 class="my-3">{{ profile.name }} Clubs</h4>
+                                <h4 class="my-3">{{ profile.name }}'s Clubs</h4>
                             </div>
                         </div>
 
@@ -219,19 +219,19 @@ export default {
             }
         }
 
-        async function getProfilesClubs() {
+        async function getOtherProfilesClubs() {
             try {
                 const profileId = route.params.profileId;
-                await clubsService.getMyClubs(profileId)
+                await clubsService.getProfileClubs(profileId)
             } catch (error) {
                 Pop.error(error.message)
             }
         }
 
-        async function getProfilesBooks() {
+        async function getOtherProfilesBooks() {
             try {
                 const profileId = route.params.profileId;
-                await booksService.getProfilesBooks(profileId)
+                await booksService.getOtherProfilesBooks(profileId)
             } catch (error) {
                 Pop.error(error.message)
             }
@@ -250,15 +250,15 @@ export default {
         watchEffect(() => {
             if (route.params.profileId) {
                 getProfileById();
-                getProfilesClubs();
-                getProfilesBooks();
+                getOtherProfilesClubs();
+                getOtherProfilesBooks();
                 getCommentsByProfileId();
             }
         });
         return {
             profile: computed(() => AppState.profile),
-            clubs: computed(() => AppState.myClubs),
-            profileBooks: computed(() => AppState.readBooks),
+            clubs: computed(() => AppState.profileClubs),
+            profileBooks: computed(() => AppState.profileReadBooks),
             expanded: computed(() => AppState.expanded),
             account: computed(() => AppState.account),
             comments: computed(() => AppState.comments),

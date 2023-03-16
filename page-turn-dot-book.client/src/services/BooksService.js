@@ -39,6 +39,11 @@ class BooksService {
         logger.log(AppState.readBooks, 'this is the book i read')
     }
 
+    async getOtherProfilesBooks(profileId){
+        const res = await api.get('/api/profiles/' + profileId + '/booksIveRead')
+        AppState.profileReadBooks = res.data.map(b => new BookIveRead(b))
+    }
+
     async addBookToReadBooks(book) {
         const res = await api.post('/api/booksIveRead', book)
         AppState.readBooks.push(new BookIveRead(res.data))

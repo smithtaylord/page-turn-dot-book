@@ -47,4 +47,10 @@ export const AppState = reactive({
   /** @type {import('./models/Comment').Comment[]} */
   comments: [],
 
+   /** @type {import('./models/ClubMember').ClubMember[]} */
+  profileClubs: [],
+
+  /** @type {import('./models/BookIveRead.js').BookIveRead[]} */
+  profileReadBooks: [],
+
 })

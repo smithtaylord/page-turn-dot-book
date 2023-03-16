@@ -27,10 +27,10 @@ class ClubsService {
         }
     }
 
-    async getMyClubs(profileId) {
+    async getProfileClubs(profileId) {
         const res = await api.get('/api/profiles/' + profileId + '/profileBookClubs')
         logger.log(res.data, "Gotten Clubs")
-        AppState.myClubs = res.data.map(c => new ClubMember(c))
+        AppState.profileClubs = res.data.map(c => new ClubMember(c))
         logger.log(AppState.myClubs)
     }
 
