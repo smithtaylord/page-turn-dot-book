@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid bg-success profile-size">
+    <div class="container-fluid bg-custom-success profile-size">
         <div class="row">
             <div class="col-12">
                 <router-link v-if="profile.id == account.id" class="selectable" :to="{ name: 'Account' }">
@@ -7,23 +7,23 @@
                 </router-link>
                 <div v-else class="text-end"><i class="mdi mdi-account-circle icon-size"></i></div>
                 <div class="text-center">
-                    <img class="position-move profile-pic" :src="profile.picture" alt="">
+                    <img class="position-move profile-pic box-shadow" :src="profile.picture" alt="">
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid bg-primary">
+    <div class="container-fluid bg-custom-primary">
         <div class="row">
             <div class="col-12 mt-5">
                 <div class="row mt-5">
-                    <div class="col-9 m-auto bg-danger text-center">
+                    <div class="col-9 m-auto bg-danger text-center box-shadow rounded">
                         <h1 class="my-3">{{ profile.name }}</h1>
                     </div>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-11 m-auto bg-warning fs-3">
+                <div class="row mt-3">
+                    <div class="col-11 m-auto bg-warning fs-5 box-shadow rounded">
                         <div :class="expanded ? 'expanded' : 'expandable'">
-                            <p>{{ profile.bio }}</p>
+                            <p class="p-2 fs-6 mt-2">{{ profile.bio }}</p>
                         </div>
                     </div>
                     <div class="d-flex flex-column align-items-center">
@@ -31,7 +31,7 @@
                         <button v-else @click="expand" class='btn-cool text-center'>read more</button>
                     </div>
                 </div>
-                <div class="row bg-success">
+                <div class="row bg-custom-success">
                     <h3 class="text-center py-3">
                         Profile Comments!
                     </h3>
@@ -56,9 +56,9 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-11 m-auto bg-warning">
+                    <div class="col-11 m-auto bg-custom-warning">
                         <div class="row mt-3">
-                            <div class="col-8 m-auto bg-danger text-center">
+                            <div class="col-8 m-auto bg-danger text-center rounded box-shadow">
                                 <h4 class="my-3">{{ profile.name }} Read Books</h4>
                             </div>
                         </div>
@@ -72,9 +72,9 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-11 m-auto bg-danger">
+                    <div class="col-11 m-auto bg-custom-danger">
                         <div class="row mt-3">
-                            <div class="col-8 m-auto bg-danger text-center">
+                            <div class="col-8 m-auto bg-danger text-center rounded box-shadow">
                                 <h4 class="my-3">{{ profile.name }} Clubs</h4>
                             </div>
                         </div>
