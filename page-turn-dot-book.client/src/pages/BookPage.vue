@@ -64,20 +64,32 @@
         </div>
     </div>
 
-    <div class="container-fluid my-4 bg-primary">
-        <div class="row">
-            <div class="col-12">
-                <!-- <form @submit.prevent="createComment()">
-                    <div class="">
-                        <label for="comment" class="form-label">
-                        </label>
-                        <input v-model="editable.comment" type="textarea" placeholder="Enter Comment Here..."
-                            class="form-control">
+    <!-- <div class="container-fluid my-4 bg-primary">
+        <div class="row bg-success">
+            <h3 class="text-center py-3">
+                Profile Comments!
+            </h3>
+            <div class="">
+                <CreateCommentForm />
+            </div>
+            <div class=" mt-4 p-2">
+                <div v-if="comments.length > 0" :class="expanded ? 'expanded' : 'expandable'">
+                    <div v-for="c in comments">
+                        <CommentComponent :comment="c" />
                     </div>
-                </form> -->
+                </div>
+                <div v-else>
+                    <div class="bg-dark text-light p-3 rounded box-shadow indent">
+                        <p>no comments... yet?</p>
+                    </div>
+                </div>
+                <div class="d-flex flex-column align-items-center" v-if="comments.length > 2">
+                    <button v-if="expanded" @click="expand" class='btn-cool text-center'>read less</button>
+                    <button v-else @click="expand" class='btn-cool text-center'>read more</button>
+                </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </template>
 
 
@@ -86,8 +98,11 @@ import { watchEffect, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { AppState } from '../AppState.js';
 import AddToClubButton from '../components/AddToClubButton.vue';
+import CommentComponent from '../components/CommentComponent.vue';
+import CreateCommentForm from '../components/CreateCommentForm.vue';
 import { booksService } from '../services/BooksService';
 import { clubsService } from '../services/ClubsService';
+import { commentsService } from '../services/CommentsService';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 
@@ -106,8 +121,18 @@ export default {
                 Pop.error(error, "GET BOOK BY ISBN PROBS YO");
             }
         }
+        // async function getCommentsByIsbn() {
+        //     try {
+        //         const isbn = route.params.isbn
+        //         await commentsService.getCommentsByIsbn(isbn)
+        //     } catch (error) {
+        //         logger.error(error)
+        //         Pop.error(error.message)
+        //     }
+        // }
         watchEffect(() => {
             if (route.params.isbn) {
+                // getCommentsByIsbn();
                 getBookByISBN();
                 // getMyClubs()
             }
@@ -115,6 +140,7 @@ export default {
         return {
             activeBook,
             account: computed(() => AppState.account),
+            comments: computed(() => AppState.comments),
             myClubs: computed(() => {
                 let array = []
                 AppState.myClubs.forEach(club => {
@@ -196,7 +222,7 @@ export default {
             // }
         };
     },
-    components: { AddToClubButton }
+    components: { AddToClubButton, CommentComponent, CreateCommentForm }
 }
 </script>
 

@@ -19,6 +19,12 @@ class CommentsService {
         AppState.comments = res.data.map(c => new Comment(c))
 
     }
+    async getCommentsByIsbn(isbn) {
+        const res = await api.get('api/clubs/' + isbn + '/comments')
+        // logger.log(res.data)
+        AppState.comments = res.data.map(c => new Comment(c))
+
+    }
 
     async createComment(commentData) {
         // logger.log(commentData)
