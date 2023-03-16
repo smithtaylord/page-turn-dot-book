@@ -4,7 +4,7 @@ import { basicStringType, defaultSchemaOptions } from "../db/Constants";
 export const CommentSchema = new Schema({
     creatorId: {type: Schema.Types.ObjectId, required: true, ref: 'Account'},
     // NOTE come back to this and find out if it needs to be an ObjectID
-    parentId: {type: Schema.Types.ObjectId, required: true},
+    parentId: {type: String, required: true},
     body: basicStringType,
 
     }, defaultSchemaOptions)

@@ -1,4 +1,4 @@
-import { Auth0Provider } from "@bcwdev/auth0provider";
+import { commentsService } from "../services/CommentsService";
 import BaseController from "../utils/BaseController";
 
 export class BooksController extends BaseController{
@@ -6,11 +6,12 @@ export class BooksController extends BaseController{
     super('api/book')
       this.router
       .get('/:isbn/comments', this.getBookComments)
-      .use(Auth0Provider.getAuthorizedUserInfo)
   }
   async getBookComments(req, res, next){
     try {
-      const isbn
+      const isbn = req.params.isbn
+      const comments = await commentsService.getCommentbyParentId(isbn)
+      return res.send(comments)
     } catch (error) {
       next(error)
     }
