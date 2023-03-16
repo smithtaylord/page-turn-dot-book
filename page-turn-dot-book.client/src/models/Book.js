@@ -2,10 +2,12 @@ const defaultImg = 'https://images.unsplash.com/photo-1595433707802-6b2626ef1c91
 
 export class Book {
     constructor(data) {
+        this.id = data.id
         this.isbn = data.primary_isbn10 || data.volumeInfo.industryIdentifiers[0].identifier
         this.title = data.title || data.volumeInfo.title
         this.coverImg = data.volumeInfo ? data.volumeInfo.imageLinks ? data.volumeInfo.imageLinks.thumbnail : defaultImg : data.book_image
         this.altImg = data.altImg || null
+        this.voteId = data.voteId
 
 
     }

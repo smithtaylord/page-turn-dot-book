@@ -4,7 +4,10 @@ import { logger } from "../utils/Logger";
 import { api } from "./AxiosService";
 
 class ClubMembersService {
-
+  async clubBookVoting(clubBooksId, clubMembers) {
+    const res = await api.put('/api/clubBooks/' + clubBooksId, clubMembers)
+    // AppState.activeClubBooks.push(res.data)
+  }
   async getMembersByClubId(clubId) {
     const res = await api.get(`api/clubs/${clubId}/members`)
     logger.log('getting members by id', res.data)

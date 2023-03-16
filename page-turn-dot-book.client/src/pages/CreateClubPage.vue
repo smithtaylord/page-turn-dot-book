@@ -15,6 +15,19 @@
                         <input v-model="editable.coverImg" required type="text" class="form-control" id="coverImg">
                         <label for="floatingInput" class="form-label">Url</label>
                     </div>
+                    <label for="type" class="form-label m-0 mt-3 text-dark">Club Type</label>
+                    <select v-model="editable.type" required class="form-select" id="type">
+                        <option selected value="casual">Casual</option>
+                        <option value="elite">Elite</option>
+                        <option value="speed">Speed</option>
+                        <option value="single cat moms">Single Cat Moms</option>
+                        <option value="sci-fi">Sci-Fi</option>
+                        <option value="horror">Horror</option>
+                        <option value="fantasy">Fantasy</option>
+                        <option value="non-fiction">Non-Fiction</option>
+                        <option value="series">Series</option>
+                        <option value="author-based">Author Based</option>
+                    </select>
                     <button class="btn bg-danger mt-4" type="submit">Create Club</button>
                 </form>
             </div>
