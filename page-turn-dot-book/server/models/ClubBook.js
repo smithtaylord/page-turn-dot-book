@@ -7,9 +7,10 @@ export const ClubBookSchema = new Schema(
         clubId: { type: Schema.Types.ObjectId, required: true, ref: 'Club' },
         title: basicStringType,
         coverImg: basicStringType,
+        altImg: { type: String, minLength: 3, maxLength: 5000 },
         isbn: basicStringType,
         isArchived: { type: Boolean, required: true, default: false },
-        voteId: { type: [Schema.Types.ObjectId], default: []},
+        voteId: { type: [Schema.Types.ObjectId], default: [] },
         // genre: basicStringType,
         // isActive: {type: Boolean, required: true, default: false}
         // NOTE come back and maybe add votes somehow, maybe
