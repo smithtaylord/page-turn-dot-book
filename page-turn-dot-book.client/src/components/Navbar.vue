@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-xxl navbar-dark bg-dark bg-gradient px-3">
+  <nav class="navbar navbar-expand-xxl navbar-dark bg-dark bg-gradient px-3 justify-content-between">
     <div>
       <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
         <h1 class="">
@@ -8,7 +8,7 @@
         </h1>
       </router-link>
     </div>
-    <div class="justify-content-end displayButton" >
+    <div class="displayButton" >
       <button class="btn bg-dark selectable" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
         aria-controls="offcanvasExample">
         <i class="fs-1 mdi mdi-menu"></i>
