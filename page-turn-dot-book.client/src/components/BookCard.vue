@@ -1,7 +1,8 @@
 <template>
     <div class="BookCard px-3">
         <router-link :to="{ name: 'Book', params: { isbn: book.isbn } }">
-            <img class=" box-shadow mt-2 selectable bookCover" :src="book.coverImg" :alt="book.title" :title="book.title">
+            <img class=" box-shadow mt-2 selectable bookCover" :src="book.coverImg" :alt="book.title" :title="book.title"
+                v-on:error="onImageError(book)">
         </router-link>
 
     </div>
@@ -14,7 +15,10 @@ import { Book } from '../models/Book.js'
 export default {
     props: { book: { type: Object, required: true, } },
     setup() {
-        return {}
+        const onImageError = (book) => {
+            event.target.src = book.altImg;
+        };
+        return { onImageError };
     }
 }
 </script>
