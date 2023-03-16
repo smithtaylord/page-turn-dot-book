@@ -1,5 +1,5 @@
 <template>
-    <div class="OffCanvas bg-warning">
+    <div class="OffCanvas bg-custom-warning">
 
 
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
@@ -8,13 +8,13 @@
                     PageTurn.Book</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close-OffCanvas"></button>
             </div>
-            <div class="offcanvas-body bg-warning">
+            <div class="offcanvas-body bg-custom-warning">
                 <div class="d-flex flex-column">
                     <div v-if="account.id">
                         <router-link :to="{ name: 'CreateClub' }">
                             <button class="btn bg-primary mb-2 w-100" data-bs-dismiss="offcanvas"
-                            aria-label="Close-OffCanvas">Create
-                            Club</button>
+                                aria-label="Close-OffCanvas">Create
+                                Club</button>
                         </router-link>
                     </div>
                     <router-link :to="{ name: 'Search' }">

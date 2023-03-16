@@ -52,11 +52,11 @@ form:invalid button[type="submit"] {
   pointer-events: none;
 }
 
-.text-shadow{
+.text-shadow {
   text-shadow: 1px 1px 2px black;
 }
 
-.box-shadow{
+.box-shadow {
   box-shadow: 2px 2px 4px black;
 }
 
@@ -74,4 +74,22 @@ form:invalid button[type="submit"] {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #5E6472;
+}
+
+.bg-custom-primary {
+  background-image: url(bg-primary.png);
+  background-size: fill;
+  background-repeat: no-repeat;
+}
+
+.bg-custom-danger {
+  background-image: url(bg-danger.png);
+  background-size: fill;
+  background-repeat: no-repeat;
+}
+
+.bg-custom-warning {
+  background-image: url(bg-warning.png);
+  background-size: fill;
+  background-repeat: no-repeat;
 }
