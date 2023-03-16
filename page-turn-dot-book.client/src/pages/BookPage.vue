@@ -1,6 +1,91 @@
 <template>
     <div class="container-fluid bg-primary" v-if="googleBook">
         <div class="row">
+            <div class="col-12 col-md-4 my-4 px-4">
+                <div class="d-flex justify-content-center">
+                    <img class="book-img" :src="googleBook?.img" :alt="googleBook.title" v-on:error="onImageError">
+                </div>
+                <div v-if="account.id">
+                    <div class="mt-1 mb-4 d-flex justify-content-between">
+                        <div v-if="!alreadyMyBook">
+                            <button @click="addBookToReadBooks()" class="btn bg-danger selectable">Add To My Books</button>
+                        </div>
+                        <div v-if="myClubs">
+                            <div>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false" @click="getMyClubs">
+                                        Add Book To Club
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li v-if="myClubs.length == 0" class="dropdown-item">You are not in any clubs</li>
+                                        <div v-for="m in myClubs">
+                                            <AddToClubButton :club="m" />
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-7">
+                <h1 class="text-center my-3">{{ googleBook?.title }}</h1>
+                <p class="mt-2 mb-4 fs-3 px-3 py-0 text-end">-{{ googleBook?.author }}</p>
+                <p class="mt-2 mb-5 fs-4 px-3 py-0">
+                <div :class="expanded ? 'expanded' : 'expandable'">
+                    {{ googleBook?.description }}
+                </div>
+                </p>
+                <div class="d-flex flex-column align-items-center">
+                    <button v-if="expanded" @click="expand" class='btn-cool text-center'>read less</button>
+                    <button v-else @click="expand" class='btn-cool text-center'>read more</button>
+                </div>
+                <p class="my-3 fs-3 p-0">{{ googleBook?.genre }}</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-8 rounded box-shadow m-auto my-4 bg-custom-success px-md-5">
+                    <div class="px-md-5 pb-5">
+                        <h3 class="text-center py-md-3">
+                            Book Comments!
+                        </h3>
+                        <div v-if="account.id" class="">
+                            <CreateCommentForm />
+                        </div>
+                        <div class=" mt-4 p-2">
+                            <div v-if="comments.length > 0" :class="expanded ? 'expanded' : 'expandable'">
+                                <div v-for="c in comments">
+                                    <CommentComponent :comment="c" />
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div class="bg-dark text-light p-3 rounded box-shadow indent">
+                                    <p>no comments... yet?</p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column align-items-center" v-if="comments.length > 2">
+                                <button v-if="expanded" @click="expand" class='btn-cool text-center'>read less</button>
+                                <button v-else @click="expand" class='btn-cool text-center'>read more</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>
+<!-- <template>
+    <div class="container-fluid bg-primary" v-if="googleBook">
+        <div class="row">
             <div class="col-12 my-4 px-4">
                 <div class="d-flex justify-content-center">
                     <img class="book-img" :src="googleBook?.img" :alt="googleBook.title" v-on:error="onImageError">
@@ -8,15 +93,12 @@
             </div>
         </div>
     </div>
-
     <div v-if="account.id" class="container-fluid bg-primary">
         <div class="row">
             <div class="col-12 mt-1 mb-4 d-flex justify-content-between">
                 <div v-if="!alreadyMyBook">
                     <button @click="addBookToReadBooks()" class="btn bg-danger selectable">Add To My Books</button>
                 </div>
-
-
                 <div v-if="myClubs">
                     <div>
                         <div class="dropdown">
@@ -29,21 +111,13 @@
                                 <div v-for="m in myClubs">
                                     <AddToClubButton :club="m" />
                                 </div>
-
                             </ul>
                         </div>
-
-
-
-                        <!-- 
-                        <button   class="btn bg-danger selectable">{{ m.club.name }}</button>
-                        <div>sample</div> -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -58,12 +132,11 @@
                     <button v-if="expanded" @click="expand" class='btn-cool text-center'>read less</button>
                     <button v-else @click="expand" class='btn-cool text-center'>read more</button>
                 </div>
-                <p class="my-3 fs-3 p-0">{{ googleBook?.genre }}</p>
+                <p class="my-3 fs-3 p-0">{{ googleBook?.genre }}</p> -->
                 <!-- TODO categories need mapped through -->
-            </div>
+            <!-- </div>
         </div>
     </div>
-
     <div class="container-fluid my-4 bg-primary">
         <div class="row bg-success">
             <h3 class="text-center py-3">
@@ -90,7 +163,7 @@
             </div>
         </div>
     </div>
-</template>
+</template> -->
 
 
 <script>
