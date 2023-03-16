@@ -9,7 +9,7 @@ export const ClubBookSchema = new Schema(
         coverImg: basicStringType,
         isbn: basicStringType,
         isArchived: { type: Boolean, required: true, default: false },
-        voteId: [{type: Schema.Types.ObjectId, unique: true, default: []}],
+        voteId: { type: [Schema.Types.ObjectId], default: []},
         // genre: basicStringType,
         // isActive: {type: Boolean, required: true, default: false}
         // NOTE come back and maybe add votes somehow, maybe

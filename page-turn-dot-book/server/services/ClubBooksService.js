@@ -5,6 +5,9 @@ class ClubBooksService {
  async addClubBookVote(clubBookId, clubMember) {
   let clubBook = await this.getClubBookById(clubBookId)
 
+  // for (let i = 0; i < clubBook.voteId.length; i++) {
+  //   voteId += clubBook.voteId[i];
+  // }
   // For loop to look in voteIds
 
   // If statement to look for where the clubMember.Id != account.id
