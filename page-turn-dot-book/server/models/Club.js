@@ -10,6 +10,7 @@ export const ClubSchema = new Schema(
         // type: {...basicStringType, enum: ['speed-readers', 'casual-readers', 'cat-moms', 'history-buffs', 'fiction-fans', 'other']}
         clubBookId: { type: Schema.Types.ObjectId, ref: 'ClubBooks'},
         creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true},
+        type: {...basicStringType, enum: ['speed', 'casual', 'single cat moms', 'sci-fi', 'horror', 'series', 'author-based', 'non-fiction', 'elite', 'fantasy']}
     }, defaultSchemaOptions
 )
 

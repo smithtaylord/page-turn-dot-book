@@ -67,9 +67,9 @@
     <div class="container-fluid my-4 bg-primary">
         <div class="row bg-success">
             <h3 class="text-center py-3">
-                Profile Comments!
+                Book Comments!
             </h3>
-            <div class="">
+            <div v-if="account.id" class="">
                 <CreateCommentForm />
             </div>
             <div class=" mt-4 p-2">
