@@ -105,13 +105,15 @@
                 <div>
                     <!-- TODO Check this out once we can log in! -->
                     <div class="d-flex scroll-x voting-area">
-                        <div v-for="b in clubBooksId">
+                        <div v-for="b in clubBooks">
                             <div>
 
                                 <BookCard :book="b" />
                                 <div class="d-flex justify-content-between align-items-baseline px-3 pt-2">
-                                    <i @click="clubBookVoting(b.id)" class="mdi mdi-star-outline selectable fs-4"
-                                        title="vote for book"></i>
+                                    <div>
+                                        <i @click="clubBookVoting(b.id)" class="mdi mdi-star-outline selectable fs-4"
+                                            title="vote for book"></i>
+                                    </div>
                                     <p class="fw-bold">Votes {{ b?.voteId?.length }}</p>
                                     <div v-if="account.id == club?.creatorId && !club?.isArchived">
                                         <div type="button" class="" data-bs-toggle="dropdown" aria-expanded="false">
@@ -212,6 +214,7 @@ export default {
             }
         })
 
+
         return {
             route,
             club: computed(() => AppState.activeClub),
@@ -219,10 +222,11 @@ export default {
             foundMember: computed(() => AppState.members.find(m => m.accountId == AppState.account.id)),
             myMembership: computed(() => AppState.members.find(m => m.club.id == AppState.activeClub.id)),
             account: computed(() => AppState.account),
-            clubBooksId: computed(() => AppState.activeClubBooks),
+            // clubBooksId: computed(() => AppState.activeClubBooks),
             activeClubBook: computed(() => AppState.activeClubBook),
             comments: computed(() => AppState.comments),
             expanded: computed(() => AppState.expanded),
+            clubBooks: computed(() => AppState.activeClubBooks.sort((a, b) => b.voteId.length - a.voteId.length)),
             async createMember() {
                 try {
                     await clubMembersService.createMember({ clubId: route.params.clubId })
