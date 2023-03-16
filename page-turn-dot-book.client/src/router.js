@@ -42,6 +42,10 @@ const routes = [
     path: '/profiles/:profileId',
     name: 'Profile',
     component: loadPage('ProfilePage')
+  }, {
+    path: '/searchClub',
+    name: 'SearchClub',
+    component: loadPage('SearchClubsPage')
   }
 
 

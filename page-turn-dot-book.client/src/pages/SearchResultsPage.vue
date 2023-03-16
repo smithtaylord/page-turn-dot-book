@@ -6,7 +6,7 @@
                     <div>
                         <input p-3 v-model="editable.query" type="text" class="form-control" placeholder="Search">
                     </div>
-                    <div  >
+                    <div>
                         <button class="btn bg-danger" type="submit"> <i class="mdi mdi-magnify"></i></button>
                     </div>
                 </form>
@@ -67,26 +67,26 @@ export default {
 
 
 <style lang="scss" scoped>
-
-.card{
+.card {
     min-height: 272px;
     min-width: 181px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.586);
 }
 
-@media (min-width: 768px){
-    .card{
+@media (min-width: 768px) {
+    .card {
         min-height: 60vh;
         max-width: 25vw;
         box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.586)
     }
 
-    .bookImg{
+    .bookImg {
         min-height: 60vh;
         max-width: 25vw;
     }
 }
-.bookImg{
+
+.bookImg {
     height: 272px;
     object-fit: cover;
     transition: transform 0.2s;
@@ -95,7 +95,4 @@ export default {
 .bookImg:hover {
     transform: scale(1.1);
 }
-
-
-
 </style>

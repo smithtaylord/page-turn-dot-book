@@ -22,6 +22,11 @@
                             aria-label="Close-OffCanvas">Search
                             Books</button>
                     </router-link>
+                    <router-link :to="{ name: 'SearchClub' }">
+                        <button class="btn bg-success mb-2 w-100" data-bs-dismiss="offcanvas"
+                            aria-label="Close-OffCanvas">Search
+                            Clubs</button>
+                    </router-link>
                     <router-link :to="{ name: 'About' }" class="">
                         <Button class="btn bg-danger mb-2 w-100" data-bs-dismiss="offcanvas"
                             aria-label="Close-OffCanvas">About</Button>
