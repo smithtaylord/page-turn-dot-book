@@ -105,13 +105,14 @@
                 <div>
                     <!-- TODO Check this out once we can log in! -->
                     <div class="d-flex scroll-x">
-                        <div v-for="b in clubBooks">
+                        <div v-for="b in clubBooksId">
                             <div>
 
                                 <BookCard :book="b" />
                                 <div class="d-flex justify-content-between align-items-baseline px-3 pt-2">
-                                    <i class="mdi mdi-star-outline selectable fs-4" title="vote for book"></i>
-                                    <p class="fw-bold">Votes 0</p>
+                                    <i @click="clubBookVoting(b.id)" class="mdi mdi-star-outline selectable fs-4"
+                                        title="vote for book"></i>
+                                    <p class="fw-bold">Votes {{ b.voteId.length }}</p>
                                     <div v-if="account.id == club?.creatorId && !club?.isArchived">
                                         <div type="button" class="" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="selectable text-dark mdi mdi-dots-horizontal fs-3 "
@@ -122,7 +123,8 @@
                                                 <i class="mdi mdi-book-heart-outline text-dark selectable fs-1"
                                                     title="set book active" @click="setBookActive(b.id)"></i>
                                                 <div>|</div>
-                                                    <i @click="removeClubBook(b.id)" class="mdi mdi-cancel text-danger selectable fs-1" 
+                                                <i @click="removeClubBook(b.id)"
+                                                    class="mdi mdi-cancel text-danger selectable fs-1"
                                                     title="remove book from club"></i>
                                             </div>
                                             <div class="list-group">
@@ -216,7 +218,7 @@ export default {
             foundMember: computed(() => AppState.members.find(m => m.accountId == AppState.account.id)),
             myMembership: computed(() => AppState.members.find(m => m.club.id == AppState.activeClub.id)),
             account: computed(() => AppState.account),
-            clubBooks: computed(() => AppState.activeClubBooks),
+            clubBooksId: computed(() => AppState.activeClubBooks),
             activeClubBook: computed(() => AppState.activeClubBook),
             comments: computed(() => AppState.comments),
             expanded: computed(() => AppState.expanded),
@@ -228,6 +230,16 @@ export default {
                     logger.error(error)
                 }
             },
+            async clubBookVoting(clubBooksId) {
+                try {
+                    let clubMembers = this.foundMember.id
+                    await clubMembersService.clubBookVoting(clubBooksId, clubMembers)
+                } catch (error) {
+                    Pop.error('add and unadd vote to Book')
+                    logger.error(error)
+                }
+            },
+
             async removeMember(memberId) {
                 try {
                     if (await Pop.confirm()) {
@@ -248,9 +260,9 @@ export default {
                     Pop.error(error, '[setting book to active]')
                 }
             },
-            async removeClubBook(clubBookId){
+            async removeClubBook(clubBookId) {
                 try {
-                    if(await Pop.confirm('Are you sure you want to remove this book from the club?', 'Some members might not like that...')){
+                    if (await Pop.confirm('Are you sure you want to remove this book from the club?', 'Some members might not like that...')) {
                         await clubsService.removeClubBook(clubBookId)
                     }
                 } catch (error) {
