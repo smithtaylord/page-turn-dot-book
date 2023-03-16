@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid bg-success">
+    <div class="container-fluid bg-custom-success">
         <div class="row">
             <div class="col-12 mt-2 d-flex flex-row justify-content-center justify-content-sm-end">
                 <form @submit.prevent="searchBooks()" class="d-flex">

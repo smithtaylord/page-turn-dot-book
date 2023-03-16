@@ -104,15 +104,17 @@
                 </div>
                 <div>
                     <!-- TODO Check this out once we can log in! -->
-                    <div class="d-flex scroll-x">
-                        <div v-for="b in clubBooksId">
+                    <div class="d-flex scroll-x voting-area">
+                        <div v-for="b in clubBooks">
                             <div>
 
                                 <BookCard :book="b" />
                                 <div class="d-flex justify-content-between align-items-baseline px-3 pt-2">
-                                    <i @click="clubBookVoting(b.id)" class="mdi mdi-star-outline selectable fs-4"
-                                        title="vote for book"></i>
-                                    <p class="fw-bold">Votes {{ b.voteId.length }}</p>
+                                    <div>
+                                        <i @click="clubBookVoting(b.id)" class="mdi mdi-star-outline selectable fs-4"
+                                            title="vote for book"></i>
+                                    </div>
+                                    <p class="fw-bold">Votes {{ b?.voteId?.length }}</p>
                                     <div v-if="account.id == club?.creatorId && !club?.isArchived">
                                         <div type="button" class="" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="selectable text-dark mdi mdi-dots-horizontal fs-3 "
@@ -162,6 +164,7 @@ import CreateCommentForm from '../components/CreateCommentForm.vue';
 export default {
     setup() {
         const route = useRoute();
+        // const ref = ref({'b.voteId'});
         const router = useRouter();
         async function getClubBooks() {
             try {
@@ -211,6 +214,7 @@ export default {
             }
         })
 
+
         return {
             route,
             club: computed(() => AppState.activeClub),
@@ -218,10 +222,11 @@ export default {
             foundMember: computed(() => AppState.members.find(m => m.accountId == AppState.account.id)),
             myMembership: computed(() => AppState.members.find(m => m.club.id == AppState.activeClub.id)),
             account: computed(() => AppState.account),
-            clubBooksId: computed(() => AppState.activeClubBooks),
+            // clubBooksId: computed(() => AppState.activeClubBooks),
             activeClubBook: computed(() => AppState.activeClubBook),
             comments: computed(() => AppState.comments),
             expanded: computed(() => AppState.expanded),
+            clubBooks: computed(() => AppState.activeClubBooks.sort((a, b) => b.voteId.length - a.voteId.length)),
             async createMember() {
                 try {
                     await clubMembersService.createMember({ clubId: route.params.clubId })
@@ -410,5 +415,9 @@ export default {
     background-color: #5360645a;
     width: 100%;
     backdrop-filter: blur(7px)
+}
+
+.voting-area {
+    height: 48vh;
 }
 </style>
