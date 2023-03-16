@@ -1,10 +1,11 @@
 <!-- booksInTheClub: computed(() => AppState.myClubs.find(c => c.clubBooks.find(b => b.isbn == route.params.isbn))), -->
 <template>
   <div>
-    <li v-if="!club.clubBooks.find(b => b.isbn == isbn) && club.club?.isArchived == false" class="dropdown-item" @click="addBookToClub(club.club?.id)">{{
-      club.club?.name }}
+    <li v-if="!club.clubBooks.find(b => b.isbn == isbn) && club.club?.isArchived == false" class="dropdown-item"
+      @click="addBookToClub(club.club?.id)">{{
+        club.club?.name }}
     </li>
-    <li v-else-if="club.club?.isArchived == true"> 
+    <li v-else-if="club.club?.isArchived == true">
 
     </li>
     <li v-else class="dropdown-item strike text-dark">{{ club.club?.name }}
@@ -40,6 +41,8 @@ export default {
           book.isbn = route.params.isbn
           book.clubId = clubId
           book.coverImg = this.googleBook.img
+          book.altImg = this.googleBook.googleImg
+          logger.log(book, '[book that is being added to the club TAYLOR ADDED THIS]')
           await clubsService.addBookToClub(book)
           router.push({ name: "Club", params: { clubId: clubId } })
         } catch (error) {

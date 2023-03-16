@@ -179,6 +179,7 @@ export default {
                     book.clubId = clubId;
                     book.coverImg = this.googleBook.img;
                     book.altImg = this.googleBook.googleImg
+                    logger.log(book, '[book that is being added to the club TAYLOR ADDED THIS]')
                     await clubsService.addBookToClub(book);
                     router.push({ name: "Club", params: { clubId: clubId } });
                 }
