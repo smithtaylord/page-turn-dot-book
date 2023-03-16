@@ -5,20 +5,24 @@ class ClubBooksService {
  async addClubBookVote(clubBookId, clubMember) {
   let clubBook = await this.getClubBookById(clubBookId)
 
-  // for (let i = 0; i < clubBook.voteId.length; i++) {
-  //   voteId += clubBook.voteId[i];
-  // }
+  let voted = clubBook.voteId.includes(clubMember)
+  if (voted) {
+    clubBook.voteId = clubBook.voteId.filter(v => v != clubMember)
+  } else {
+    clubBook.voteId.push(clubMember)
+  }
+  await clubBook.save()
   // For loop to look in voteIds
 
   // If statement to look for where the clubMember.Id != account.id
 
   // If the clubMember.id already exists in the voteIds array then do not push the vote 
 
-  if(clubBook.voteId == clubMember){
+  // if(clubBook.voteId == clubMember){
 
-  }
-  clubBook.voteId.push(clubMember)
-  await clubBook.save()
+  // }
+  // clubBook.voteId.push(clubMember)
+  // await clubBook.save()
   //  const CB = await dbContext.ClubBooks.put(clubBookId)
    return clubBook
 
