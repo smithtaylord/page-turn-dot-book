@@ -37,10 +37,18 @@
         <h1 class="text-center mt-2">
           New & Popular
         </h1>
-        <div class="d-flex scroll-x">
+        <div v-if="Books?.length > 0" class="d-flex scroll-x">
           <div v-for="b in Books" class="">
             <BookCard :book="b" />
           </div>
+        </div>
+        <div v-else class="bg-custom-warning rounded box-shadow">
+          <p class="p-2">
+            We're sorry, but we're currently experiencing issues loading the latest New York Times bestsellers. Our API
+            can
+            only be pinged 10 times a minute, and we may have reached our limit. Please try again later, and we apologize
+            for any inconvenience this may have caused.
+          </p>
         </div>
       </div>
     </div>
