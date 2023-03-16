@@ -178,6 +178,7 @@ export default {
                     book.isbn = route.params.isbn;
                     book.clubId = clubId;
                     book.coverImg = this.googleBook.img;
+                    book.altImg = this.googleBook.googleImg
                     await clubsService.addBookToClub(book);
                     router.push({ name: "Club", params: { clubId: clubId } });
                 }
@@ -192,6 +193,7 @@ export default {
                     book.isbn = route.params.isbn;
                     book.coverImg = this.googleBook.img;
                     book.accountId = AppState.account.id;
+                    book.altImg = this.googleBook.googleImg
                     if (await Pop.confirm("Have you read this book?")) {
                         await booksService.addBookToReadBooks(book);
                     }
