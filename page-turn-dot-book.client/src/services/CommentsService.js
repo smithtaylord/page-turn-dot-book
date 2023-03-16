@@ -20,7 +20,7 @@ class CommentsService {
 
     }
     async getCommentsByIsbn(isbn) {
-        const res = await api.get('api/clubs/' + isbn + '/comments')
+        const res = await api.get('api/book/' + isbn + '/comments')
         // logger.log(res.data)
         AppState.comments = res.data.map(c => new Comment(c))
 

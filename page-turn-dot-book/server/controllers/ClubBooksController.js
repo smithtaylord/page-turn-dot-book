@@ -15,7 +15,7 @@ export class ClubBooksController extends BaseController {
     try {
       let clubBookId = req.params.clubBookId
     let clubMember = req.body.voteId
-    //  clubBookId.accountId = req.userInfo.id
+    // clubBookId.accountId = req.userInfo.id
     const CB = await clubBooksService.addClubBookVote(clubBookId, clubMember)
     return res.send(CB)
     } catch (error) {

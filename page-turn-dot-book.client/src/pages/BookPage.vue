@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <!-- <div class="container-fluid my-4 bg-primary">
+    <div class="container-fluid my-4 bg-primary">
         <div class="row bg-success">
             <h3 class="text-center py-3">
                 Profile Comments!
@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 </template>
 
 
@@ -121,18 +121,18 @@ export default {
                 Pop.error(error, "GET BOOK BY ISBN PROBS YO");
             }
         }
-        // async function getCommentsByIsbn() {
-        //     try {
-        //         const isbn = route.params.isbn
-        //         await commentsService.getCommentsByIsbn(isbn)
-        //     } catch (error) {
-        //         logger.error(error)
-        //         Pop.error(error.message)
-        //     }
-        // }
+        async function getCommentsByIsbn() {
+            try {
+                const isbn = route.params.isbn
+                await commentsService.getCommentsByIsbn(isbn)
+            } catch (error) {
+                logger.error(error)
+                Pop.error(error.message)
+            }
+        }
         watchEffect(() => {
             if (route.params.isbn) {
-                // getCommentsByIsbn();
+                getCommentsByIsbn();
                 getBookByISBN();
                 // getMyClubs()
             }
