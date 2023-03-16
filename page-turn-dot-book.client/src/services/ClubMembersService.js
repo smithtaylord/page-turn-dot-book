@@ -1,4 +1,5 @@
 import { AppState } from "../AppState";
+import { Book } from "../models/Book.js";
 import { ClubMember } from "../models/ClubMember";
 import { logger } from "../utils/Logger";
 import { api } from "./AxiosService";
@@ -6,7 +7,12 @@ import { api } from "./AxiosService";
 class ClubMembersService {
   async clubBookVoting(clubBooksId, clubMembers) {
     const res = await api.put('/api/clubBooks/' + clubBooksId, clubMembers)
-    // AppState.activeClubBooks.push(res.data)
+    logger.log(res.data, 'this is the vote')
+    let i = AppState.activeClubBooks.findIndex(b => b.id == res.data.id)
+    // let place = AppState.activeClubBooks.push()
+    AppState.activeClubBooks.splice(i, 1,)
+    // AppState.activeClubBooks.push(res.data.voteId)
+    AppState.activeClubBooks.push(res.data)
   }
   async getMembersByClubId(clubId) {
     const res = await api.get(`api/clubs/${clubId}/members`)

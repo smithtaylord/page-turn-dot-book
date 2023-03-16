@@ -112,7 +112,7 @@
                                 <div class="d-flex justify-content-between align-items-baseline px-3 pt-2">
                                     <i @click="clubBookVoting(b.id)" class="mdi mdi-star-outline selectable fs-4"
                                         title="vote for book"></i>
-                                    <p class="fw-bold">Votes {{ b.voteId.length }}</p>
+                                    <p class="fw-bold">Votes {{ b?.voteId?.length }}</p>
                                     <div v-if="account.id == club?.creatorId && !club?.isArchived">
                                         <div type="button" class="" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="selectable text-dark mdi mdi-dots-horizontal fs-3 "
@@ -162,6 +162,7 @@ import CreateCommentForm from '../components/CreateCommentForm.vue';
 export default {
     setup() {
         const route = useRoute();
+        // const ref = ref({'b.voteId'});
         const router = useRouter();
         async function getClubBooks() {
             try {
