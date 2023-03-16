@@ -6,7 +6,8 @@ import { api } from "./AxiosService";
 
 class ClubMembersService {
   async clubBookVoting(clubBooksId, clubMembers) {
-    const res = await api.put('/api/clubBooks/' + clubBooksId, clubMembers)
+    let voteId = clubMembers.voteId
+    const res = await api.put('/api/clubBooks/' + clubBooksId, {voteId})
     logger.log(res.data, 'this is the vote')
     let i = AppState.activeClubBooks.findIndex(b => b.id == res.data.id)
     // let place = AppState.activeClubBooks.push()

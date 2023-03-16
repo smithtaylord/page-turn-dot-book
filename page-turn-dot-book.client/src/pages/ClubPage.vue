@@ -222,7 +222,7 @@ export default {
             foundMember: computed(() => AppState.members.find(m => m.accountId == AppState.account.id)),
             myMembership: computed(() => AppState.members.find(m => m.club.id == AppState.activeClub.id)),
             account: computed(() => AppState.account),
-            // clubBooksId: computed(() => AppState.activeClubBooks),
+            clubBooksId: computed(() => AppState.activeClubBooks),
             activeClubBook: computed(() => AppState.activeClubBook),
             comments: computed(() => AppState.comments),
             expanded: computed(() => AppState.expanded),
@@ -237,7 +237,11 @@ export default {
             },
             async clubBookVoting(clubBooksId) {
                 try {
-                    let clubMembers = this.foundMember.id
+                    // logger.log(clubBooksId, 'clubBook Voting')
+                    let clubMembers = this.account
+                    // clubMembers = this.foundMember.id
+                    clubMembers.voteId = this.account.id
+                    logger.log(clubMembers, 'getting the members Id')
                     await clubMembersService.clubBookVoting(clubBooksId, clubMembers)
                 } catch (error) {
                     Pop.error('add and unadd vote to Book')
