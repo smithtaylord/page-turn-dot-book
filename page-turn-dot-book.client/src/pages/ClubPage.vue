@@ -104,7 +104,7 @@
                 </div>
                 <div>
                     <!-- TODO Check this out once we can log in! -->
-                    <div class="d-flex scroll-x">
+                    <div class="d-flex scroll-x voting-area">
                         <div v-for="b in clubBooksId">
                             <div>
 
@@ -411,5 +411,9 @@ export default {
     background-color: #5360645a;
     width: 100%;
     backdrop-filter: blur(7px)
+}
+
+.voting-area {
+    height: 48vh;
 }
 </style>
