@@ -1,8 +1,8 @@
 <template>
-  <div class="container-fluid bg-success">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-6 dropdown">
-        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+      <div class="col-12 dropdown text-end mt-2">
+        <button class="btn bg-danger dropdown-toggle" type="button" id="dropdownMenuButton"
           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Filter Clubs by Type: {{ filterCategory }}
         </button>
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3" v-for="c in clubs">
+      <div class="col-md-4 d-flex justify-content-center" v-for="c in clubs">
         <ClubCard :club="c" />
       </div>
     </div>
