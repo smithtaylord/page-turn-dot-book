@@ -110,14 +110,15 @@
 
                                 <BookCard :book="b" />
                                 <div class="d-flex justify-content-between align-items-baseline px-3 pt-2">
-                                    <div v-if="b.voteId.find(() => foundMember?.accountId)">
-                                        <i @click="clubBookVoting(b.id)" class="mdi mdi-star selectable fs-4"
+                                    <div>
+                                        <i @click="clubBookVoting(b.id)"
+                                            :class="`fs-4 ${((b.voteId.includes(account.id)) ? 'mdi mdi-star selectable' : 'mdi mdi-star-outline selectable')}`"
                                             title="vote for book"></i>
                                     </div>
-                                    <div v-else>
-                                        <i @click="clubBookVoting(b.id)" class="mdi mdi-star-outline selectable fs-4"
+                                    <!-- <div v-else>
+                                        <i @click="clubBookVoting(b.id)" class=" fs-4"
                                             title="vote for book"></i>
-                                    </div>
+                                    </div> -->
                                     <p class="fw-bold">Votes {{ b?.voteId?.length }}</p>
                                     <div v-if="account.id == club?.creatorId && !club?.isArchived">
                                         <div type="button" class="" data-bs-toggle="dropdown" aria-expanded="false">
@@ -235,6 +236,7 @@ export default {
             comments: computed(() => AppState.comments),
             expanded: computed(() => AppState.expanded),
             clubBooks: computed(() => AppState.activeClubBooks.sort((a, b) => b.voteId.length - a.voteId.length)),
+            // myVote: computed(() => AppState.activeClubBooks.find(b => b.voteId), logger.log(myVote)),
             async createMember() {
                 try {
                     await clubMembersService.createMember({ clubId: route.params.clubId })
