@@ -110,7 +110,11 @@
 
                                 <BookCard :book="b" />
                                 <div class="d-flex justify-content-between align-items-baseline px-3 pt-2">
-                                    <div>
+                                    <div v-if="b.voteId.find(() => account.id)">
+                                        <i @click="clubBookVoting(b.id)" class="mdi mdi-star selectable fs-4"
+                                            title="vote for book"></i>
+                                    </div>
+                                    <div v-else>
                                         <i @click="clubBookVoting(b.id)" class="mdi mdi-star-outline selectable fs-4"
                                             title="vote for book"></i>
                                     </div>
@@ -212,6 +216,10 @@ export default {
                 getClubBooks();
                 getCommentsByClubId();
             }
+        })
+
+        onMounted(() => {
+            window.scrollTo(0, 0)
         })
 
 
