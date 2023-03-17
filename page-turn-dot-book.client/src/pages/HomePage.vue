@@ -57,7 +57,7 @@
     <div class="row">
       <div class="col-12 bg-custom-danger">
         <h1 class="text-center mt-2">Let's get clubbin'!</h1>
-        <div class="d-flex scroll-x mb-3">
+        <div class="d-flex align-items-center scroll-x mb-3">
           <div v-for="c in clubs">
             <ClubCard :club="c" />
           </div>

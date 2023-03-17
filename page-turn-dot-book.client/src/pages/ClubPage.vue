@@ -1,4 +1,225 @@
 <template>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 d-none d-md-block bg-custom-primary scroll-y">
+
+                <div class="card text-start mt-2">
+                    <img class="clubImg image-container" :src="club?.coverImg" :alt="club?.name">
+                    <div v-if="!club?.isArchived && club?.creatorId == account.id" class="text-end icon-container"><i
+                            class="mdi mdi-bookmark-remove selectable fs-1 px-2 pb-1 mx-2 glass-card rounded"
+                            @click="archiveClub"></i>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ club?.name }}</h4>
+                        <p class="card-text">{{ club?.bio }}</p>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div v-if="account.id" class="col-6 text-end m-2">
+                            <button class="btn bg-success box-shadow" v-if="!foundMember" @click="createMember()"
+                                :disabled="club?.isArchived">Join Club</button>
+                            <button class="btn bg-danger box-shadow" v-else @click="removeMember(foundMember.id)"
+                                :disabled="club?.isArchived">Leave Club</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class=" col-md-9 scroll-y">
+                <div class="row">
+                    <div class="col-md-9 m-auto">
+                        <div class="row">
+                            <div class="col-12 d-md-none bg-custom-primary pb-3">
+
+                                <div class="card text-start mt-2">
+                                    <img class="clubImg image-container" :src="club?.coverImg" :alt="club?.name">
+                                    <div v-if="!club?.isArchived && club?.creatorId == account.id"
+                                        class="text-end icon-container"><i
+                                            class="mdi mdi-bookmark-remove selectable fs-1 px-2 pb-1 mx-2 glass-card rounded"
+                                            @click="archiveClub"></i>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{ club?.name }}</h4>
+                                        <p class="card-text">{{ club?.bio }}</p>
+                                    </div>
+                                    <div class="row justify-content-end">
+                                        <div v-if="account.id" class="col-6 text-end m-2">
+                                            <button class="btn bg-success box-shadow" v-if="!foundMember"
+                                                @click="createMember()" :disabled="club?.isArchived">Join Club</button>
+                                            <button class="btn bg-danger box-shadow" v-else
+                                                @click="removeMember(foundMember.id)" :disabled="club?.isArchived">Leave
+                                                Club</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-12 mt-3 bg-danger p-2 my-3 rounded box-shadow ">
+
+                                <h4>Club Members</h4>
+                                <div class="d-flex">
+                                    <div v-for="m in members">
+                                        <router-link class="selectable"
+                                            :to="{ name: 'Profile', params: { profileId: m.profile.id } }">
+                                            <img :src="m.profile.picture" :alt="m.name" class="profilePic m-1">
+                                        </router-link>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-12 text-center bg-custom-primary rounded box-shadow my-3">
+
+                                <h1 class="my-3">Currently Reading</h1>
+                                <div v-if="!activeClubBook">
+                                    <img class=" mb-3 bookCover"
+                                        src="https://jackchovet.files.wordpress.com/2022/05/placeholder-cover-to-be-revealed.png?w=335"
+                                        alt="">
+                                    <p class="mb-3 px-2 text-start">We're eagerly awaiting the club's next book selection.
+                                        Please reach
+                                        out
+                                        to
+                                        your club
+                                        owner for more information on the upcoming book.</p>
+                                </div>
+                                <div v-else>
+                                    <div>
+                                        <BookCard :book="activeClubBook" />
+                                    </div>
+                                    <h3 class="my-3">{{ activeClubBook.title }}</h3>
+                                </div>
+
+
+                            </div>
+                            <div class="col-12 bg-custom-warning my-md-3 rounded box-shadow p-3 my-3">
+
+                                <h3 class="text-center py-3">
+                                    Club Comments!
+                                </h3>
+                                <div v-if="foundMember && !club?.isArchived">
+                                    <CreateCommentForm />
+                                </div>
+                                <div class="row">
+                                    <div v-if="comments.length > 0" :class="expanded ? 'expanded' : 'expandable'">
+                                        <div v-for="c in comments">
+                                            <CommentComponent :comment="c" />
+                                        </div>
+                                    </div>
+                                    <div v-else>
+                                        <div class="bg-dark text-light p-3 rounded box-shadow indent">
+                                            <p>no comments... yet?</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-center" v-if="comments.length > 2">
+                                        <button v-if="expanded" @click="expand" class='btn-cool text-center'>read
+                                            less</button>
+                                        <button v-else @click="expand" class='btn-cool text-center'>read more</button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-12 bg-custom-danger my-md-3 rounded box-shadow p-3 my-3">
+
+
+                                <div class="text-center">
+                                    <h1>Vote On Next Book</h1>
+                                </div>
+                                <div>
+                                    <div class="d-flex align-items-center scroll-x voting-area">
+                                        <div v-for="b in clubBooks">
+                                            <div>
+
+                                                <BookCard :book="b" />
+                                                <div class="d-flex justify-content-between align-items-baseline px-3 pt-2">
+                                                    <div>
+                                                        <i @click="clubBookVoting(b.id)"
+                                                            :class="`fs-4 ${((b.voteId.includes(account.id)) ? 'mdi mdi-star selectable' : 'mdi mdi-star-outline selectable')}`"
+                                                            title="vote for book"></i>
+                                                    </div>
+                                                    <p class="fw-bold">Votes {{ b?.voteId?.length }}</p>
+                                                    <div v-if="account.id == club?.creatorId && !club?.isArchived">
+                                                        <div type="button" class="" data-bs-toggle="dropdown"
+                                                            aria-expanded="false">
+                                                            <i class="selectable text-dark mdi mdi-dots-horizontal fs-3 "
+                                                                title="remove/set active book"></i>
+                                                        </div>
+                                                        <div class="dropdown-menu text-center fs-1">
+                                                            <div class="d-flex justify-content-evenly">
+                                                                <i class="mdi mdi-book-heart-outline text-dark selectable fs-1"
+                                                                    title="set book active"
+                                                                    @click="setBookActive(b.id)"></i>
+                                                                <div>|</div>
+                                                                <i @click="removeClubBook(b.id)"
+                                                                    class="mdi mdi-cancel text-danger selectable fs-1"
+                                                                    title="remove book from club"></i>
+                                                            </div>
+                                                            <div class="list-group">
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- <template>
+    <div :style="club?.isArchived ? { filter: 'grayscale(100%)' } : {}">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    
+
+
+
+                </div>
+                <div class="col-12 mt-3 bg-danger p-2 ">
+                    
+
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid my-3">
+            <div class="row">
+                <div class="col-12 text-center bg-primary">
+                    
+
+
+                </div>
+            </div>
+            
+
+
+
+        </div>
+        <div class="container-fluid bg-warning">
+            <div class="row">
+                
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</template> -->
+<!-- <template>
     <div :style="club?.isArchived ? { filter: 'grayscale(100%)' } : {}">
         <div class="container-fluid">
             <div class="row">
@@ -80,30 +301,12 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="container-fluid bg-dark">
-        <div class="row">
-            <div v-for="c in comments" class="col-12 my-3">
-                <div class="row d-flex align-content-center">
-                    <div class="col-2">
-                        <img :src="c.creator?.picture" alt="" class="profilePic">
-                    </div>
-                    <div class="col-8 bg-warning ms-2 rounded">
-                        <p class="fw-bold m-0"> {{ c.creator.name }}</p>
-                        <p class="m-0 mb-2">
-                            {{ c.body }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
         <div class="container-fluid bg-warning">
             <div class="row">
                 <div class="col-12 text-center">
                     <h1>Vote On Next Book</h1>
                 </div>
                 <div>
-                    <!-- TODO Check this out once we can log in! -->
                     <div class="d-flex scroll-x voting-area">
                         <div v-for="b in clubBooks">
                             <div>
@@ -115,10 +318,6 @@
                                             :class="`fs-4 ${((b.voteId.includes(account.id)) ? 'mdi mdi-star selectable' : 'mdi mdi-star-outline selectable')}`"
                                             title="vote for book"></i>
                                     </div>
-                                    <!-- <div v-else>
-                                        <i @click="clubBookVoting(b.id)" class=" fs-4"
-                                            title="vote for book"></i>
-                                    </div> -->
                                     <p class="fw-bold">Votes {{ b?.voteId?.length }}</p>
                                     <div v-if="account.id == club?.creatorId && !club?.isArchived">
                                         <div type="button" class="" data-bs-toggle="dropdown" aria-expanded="false">
@@ -149,7 +348,7 @@
             </div>
         </div>
     </div>
-</template>
+</template> -->
 
 
 <script>
@@ -342,8 +541,9 @@ export default {
 
 <style lang="scss" scoped>
 .clubImg {
-    height: 50vh;
+    height: 35vh;
     width: auto;
+    object-fit: cover;
 
 }
 
@@ -458,5 +658,17 @@ export default {
 
 .voting-area {
     height: 48vh;
+}
+
+.scroll-y {
+    overflow-y: scroll;
+    height: calc(100vh - 122px);
+}
+
+@media (max-width: 768px) {
+    .scroll-y {
+        overflow-y: visible;
+        height: auto;
+    }
 }
 </style>
