@@ -5,7 +5,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [vue()],
   build: {
-    outDir: '...page-turn.dot-book/client',
+    outDir: '../page-turn-dot-book/client',
     sourcemap: false
   
   },
