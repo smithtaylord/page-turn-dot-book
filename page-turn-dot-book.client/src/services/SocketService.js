@@ -1,6 +1,7 @@
 import Pop from '../utils/Pop'
 import { SocketHandler } from '../utils/SocketHandler'
 import { logger } from '../utils/Logger.js'
+import { AppState } from '../AppState.js'
 
 class SocketService extends SocketHandler {
   constructor() {
@@ -19,6 +20,7 @@ class SocketService extends SocketHandler {
   newVote(payload){
     try {
       logger.log('[created vote payload]', payload)
+      
     } catch (error) {
       Pop.error(error.message)
     }
