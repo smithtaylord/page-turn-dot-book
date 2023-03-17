@@ -110,7 +110,7 @@
 
                                 <BookCard :book="b" />
                                 <div class="d-flex justify-content-between align-items-baseline px-3 pt-2">
-                                    <div v-if="b.voteId.find(() => account.id)">
+                                    <div v-if="b.voteId.find(() => foundMember?.accountId)">
                                         <i @click="clubBookVoting(b.id)" class="mdi mdi-star selectable fs-4"
                                             title="vote for book"></i>
                                     </div>
