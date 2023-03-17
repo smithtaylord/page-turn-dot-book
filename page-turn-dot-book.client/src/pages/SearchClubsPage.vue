@@ -37,7 +37,7 @@
 
 
 <script>
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, ref, computed, onUpdated } from 'vue';
 import { AppState } from '../AppState';
 import ClubCard from '../components/ClubCard.vue';
 import { clubsService } from '../services/ClubsService';
@@ -56,6 +56,9 @@ export default {
 
     onMounted(() => {
       getAllClubs()
+    })
+    onUpdated(() => {
+      window.scrollTo(0, 0)
     })
 
     return {

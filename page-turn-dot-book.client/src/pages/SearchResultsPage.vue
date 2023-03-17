@@ -33,7 +33,7 @@
 
 <script>
 
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, onUpdated } from "vue";
 import { AppState } from "../AppState";
 import { booksService } from "../services/BooksService";
 import { logger } from "../utils/Logger";
@@ -44,6 +44,9 @@ export default {
         const editable = ref({})
         onMounted(() => {
             AppState.googleBooks = []
+        })
+        onUpdated(() => {
+            window.scrollTo(0, 0)
         })
 
         return {

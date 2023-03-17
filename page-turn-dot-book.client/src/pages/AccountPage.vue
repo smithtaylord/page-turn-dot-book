@@ -36,7 +36,7 @@
 <script>
 import { computed } from 'vue'
 import { AppState } from '../AppState'
-import { ref, watchEffect } from "vue"
+import { ref, watchEffect, onUpdated } from "vue"
 import Pop from "../utils/Pop"
 import { logger } from "../utils/Logger"
 import { accountService } from "../services/AccountService"
@@ -48,6 +48,9 @@ export default {
       if (AppState.profile.id) {
         editable.value = { ...AppState.profile }
       }
+    })
+    onUpdated(() => {
+      window.scrollTo(0, 0)
     })
 
     return {

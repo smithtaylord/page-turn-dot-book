@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { onMounted, computed } from 'vue';
+import { onMounted, computed, onUpdated } from 'vue';
 import { AppState } from '../AppState.js';
 import BookCard from '../components/BookCard.vue';
 import { booksService } from '../services/BooksService.js';
@@ -100,6 +100,9 @@ export default {
       getNYTBooks();
       getAllClubs();
     });
+    onUpdated(() => {
+      window.scrollTo(0, 0)
+    })
 
     return {
       Books: computed(() => AppState.Books),
