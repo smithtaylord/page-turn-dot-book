@@ -1,6 +1,8 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
 import { clubBooksService } from "../services/ClubBooksService";
 import BaseController from "../utils/BaseController";
+import { socketProvider } from "../SocketProvider.js";
+// import { ClubBookSchema } from "../models/ClubBook.js";
 
 export class ClubBooksController extends BaseController {
   constructor() {
@@ -18,6 +20,7 @@ export class ClubBooksController extends BaseController {
     let clubMember = req.body.voteId
     // clubBookId.accountId = req.userInfo.id
     const CB = await clubBooksService.addClubBookVote(clubBookId, clubMember)
+    socketProvider.messageRoom(CB.voteId.toString(), 'new:vote', CB)
     return res.send(CB)
     } catch (error) {
       next(error)

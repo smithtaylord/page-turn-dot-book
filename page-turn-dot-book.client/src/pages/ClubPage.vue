@@ -165,6 +165,7 @@ import CommentComponent from "../components/CommentComponent.vue";
 import { commentsService } from '../services/CommentsService.js';
 import { booksService } from '../services/BooksService.js';
 import CreateCommentForm from '../components/CreateCommentForm.vue';
+import { socketService } from '../services/SocketService.js'
 
 export default {
     setup() {
@@ -210,8 +211,29 @@ export default {
             }
         }
 
+        function joinedRoom() {
+            try {
+                socketService.emit('joined:room', { roomName: route.params.clubId })
+            } catch (error) {
+                console.error(error)
+                // @ts-ignore
+                Pop.error(('[ERROR]'), error.message)
+            }
+        }
+        function leftRoom() {
+            try {
+                socketService.emit('left:room', { roomName: AppState.clubId })
+            } catch (error) {
+                console.error(error)
+                // @ts-ignore
+                Pop.error(('[ERROR]'), error.message)
+            }
+        }
+
         watchEffect(() => {
             if (route.params.clubId) {
+                joinedRoom();
+                leftRoom();
                 getClubById();
                 getMembersByClubId();
                 getClubBooks();
