@@ -1,6 +1,6 @@
 <template>
     <div class="component">
-        <div class="container-fluid bg-dark">
+        <div class="container-fluid bg-dark rounded">
             <div class="row">
                 <div class="row d-flex align-content-center p-2">
                     <div class="col-2">
