@@ -42,6 +42,7 @@
 import { ref } from 'vue';
 import { Club } from '../models/Club.js';
 import { router } from '../router.js';
+import { clubMembersService } from '../services/ClubMembersService';
 import { clubsService } from '../services/ClubsService.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
@@ -61,6 +62,7 @@ export default {
                     const formData = editable.value
                     const club = await clubsService.createClub(formData)
                     editable.value = {}
+                    await clubMembersService.createMember({clubId: club.id})
                     if (club?.id) {
                         router.push({ name: 'Club', params: { clubId: club.id } })
                     }
