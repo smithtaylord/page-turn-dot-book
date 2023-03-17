@@ -167,7 +167,7 @@
 
 
 <script>
-import { watchEffect, computed, onUpdated } from 'vue';
+import { watchEffect, computed, onUpdated, onUnmounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { AppState } from '../AppState.js';
 import AddToClubButton from '../components/AddToClubButton.vue';
@@ -210,9 +210,12 @@ export default {
                 // getMyClubs()
             }
         });
+        onUnmounted(() => {
+            booksService.clearBooks()
+        });
         onUpdated(() => {
             window.scrollTo(0, 0)
-        })
+        });
         return {
             activeBook,
             account: computed(() => AppState.account),

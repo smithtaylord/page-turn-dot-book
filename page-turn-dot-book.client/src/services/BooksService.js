@@ -51,7 +51,9 @@ class BooksService {
         logger.log(res.data)
     }
 
-
+    clearBooks(){
+        AppState.googleBook = []
+    }
 
 }
 
