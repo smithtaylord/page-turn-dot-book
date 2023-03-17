@@ -34,6 +34,13 @@ class ClubsService {
         logger.log(AppState.myClubs)
     }
 
+    async getMyClubs(profileId) {
+        const res = await api.get('/api/profiles/' + profileId + '/profileBookClubs')
+        logger.log(res.data, "Gotten Clubs")
+        AppState.myClubs = res.data.map(c => new ClubMember(c))
+        logger.log(AppState.myClubs)
+    }
+
     async getAllClubs() {
         const res = await api.get('/api/clubs')
         logger.log(res.data)
