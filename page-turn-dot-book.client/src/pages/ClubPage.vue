@@ -153,7 +153,7 @@
 
 
 <script>
-import { watchEffect, computed, onMounted } from 'vue';
+import { watchEffect, computed, onMounted, onUnmounted } from 'vue';
 import { clubsService } from '../services/ClubsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
@@ -233,7 +233,6 @@ export default {
         watchEffect(() => {
             if (route.params.clubId) {
                 joinedRoom();
-                leftRoom();
                 getClubById();
                 getMembersByClubId();
                 getClubBooks();
@@ -243,6 +242,10 @@ export default {
 
         onMounted(() => {
             window.scrollTo(0, 0)
+        })
+
+        onUnmounted(() => {
+            leftRoom();
         })
 
 
