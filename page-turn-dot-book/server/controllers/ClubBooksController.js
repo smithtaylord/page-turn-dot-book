@@ -20,7 +20,7 @@ export class ClubBooksController extends BaseController {
     let clubMember = req.body.voteId
     // clubBookId.accountId = req.userInfo.id
     const clubBook = await clubBooksService.addClubBookVote(clubBookId, clubMember)
-    socketProvider.messageRoom(clubBook.voteId.toString(), 'new:vote', clubBook)
+    // socketProvider.messageRoom(clubBook.clubId.toString(), 'new:vote', clubBook)
     return res.send(clubBook)
     } catch (error) {
       next(error)

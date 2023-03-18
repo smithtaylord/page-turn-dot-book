@@ -20,7 +20,9 @@ class SocketService extends SocketHandler {
   newVote(payload){
     try {
       logger.log('[created vote payload]', payload)
-      
+      let i = AppState.activeClubBooks.findIndex(b => b.id == payload.id)
+      AppState.activeClubBooks.splice(i, 1,)
+      AppState.activeClubBooks.push(payload)
     } catch (error) {
       Pop.error(error.message)
     }

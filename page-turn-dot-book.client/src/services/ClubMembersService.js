@@ -10,9 +10,9 @@ class ClubMembersService {
     const res = await api.put('/api/clubBooks/' + clubBooksId, {voteId})
     logger.log(res.data, 'this is the vote')
     let i = AppState.activeClubBooks.findIndex(b => b.id == res.data.id)
-    // let place = AppState.activeClubBooks.push()
+    // // let place = AppState.activeClubBooks.push()
     AppState.activeClubBooks.splice(i, 1,)
-    // AppState.activeClubBooks.push(res.data.voteId)
+    // // AppState.activeClubBooks.push(res.data.voteId)
     AppState.activeClubBooks.push(res.data)
   }
   async getMembersByClubId(clubId) {
