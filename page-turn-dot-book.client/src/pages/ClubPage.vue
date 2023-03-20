@@ -1,4 +1,5 @@
 <template>
+    <div :style="club?.isArchived ? { filter: 'grayscale(100%)' } : {}">
     <div class="container-fluid">
         <div class="row">
             <div class="col-3 d-none d-md-block bg-custom-primary scroll-y">
@@ -174,6 +175,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </template>
 
