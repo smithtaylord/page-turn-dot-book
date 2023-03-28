@@ -59,7 +59,7 @@
                                 <div class="col-12 mt-3 bg-danger p-2 my-3 rounded box-shadow ">
 
                                     <h4>Club Members</h4>
-                                    <div class="d-flex">
+                                    <div class="d-flex flex-wrap">
                                         <div v-for="m in members">
                                             <router-link class="selectable"
                                                 :to="{ name: 'Profile', params: { profileId: m.profile.id } }">
