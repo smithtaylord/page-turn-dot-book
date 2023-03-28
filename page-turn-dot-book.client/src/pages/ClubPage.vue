@@ -410,24 +410,24 @@ export default {
             }
         }
 
-        function joinedRoom() {
-            try {
-                socketService.emit('joined:room', { roomName: route.params.clubId })
-            } catch (error) {
-                console.error(error)
-                // @ts-ignore
-                Pop.error(('[ERROR]'), error.message)
-            }
-        }
-        function leftRoom() {
-            try {
-                socketService.emit('left:room', { roomName: AppState.clubId })
-            } catch (error) {
-                console.error(error)
-                // @ts-ignore
-                Pop.error(('[ERROR]'), error.message)
-            }
-        }
+        // function joinedRoom() {
+        //     try {
+        //         socketService.emit('joined:room', { roomName: route.params.clubId })
+        //     } catch (error) {
+        //         console.error(error)
+        //         // @ts-ignore
+        //         Pop.error(('[ERROR]'), error.message)
+        //     }
+        // }
+        // function leftRoom() {
+        //     try {
+        //         socketService.emit('left:room', { roomName: AppState.clubId })
+        //     } catch (error) {
+        //         console.error(error)
+        //         // @ts-ignore
+        //         Pop.error(('[ERROR]'), error.message)
+        //     }
+        // }
 
         function resetExpand() {
             AppState.expanded = false
@@ -435,7 +435,7 @@ export default {
 
         watchEffect(() => {
             if (route.params.clubId) {
-                joinedRoom();
+                // joinedRoom();
                 getClubById();
                 getMembersByClubId();
                 getClubBooks();
@@ -448,7 +448,7 @@ export default {
         })
 
         onUnmounted(() => {
-            leftRoom();
+            // leftRoom();
             resetExpand()
         })
 

@@ -11,7 +11,7 @@ class MembersService {
             path: 'club',
             populate: {
                 path: 'clubBooks',
-                select:'isbn'
+                select: 'isbn'
             }
         })
         return club
@@ -46,14 +46,20 @@ class MembersService {
 
     async createMember(memberData) {
         const club = await clubsService.getClubById(memberData.clubId)
+        const clubMembers = await this.getClubMembers(club.id)
+        const inClub = clubMembers.find(cm => cm.accountId == memberData.accountId)
         if (club.isArchived) {
             throw new Forbidden('This Club Has Been Disbanded')
+        }
+        if (inClub) {
+            throw new BadRequest("You are already in this club!, did you want to leave?")
         }
 
         const member = await dbContext.ClubMembers.create(memberData)
         await member.populate('profile')
         await member.populate('club')
         return member
+
     }
 }
 
