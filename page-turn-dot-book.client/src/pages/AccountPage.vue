@@ -8,7 +8,7 @@
 
   <div class="container-fluid bg-warning container-ht">
     <div class="row">
-      <div class="col-12 mt-5">
+      <div class="col-12 col-md-6 m-auto mt-5">
         <form @submit.prevent="editAccount()">
           <div class="form-floating mb-2">
             <input v-model="editable.picture" :placeholder="account.picture" required type="text" class="form-control"

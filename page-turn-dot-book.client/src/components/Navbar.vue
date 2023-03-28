@@ -8,16 +8,16 @@
         </h1>
       </router-link>
     </div>
-    <div class="displayButton" >
+    <div class="displayButton">
       <button class="btn bg-dark selectable" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
         aria-controls="offcanvasExample">
-        <i class="fs-1 mdi mdi-menu"></i>
+        <i class="fs-1 mdi mdi-menu" title="open-menu"></i>
       </button>
     </div>
   </nav>
-    <!-- OLD NAVBAR STUFF BELOW LEFT FOR REF -->
+  <!-- OLD NAVBAR STUFF BELOW LEFT FOR REF -->
 
-    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+  <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -44,9 +44,7 @@ export default {
 </script>
 
 <style scoped>
-
-
-.displayButton{
+.displayButton {
   justify-self: inherit;
   overflow: hidden;
 }

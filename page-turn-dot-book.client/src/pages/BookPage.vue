@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-12 col-md-4 my-4 px-4">
                 <div class="d-flex justify-content-center">
-                    <img class="book-img" :src="googleBook?.img" :alt="googleBook.title" v-on:error="onImageError">
+                    <img class="book-img pb-3" :src="googleBook?.img" :alt="googleBook.title" v-on:error="onImageError">
                 </div>
                 <div v-if="account.id">
                     <div class="mt-1 mb-4 d-flex justify-content-between">
@@ -47,7 +47,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-8 rounded box-shadow m-auto my-4 bg-custom-success px-md-5">
-                    <div class="px-md-5 pb-5">
+                    <div class="px-md-5 py-5">
                         <h3 class="text-center py-md-3">
                             Book Comments!
                         </h3>
