@@ -125,7 +125,7 @@ export default {
 }
 
 .LGhomePagePic {
-  background-image: url(public/bookbackground.jpeg);
+  background-image: url("../bookbackground.jpeg");
   background-size: cover;
 }
 

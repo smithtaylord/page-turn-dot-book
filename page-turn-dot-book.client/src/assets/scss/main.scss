@@ -77,13 +77,13 @@ form:invalid button[type="submit"] {
 }
 
 .bg-custom-primary {
-  background-image: url("../assets/img/bg-primary.png");
+  background-image: url("../bg-primary.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .bg-custom-danger {
-  background-image: url("../img/bg-danger.png");
+  background-image: url("../bg-danger.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -95,7 +95,7 @@ form:invalid button[type="submit"] {
 }
 
 .bg-custom-success {
-  background-image: url(../bg-success.png);
+  background-image: url("../bg-success.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
