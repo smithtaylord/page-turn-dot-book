@@ -36,7 +36,6 @@ export default {
       googleBook: computed(() => AppState.googleBook),
       async addBookToClub(clubId) {
         try {
-          // console.log(this.booksInTheClub);
           const book = this.googleBook
           book.isbn = route.params.isbn
           book.clubId = clubId

@@ -7,7 +7,7 @@ import { api } from "./AxiosService";
 class ClubMembersService {
   async clubBookVoting(clubBooksId, clubMembers) {
     let voteId = clubMembers.voteId
-    const res = await api.put('/api/clubBooks/' + clubBooksId, {voteId})
+    const res = await api.put('/api/clubBooks/' + clubBooksId, { voteId })
     logger.log(res.data, 'this is the vote')
     let i = AppState.activeClubBooks.findIndex(b => b.id == res.data.id)
     // // let place = AppState.activeClubBooks.push()
@@ -29,7 +29,7 @@ class ClubMembersService {
   }
 
   async removeMember(memberId) {
-    console.log(memberId);
+    logger.log(memberId);
     const res = await api.delete('api/members/' + memberId)
     logger.log('Removed Member', res.data)
     const memberIndex = AppState.members.findIndex(m => m.id == memberId)
