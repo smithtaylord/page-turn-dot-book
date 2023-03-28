@@ -22,7 +22,7 @@ export const AuthService = initialize({
   }
 })
 
-AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
+AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function () {
   api.defaults.headers.authorization = AuthService.bearer
   api.interceptors.request.use(refreshAuthToken)
   AppState.user = AuthService.user
@@ -31,7 +31,7 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   // NOTE if there is something you want to do once the user is authenticated, place that here
   await clubsService.getMyClubs(AppState.user.id)
   await booksService.getProfilesBooks(AppState.user.id)
-  
+
 })
 
 async function refreshAuthToken(config) {
@@ -40,7 +40,7 @@ async function refreshAuthToken(config) {
   const expired = expires < Date.now()
   const needsRefresh = expires < Date.now() + (1000 * 60 * 60 * 12)
   if (expired) {
-    await AuthService.loginWithPopup()
+    // await AuthService.loginWithPopup()
   } else if (needsRefresh) {
     await AuthService.getTokenSilently()
     api.defaults.headers.authorization = AuthService.bearer
