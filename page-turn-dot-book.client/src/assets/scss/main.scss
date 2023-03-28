@@ -78,13 +78,13 @@ form:invalid button[type="submit"] {
 
 .bg-custom-primary {
   background-image: url(bg-primary.png);
-  background-size: fill;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
 .bg-custom-danger {
   background-image: url(bg-danger.png);
-  background-size: fill;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 

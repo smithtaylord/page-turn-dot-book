@@ -23,16 +23,16 @@
                             Books</button>
                     </router-link>
                     <router-link :to="{ name: 'SearchClub' }">
-                        <button class="btn bg-success mb-2 w-100" data-bs-dismiss="offcanvas"
+                        <button class="btn bg-danger mb-2 w-100" data-bs-dismiss="offcanvas"
                             aria-label="Close-OffCanvas">Search
                             Clubs</button>
                     </router-link>
                     <router-link :to="{ name: 'About' }" class="">
-                        <Button class="btn bg-danger mb-2 w-100" data-bs-dismiss="offcanvas"
+                        <Button class="btn bg-primary mb-2 w-100" data-bs-dismiss="offcanvas"
                             aria-label="Close-OffCanvas">About</Button>
                     </router-link>
                     <router-link v-if="account.id" :to="{ name: 'Profile', params: { profileId: account.id } }">
-                        <button class="btn bg-danger w-100" data-bs-dismiss="offcanvas" aria-label="Close-OffCanvas">My
+                        <button class="btn bg-success w-100" data-bs-dismiss="offcanvas" aria-label="Close-OffCanvas">My
                             Profile</button>
                     </router-link>
                     <Login />

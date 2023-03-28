@@ -206,7 +206,7 @@
 
 <script>
 import { AppState } from '../AppState.js';
-import { computed, onUpdated, watchEffect } from 'vue';
+import { computed, onUpdated, watchEffect, onUnmounted } from 'vue';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { useRoute } from 'vue-router';
@@ -262,6 +262,10 @@ export default {
             }
         }
 
+        function resetExpand() {
+            AppState.expanded = false
+        }
+
         watchEffect(() => {
             if (route.params.profileId) {
                 getProfileById();
@@ -270,6 +274,10 @@ export default {
                 getCommentsByProfileId();
             }
         });
+
+        onUnmounted(() => {
+            resetExpand()
+        })
         onUpdated(() => {
             window.scrollTo(0, 0)
         })

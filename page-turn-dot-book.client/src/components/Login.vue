@@ -7,7 +7,7 @@
       <div class="">
         <div class="">
           <router-link :to="{ name: 'Account' }">
-            <button class="btn bg-success w-100 selectable mb-2" data-bs-dismiss="offcanvas" aria-label="Close-OffCanvas">
+            <button class="btn bg-danger w-100 selectable mb-2" data-bs-dismiss="offcanvas" aria-label="Close-OffCanvas">
               Manage Account
             </button>
           </router-link>

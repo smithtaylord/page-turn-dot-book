@@ -41,7 +41,7 @@
                     <button v-if="expanded" @click="expand" class='btn-cool text-center'>read less</button>
                     <button v-else @click="expand" class='btn-cool text-center'>read more</button>
                 </div>
-                <p class="my-3 fs-3 p-0">{{ googleBook?.genre }}</p>
+                <!-- <p class="my-3 fs-3 p-0">{{ googleBook?.genre }}</p> -->
             </div>
         </div>
         <div class="container">
@@ -203,6 +203,9 @@ export default {
                 Pop.error(error.message)
             }
         }
+        function resetExpand() {
+            AppState.expanded = false
+        }
         watchEffect(() => {
             if (route.params.isbn) {
                 getCommentsByIsbn();
@@ -211,7 +214,8 @@ export default {
             }
         });
         onUnmounted(() => {
-            booksService.clearBooks()
+            booksService.clearBooks(),
+                resetExpand()
         });
         onUpdated(() => {
             window.scrollTo(0, 0)
