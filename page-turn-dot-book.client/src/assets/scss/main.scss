@@ -77,13 +77,13 @@ form:invalid button[type="submit"] {
 }
 
 .bg-custom-primary {
-  background-image: url(../assets/img/page-turn-dot-book/client/bg-primary.png);
+  background-image: url("../assets/img/page-turn-dot-book/client/bg-primary.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .bg-custom-danger {
-  background-image: url(../assets/img/page-turn-dot-book/client/bg-danger.png);
+  background-image: url("../assets/img/page-turn-dot-book/client/bg-danger.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
