@@ -40,7 +40,7 @@ async function refreshAuthToken(config) {
   const expired = expires < Date.now()
   const needsRefresh = expires < Date.now() + (1000 * 60 * 60 * 12)
   if (expired) {
-    // await AuthService.loginWithPopup()
+    await AuthService.loginWithPopup()
   } else if (needsRefresh) {
     await AuthService.getTokenSilently()
     api.defaults.headers.authorization = AuthService.bearer
