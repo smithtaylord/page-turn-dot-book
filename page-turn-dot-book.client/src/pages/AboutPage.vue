@@ -31,7 +31,8 @@
                 class="profile-picture rounded-circle my-3 box-shadow">
               <div class="ps-3 my-3">
                 <h4 class="fw-bold">Jaden Hawkes</h4>
-                <span><a href="" class="mdi mdi-linkedin fs-3 text-dark"></a> <a href="https://github.com/HawkesJ02"
+                <span><a href="https://www.linkedin.com/in/jaden-hawkes-63831426a/"
+                    class="mdi mdi-linkedin fs-3 text-dark"></a> <a href="https://github.com/HawkesJ02"
                     class="mdi mdi-github fs-3 text-dark selectable"></a></span>
                 <h6>Full-Stack Developer</h6>
               </div>
@@ -45,8 +46,9 @@
                 class="profile-picture rounded-circle my-3 box-shadow">
               <div class="ps-3 my-3">
                 <h4 class="fw-bold">Dustin Bates</h4>
-                <span><a href="" class="mdi mdi-linkedin fs-3 text-dark selectable"></a> <a
-                    href="https://github.com/dustinbates" class="mdi mdi-github fs-3 text-dark selectable"></a></span>
+                <span><a href="https://www.linkedin.com/in/dustinbates94/"
+                    class="mdi mdi-linkedin fs-3 text-dark selectable"></a> <a href="https://github.com/dustinbates"
+                    class="mdi mdi-github fs-3 text-dark selectable"></a></span>
                 <h6>Full-Stack Developer</h6>
               </div>
             </div>

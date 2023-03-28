@@ -1,6 +1,7 @@
 <template>
     <div class="ClubCard ClubCard-large box-shadow m-3 bg-warning  d-flex flex-column p-3 ">
         <div v-if="club.isArchived" class="text-end fs-3"><i class="mdi mdi-lock text-end text-dark"></i></div>
+        <div v-else class="text-end fs-3"><i class="mdi mdi-lock-open-outline text-end text-warning"></i></div>
         <div class="text-center align-items-center">
             <img class="rounded-circle club-picture mb-2" :src="club.coverImg" :alt="club.name">
             <h4 class="text-limit">{{ club.name }}</h4>

@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid bg-warning container-ht">
         <div class="row">
-            <div class="col-12 mt-5">
+            <div class="col-12 col-md-6 m-auto mt-5">
                 <form @submit.prevent="createClub()">
                     <div class="form-floating">
                         <input v-model="editable.name" required type="text" class="form-control" id="name" maxlength="20">
@@ -62,7 +62,7 @@ export default {
                     const formData = editable.value
                     const club = await clubsService.createClub(formData)
                     editable.value = {}
-                    await clubMembersService.createMember({clubId: club.id})
+                    await clubMembersService.createMember({ clubId: club.id })
                     if (club?.id) {
                         router.push({ name: 'Club', params: { clubId: club.id } })
                     }
