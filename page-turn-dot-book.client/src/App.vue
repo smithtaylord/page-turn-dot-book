@@ -8,7 +8,9 @@
   <footer class="bg-dark text-light">
 
     <span class="text-light d-flex align-items-center">
-      <h6 class="mx-2 pt-1 fs-6">Made with </h6>
+      <div>
+        <h6 class="mx-2 pt-1 fs-6">Made with <i class="mdi mdi-heart"></i> using</h6>
+      </div>
       <img src="https://developer.nytimes.com/files/poweredby_nytimes_65a.png?v=1583354208350" alt=""
         class="px-2 bg-light logo rounded py-1">
       <h6 class="mx-2 pt-1">&</h6>
@@ -47,7 +49,7 @@ footer {
   margin-bottom: 0;
   display: grid;
   place-content: center;
-  height: 32px;
+  height: 40px;
 }
 
 .logo {
